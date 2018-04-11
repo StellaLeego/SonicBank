@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Open.Domain.Common.TemporalObject&lt;T&gt;" Collapsed="true">
+    <Position X="5.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\TemporalObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Core.RootObject" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Open.Domain.Common.UniqueObject&lt;T&gt;" Collapsed="true">
+    <Position X="3.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\UniqueObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Common.IdentifiedObject&lt;T&gt;" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\IdentifiedObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Location.AddressObject&lt;T&gt;" Collapsed="true">
+    <Position X="2.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Location\AddressObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Location.EmailAddressObject" Collapsed="true">
+    <Position X="2.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Location\EmailAddressObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Location.GeographicAddressObject" Collapsed="true">
+    <Position X="4.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Location\GeographicAddressObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Location.TelecomAddressObject" Collapsed="true">
+    <Position X="6.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Location\TelecomAddressObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Location.WebAddressObject" Collapsed="true">
+    <Position X="8.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Location\WebAddressObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Common.MetricObject&lt;T&gt;" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\MetricObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Location.CountryObject" Collapsed="true">
+    <Position X="2.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Location\CountryObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Money.CurrencyObject" Collapsed="true">
+    <Position X="0.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Money\CurrencyObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Quantity.MeasureObject" Collapsed="true">
+    <Position X="2.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Quantity\MeasureObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Quantity.UnitObject" Collapsed="true">
+    <Position X="5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Quantity\UnitObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

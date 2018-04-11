@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>Open.Domain</AssemblyName>
+    <RootNamespace>Open.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aids\Aids.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Data\Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Inventory\" />
+    <Folder Include="Rule\" />
+    <Folder Include="Relationship\" />
+    <Folder Include="Product\" />
+    <Folder Include="Party\" />
+    <Folder Include="Process\" />
+    <Folder Include="Order\" />
+  </ItemGroup>
+
+</Project>
