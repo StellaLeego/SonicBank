@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 
 namespace Open.Aids
 {
+
     public class GetClass
     {
         private const string g = "get_";
