@@ -4,8 +4,6 @@ using System.Reflection;
 
 namespace Open.Aids
 {
-
-
     public static class CreateNew
     {
         public static T Instance<T>()

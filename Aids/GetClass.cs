@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace Open.Aids
 {
-
     public class GetClass
     {
         private const string g = "get_";
