@@ -4,7 +4,7 @@ using Open.Infra.Location;
 namespace Open.Tests.Infra.Location
 {
     [TestClass]
-    public class CountryDbContextTests : CountryDbTests<CountryDbContext>
+    public class CountryDbContextTests : CountryDbTests<LocationDbContext>
     {
         public void CountriesTest()
         {

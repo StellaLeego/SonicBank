@@ -10,14 +10,14 @@ namespace Open.Tests.Infra.Money
     [TestClass]
     public class CurrencyDbTests<T> : ClassTests<T>
     {
-        protected readonly CurrencyDbContext db;
+        protected readonly MoneyDbContext db;
         protected readonly CurrencyObjectsRepository repository;
         protected const int count = 10;
 
         public CurrencyDbTests()
         {
-            var options = new DbContextOptionsBuilder<CurrencyDbContext>().UseInMemoryDatabase("TestDb").Options;
-            db = new CurrencyDbContext(options);
+            var options = new DbContextOptionsBuilder<MoneyDbContext>().UseInMemoryDatabase("TestDb").Options;
+            db = new MoneyDbContext(options);
             repository = new CurrencyObjectsRepository(db);
         }
 

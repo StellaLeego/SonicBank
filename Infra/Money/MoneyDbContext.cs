@@ -3,9 +3,9 @@ using Open.Data.Money;
 
 namespace Open.Infra.Money
 {
-    public class CurrencyDbContext : DbContext
+    public class MoneyDbContext : DbContext
     {
-        public CurrencyDbContext(DbContextOptions<CurrencyDbContext> o) : base(o)
+        public MoneyDbContext(DbContextOptions<MoneyDbContext> o) : base(o)
         { }
 
         public DbSet<CurrencyDbRecord> Currencies { get; set; }

@@ -9,7 +9,7 @@ using Open.Infra.Money;
 
 namespace Open.Infra.Migrations
 {
-    [DbContext(typeof(CurrencyDbContext))]
+    [DbContext(typeof(MoneyDbContext))]
     [Migration("20180322080325_Currencies")]
     partial class Currencies
     {

@@ -2,12 +2,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Open.Domain.Location;
 using Open.Domain.Money;
-using Open.Infra;
 using Open.Infra.Location;
 using Open.Infra.Money;
 using Open.Sentry.Data;
@@ -25,7 +23,6 @@ namespace Open.Sentry
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             setDatabase(services);
@@ -33,15 +30,45 @@ namespace Open.Sentry
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             setAuthentication(services);
-            // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddMvc();
+            setMvcWithAntiForgeryToken(services);
             services.AddScoped<ICountryObjectsRepository, CountryObjectsRepository>();
             services.AddScoped<ICurrencyObjectsRepository, CurrencyObjectsRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        protected virtual void setMvcWithAntiForgeryToken(IServiceCollection services)
+        {
+            services.AddMvc();
+
+        }
+
+        protected virtual void setAuthentication(IServiceCollection services) { }
+
+        protected virtual void setDatabase(IServiceCollection services)
+        {
+            var s = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlServer(s));
+            services.AddDbContext<LocationDbContext>(
+                options => options.UseSqlServer(s));
+            services.AddDbContext<MoneyDbContext>(
+                options => options.UseSqlServer(s));
+        }
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            setErrorPage(app, env);
+            app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+        }
+
+        protected virtual void setErrorPage(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -53,30 +80,6 @@ namespace Open.Sentry
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
-            app.UseStaticFiles();
-
-            app.UseAuthentication();
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-        }
-
-        protected virtual void setAuthentication(IServiceCollection sevices)
-        {
-
-        }
-
-        protected virtual void setDatabase(IServiceCollection services)
-        {
-            var s = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(s));
-            services.AddDbContext<CountryDbContext>(options => options.UseSqlServer(s));
-            services.AddDbContext<CurrencyDbContext>(options => options.UseSqlServer(s));
         }
     }
 }

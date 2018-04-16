@@ -5,10 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Open.Domain.Location;
 using Open.Domain.Money;
-using Open.Infra;
 using Open.Infra.Location;
 using Open.Infra.Money;
-using Open.Sentry.Data;
 
 namespace Open.Sentry
 {
@@ -23,16 +21,16 @@ namespace Open.Sentry
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var countriesContext = services.GetRequiredService<ICountryObjectsRepository>();
-                    CountriesDbTableInitializer.Initialize(countriesContext);
+                    var locationDb = services.GetRequiredService<LocationDbContext>();
+                    CountriesDbTableInitializer.Initialize(locationDb);
 
-                    var currenciesContext = services.GetRequiredService<ICurrencyObjectsRepository>();
-                    CurrenciesDbTableInitializer.Initialize(currenciesContext);
+                    var moneyDb = services.GetRequiredService<MoneyDbContext>();
+                    CurrenciesDbTableInitializer.Initialize(moneyDb);
                 }
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occured while seeding the database");
+                    logger?.LogError(ex, "An error occured while seeding the database");
                 }
             }
             host.Run();

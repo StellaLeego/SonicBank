@@ -18,9 +18,9 @@ namespace Open.Tests.Sentry
         {
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseInMemoryDatabase(Testing));
-            services.AddDbContext<CountryDbContext>(
+            services.AddDbContext<LocationDbContext>(
                 options => options.UseInMemoryDatabase(Testing));
-            services.AddDbContext<CurrencyDbContext>
+            services.AddDbContext<MoneyDbContext>
                 (options => options.UseInMemoryDatabase(Testing));
         }
 

@@ -26,6 +26,12 @@ namespace Open.Infra
             db = c;
         }
 
+        public async Task<TObject> GetObject(string id)
+        {
+            var r = await getObject(id);
+            return createObject(r);
+        }
+
         public async Task AddObject(TObject o)
         {
             dbSet.Add(o.DbRecord);
