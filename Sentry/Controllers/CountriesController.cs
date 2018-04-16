@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Open.Aids;
 using Open.Core;
+using Open.Data.Location;
 using Open.Domain.Location;
 using Open.Facade.Location;
 
@@ -32,11 +34,27 @@ namespace Open.Sentry.Controllers
             ViewData["SortAlpha2"] = sortOrder == "alpha2" ? "alpha2_desc" : "alpha2";
             ViewData["SortValidFrom"] = sortOrder == "validFrom" ? "validFrom_desc" : "validFrom";
             ViewData["SortValidTo"] = sortOrder == "validTo" ? "validTo_desc" : "validTo";
+            repository.SortOrder = sortOrder != null && sortOrder.EndsWith("_desc")
+                ? SortOrder.Descending
+                : SortOrder.Ascending;
+            repository.SortOrder = getSortFunction(sortOrder);
             if (searchString != null) page = 1;
             else searchString = currentFilter;
             ViewData["CurrentFilter"] = searchString;
-            var l = await repository.GetObjectsList(searchString, page);
-            return View(new CountryViewModelsList(l, sortOrder));
+            repository.SearchString = searchString;
+            repository.PageIndex = page ?? 1;
+            var l = await repository.GetObjectsList();
+            return View(new CountryViewModelsList(l));
+        }
+
+        private Func<CountryDbRecord, object> getSortFunction(string sortOrder) {
+            if (string.IsNullOrWhiteSpace(sortOrder)) return x => x.Name;
+            if (sortOrder.StartsWith("validTo")) return x => x.ValidTo;
+            if (sortOrder.StartsWith("validFrom")) return x => x.ValidFrom;
+            if (sortOrder.StartsWith("alpha3")) return x => x.ID;
+            if (sortOrder.StartsWith("aplha2")) return x => x.Code;
+            return x => x.Name;
+
         }
 
         public IActionResult Create()
@@ -44,8 +62,7 @@ namespace Open.Sentry.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost]//[ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind(properties)] CountryViewModel c)
         {
             await validateId(c.Alpha3Code, ModelState);
@@ -71,7 +88,7 @@ namespace Open.Sentry.Controllers
             o.DbRecord.Code = c.Alpha2Code;
             o.DbRecord.ValidFrom = c.ValidFrom ?? DateTime.MinValue;
             o.DbRecord.ValidTo = c.ValidTo ?? DateTime.MaxValue;
-            repository.UpdateObject(o);
+            await repository.UpdateObject(o);
             return RedirectToAction("Index");
         }
 
