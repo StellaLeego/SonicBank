@@ -5,11 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Open.Aids;
 using Open.Core;
+using Open.Data.Money;
 using Open.Domain.Money;
+using Open.Facade.Location;
 using Open.Facade.Money;
 
 namespace Open.Sentry.Controllers
-{
+{ 
+    [Authorize]
     public class CurrenciesController : Controller
     {
         private readonly ICurrencyObjectsRepository repository;
@@ -19,18 +22,38 @@ namespace Open.Sentry.Controllers
         {
             repository = r;
         }
-
-        [Authorize]
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder = null,
+            string currentFilter = null,
+            string searchString = null,
+            int? page = null)
         {
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["SortName"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["SortAlpha3"] = sortOrder == "alpha3" ? "alpha3_desc" : "alpha3";
             ViewData["SortAlpha2"] = sortOrder == "alpha2" ? "alpha2_desc" : "alpha2";
             ViewData["SortValidFrom"] = sortOrder == "validFrom" ? "validFrom_desc" : "validFrom";
             ViewData["SortValidTo"] = sortOrder == "validTo" ? "validTo_desc" : "validTo";
+            repository.SortOrder = sortOrder != null && sortOrder.EndsWith("_desc")
+                ? SortOrder.Descending
+                : SortOrder.Ascending;
+            repository.SortFunction = getSortFunction(sortOrder);
+            if (searchString != null) page = 1;
+            else searchString = currentFilter;
             ViewData["CurrentFilter"] = searchString;
-            var l = await repository.GetObjectsList(searchString);
-            return View(new CurrencyViewModelsList(l, sortOrder));
+            repository.SearchString = searchString;
+            repository.PageIndex = page ?? 1;
+            var l = await repository.GetObjectsList();
+            return View(new CurrencyViewModelsList(l));
+        }
+
+        private Func<CurrencyDbRecord, object> getSortFunction(string sortOrder)
+        {
+            if (string.IsNullOrWhiteSpace(sortOrder)) return x => x.Name;
+            if (sortOrder.StartsWith("validTo")) return x => x.ValidTo;
+            if (sortOrder.StartsWith("validFrom")) return x => x.ValidFrom;
+            if (sortOrder.StartsWith("alpha3")) return x => x.ID;
+            if (sortOrder.StartsWith("aplha2")) return x => x.Code;
+            return x => x.Name;
         }
 
         public IActionResult Create()
@@ -39,7 +62,7 @@ namespace Open.Sentry.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind(properties)] CurrencyViewModel c)
         {
             await validateId(c.IsoCurrencySymbol, ModelState);

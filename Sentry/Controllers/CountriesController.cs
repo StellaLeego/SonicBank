@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +11,7 @@ using Open.Facade.Location;
 
 namespace Open.Sentry.Controllers
 {
+    [Authorize]
     public class CountriesController : Controller
     {
         private readonly ICountryObjectsRepository repository;
@@ -22,7 +22,6 @@ namespace Open.Sentry.Controllers
             repository = r;
         }
 
-        [Authorize]
         public async Task<IActionResult> Index(string sortOrder = null,
             string currentFilter = null,
             string searchString = null,
@@ -37,7 +36,7 @@ namespace Open.Sentry.Controllers
             repository.SortOrder = sortOrder != null && sortOrder.EndsWith("_desc")
                 ? SortOrder.Descending
                 : SortOrder.Ascending;
-            repository.SortOrder = getSortFunction(sortOrder);
+            repository.SortFunction = getSortFunction(sortOrder);
             if (searchString != null) page = 1;
             else searchString = currentFilter;
             ViewData["CurrentFilter"] = searchString;
