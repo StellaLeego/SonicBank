@@ -75,7 +75,7 @@ namespace Open.Tests.Sentry
 
         private string getPath()
         {
-            var n = GetString.Tail(assembly.GetName().Name);
+            var n = "Open\\" + GetString.Tail(assembly.GetName().Name);
             var p = PlatformServices.Default.Application.ApplicationBasePath;
             var d = new DirectoryInfo(p);
             while (d != null)

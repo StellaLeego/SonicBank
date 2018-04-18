@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc;
+using Open.Aids;
 
-namespace Open.Aids
+namespace Open.Tests
 {
     public static class GetUrl
     {
