@@ -10,8 +10,15 @@ using Open.Infra.Location;
 namespace Open.Tests.Infra.Location
 {
     [TestClass]
-    public class CountryObjectsRepositoryTests : CountryDbTests<CountryObjectsRepository>
+    public class CountryObjectsRepositoryTests : CountryDbTests
     {
+        [TestInitialize]
+        public override void TestInitialize()
+        {
+            base.TestInitialize();
+            type = typeof(CountryObjectsRepository);
+        }
+
         private static void validateCountry(CountryDbRecord actual, CountryDbRecord expected)
         {
             Assert.AreEqual(actual.ID, expected.ID);

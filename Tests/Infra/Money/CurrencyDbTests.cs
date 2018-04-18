@@ -8,15 +8,16 @@ using Open.Infra.Money;
 namespace Open.Tests.Infra.Money
 {
     [TestClass]
-    public class CurrencyDbTests<T> : ClassTests<T>
+    public class CurrencyDbTests : BaseTests
     {
-        protected readonly MoneyDbContext db;
-        protected readonly CurrencyObjectsRepository repository;
+        protected static MoneyDbContext db;
+        protected static CurrencyObjectsRepository repository;
         protected const int count = 10;
 
         public CurrencyDbTests()
         {
-            var options = new DbContextOptionsBuilder<MoneyDbContext>().UseInMemoryDatabase("TestDb").Options;
+            if (db != null) return;
+            var options = new DbContextOptionsBuilder<MoneyDbContext>().UseInMemoryDatabase("CurrencyDbTests").Options;
             db = new MoneyDbContext(options);
             repository = new CurrencyObjectsRepository(db);
         }

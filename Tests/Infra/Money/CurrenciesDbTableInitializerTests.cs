@@ -7,7 +7,7 @@ using Open.Infra.Money;
 namespace Open.Tests.Infra.Money
 {
     [TestClass]
-    public class CurrenciesDbTableInitializerTests : CurrencyDbTests<object>
+    public class CurrenciesDbTableInitializerTests : CurrencyDbTests
     {
         [TestInitialize]
         public override void TestInitialize()
@@ -20,7 +20,7 @@ namespace Open.Tests.Infra.Money
         public void CantInitializeTest()
         {
             Assert.AreEqual(count, db.Currencies.Count());
-            CurrenciesDbTableInitializer.Initialize(repository);
+            CurrenciesDbTableInitializer.Initialize(db);
             Assert.AreEqual(count, db.Currencies.Count());
         }
 
@@ -28,13 +28,14 @@ namespace Open.Tests.Infra.Money
         public void InitializeTest()
         {
             TestCleanup();
-            CurrenciesDbTableInitializer.Initialize(repository);
+            CurrenciesDbTableInitializer.Initialize(db);
             var l = SystemRegionInfo.GetRegionsList();
             var a = new List<string>();
             for (var i = l.Count; i > 0; i--)
             {
                 var c = l[i - 1];
-                if(!a.Contains(c.ISOCurrencySymbol))
+                if (!SystemRegionInfo.IsCountry(c)) continue;
+                if (a.Contains(c.ISOCurrencySymbol)) continue;
                 a.Add(c.ISOCurrencySymbol);
             }
             Assert.AreEqual(a.Count, db.Currencies.Count());

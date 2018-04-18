@@ -185,7 +185,7 @@ namespace Open.Tests.Aids
         [TestMethod]
         public void Int64Test()
         {
-            var d = 1000000L;
+            var d = 1000000000L;
             doGetRandomTest(GetRandom.Int64, (long) 100, 200);
             doGetRandomTest(GetRandom.Int64, (long)-200, 100);
             doGetRandomTest(GetRandom.Int64, (long)-400, -200);

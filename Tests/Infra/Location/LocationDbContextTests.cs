@@ -4,8 +4,15 @@ using Open.Infra.Location;
 namespace Open.Tests.Infra.Location
 {
     [TestClass]
-    public class CountryDbContextTests : CountryDbTests<LocationDbContext>
+    public class LocationDbContextTests : CountryDbTests
     {
+        [TestInitialize]
+        public override void TestInitialize()
+        {
+            base.TestInitialize();
+            type = typeof(LocationDbContext);
+        }
+
         public void CountriesTest()
         {
             Assert.IsNotNull(db.Countries);

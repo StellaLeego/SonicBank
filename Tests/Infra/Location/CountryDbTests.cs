@@ -8,15 +8,16 @@ using Open.Infra.Location;
 namespace Open.Tests.Infra.Location
 {
     [TestClass]
-    public class CountryDbTests<T> : ClassTests<T>
+    public class CountryDbTests : BaseTests
     {
-        protected readonly LocationDbContext db;
-        protected readonly CountryObjectsRepository repository;
+        protected static LocationDbContext db;
+        protected static CountryObjectsRepository repository;
         protected const int count = 10;
 
         public CountryDbTests()
         {
-            var options = new DbContextOptionsBuilder<LocationDbContext>().UseInMemoryDatabase("TestDb").Options;
+            if (db != null) return;
+            var options = new DbContextOptionsBuilder<LocationDbContext>().UseInMemoryDatabase("CountryDbTests").Options;
             db = new LocationDbContext(options);
             repository = new CountryObjectsRepository(db);
         }

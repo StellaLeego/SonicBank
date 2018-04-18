@@ -6,7 +6,7 @@ using Open.Infra.Location;
 namespace Open.Tests.Infra.Location
 {
     [TestClass]
-    public class CountriesDbTableInitializerTests : CountryDbTests<object>
+    public class CountriesDbTableInitializerTests : CountryDbTests
     {
         [TestInitialize]
         public override void TestInitialize()
@@ -19,7 +19,7 @@ namespace Open.Tests.Infra.Location
         public void CantInitializeTest()
         {
             Assert.AreEqual(count,db.Countries.Count());
-            CountriesDbTableInitializer.Initialize(repository);
+            CountriesDbTableInitializer.Initialize(db);
             Assert.AreEqual(count, db.Countries.Count());
         }
 
@@ -27,7 +27,7 @@ namespace Open.Tests.Infra.Location
         public void InitializeTest()
         {
             TestCleanup();
-            CountriesDbTableInitializer.Initialize(repository);
+            CountriesDbTableInitializer.Initialize(db);
             var l = SystemRegionInfo.GetRegionsList();
             for (var i = l.Count; i > 0; i--)
             {

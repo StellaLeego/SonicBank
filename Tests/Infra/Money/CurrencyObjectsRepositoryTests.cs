@@ -10,8 +10,15 @@ using Open.Infra.Money;
 namespace Open.Tests.Infra.Money
 {
     [TestClass]
-    public class CurrencyObjectsRepositoryTests : CurrencyDbTests<CurrencyObjectsRepository>
+    public class CurrencyObjectsRepositoryTests : CurrencyDbTests
     {
+        [TestInitialize]
+        public override void TestInitialize()
+        {
+            base.TestInitialize();
+            type = typeof(CurrencyObjectsRepository);
+        }
+
         private static void validateCurrency(CurrencyDbRecord actual, CurrencyDbRecord expected)
         {
             Assert.AreEqual(actual.ID, expected.ID);
