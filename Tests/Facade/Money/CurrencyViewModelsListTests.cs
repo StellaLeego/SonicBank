@@ -11,7 +11,7 @@ namespace Open.Tests.Facade.Money
     {
         protected override CurrencyViewModelsList getRandomTestObject()
         {
-            var l = new PaginatedList<CurrencyObject>();
+            var l = new CurrencyObjectsList(null, null);
             SetRandom.Values(l);
             return new CurrencyViewModelsList(l);
         }
