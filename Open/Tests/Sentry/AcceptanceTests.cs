@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Open.Aids;
 using Open.Domain.Location;
+using Open.Infra;
 using Open.Infra.Location;
 using Open.Sentry;
 
@@ -42,7 +43,7 @@ namespace Open.Tests.Sentry
             {
                 var services = scope.ServiceProvider;
                 repository = services.GetRequiredService<ICountryObjectsRepository>();
-                var db = services.GetService<LocationDbContext>();
+                var db = services.GetService<SentryDbContext>();
                 CountriesDbTableInitializer.Initialize(db);
             }
         }

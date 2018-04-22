@@ -33,12 +33,12 @@ namespace Open.Tests
 
         protected abstract T getRandomTestObject();
 
-        protected void testReadWriteProperty<TR>(Func<TR> get, Func<TR, TR> set)
+        protected void testReadWriteProperty<TR>(Func<TR> get, Action<TR> set)
         {
             testReadWriteProperty(get, set, () => (TR) GetRandom.Value(typeof(TR)));
         }
 
-        protected void testReadWriteProperty<TR>(Func<TR> get, Func<TR, TR> set, Func<TR> getRandom)
+        protected void testReadWriteProperty<TR>(Func<TR> get, Action<TR> set, Func<TR> getRandom)
         {
             var x = get();
             Assert.AreEqual(x, get());
@@ -51,7 +51,7 @@ namespace Open.Tests
             validatePropertyValues();
         }
 
-        protected void testNullEmptyAndWhitespacesCases(Func<string> get, Func<string, string> set,
+        protected void testNullEmptyAndWhitespacesCases(Func<string> get, Action<string> set,
             Func<string> expected)
         {
             void test(string s)

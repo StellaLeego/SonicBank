@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
 using Open.Data.Location;
+using Open.Infra;
 using Open.Infra.Location;
 
 namespace Open.Tests.Infra.Location
@@ -10,15 +11,15 @@ namespace Open.Tests.Infra.Location
     [TestClass]
     public class CountryDbTests : BaseTests
     {
-        protected static LocationDbContext db;
+        protected static SentryDbContext db;
         protected static CountryObjectsRepository repository;
         protected const int count = 10;
 
         public CountryDbTests()
         {
             if (db != null) return;
-            var options = new DbContextOptionsBuilder<LocationDbContext>().UseInMemoryDatabase("CountryDbTests").Options;
-            db = new LocationDbContext(options);
+            var options = new DbContextOptionsBuilder<SentryDbContext>().UseInMemoryDatabase("CountryDbTests").Options;
+            db = new SentryDbContext(options);
             repository = new CountryObjectsRepository(db);
         }
 

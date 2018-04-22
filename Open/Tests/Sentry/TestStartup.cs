@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Open.Infra;
 using Open.Infra.Location;
 using Open.Infra.Money;
 using Open.Sentry;
@@ -18,9 +19,9 @@ namespace Open.Tests.Sentry
         {
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseInMemoryDatabase(Testing));
-            services.AddDbContext<LocationDbContext>(
+            services.AddDbContext<SentryDbContext>(
                 options => options.UseInMemoryDatabase(Testing));
-            services.AddDbContext<MoneyDbContext>
+            services.AddDbContext<SentryDbContext>
                 (options => options.UseInMemoryDatabase(Testing));
         }
 

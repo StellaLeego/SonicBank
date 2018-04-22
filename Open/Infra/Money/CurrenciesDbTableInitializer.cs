@@ -7,7 +7,7 @@ namespace Open.Infra.Money
 {
     public static class CurrenciesDbTableInitializer
     {
-        public static void Initialize(MoneyDbContext c)
+        public static void Initialize(SentryDbContext c)
         {
             c.Database.EnsureCreated();
             if(c.Currencies.Any()) return;

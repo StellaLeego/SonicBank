@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Open.Domain.Location;
 using Open.Domain.Money;
+using Open.Infra;
 using Open.Infra.Location;
 using Open.Infra.Money;
 using Open.Sentry.Data;
@@ -49,9 +50,9 @@ namespace Open.Sentry
             var s = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(s));
-            services.AddDbContext<LocationDbContext>(
+            services.AddDbContext<SentryDbContext>(
                 options => options.UseSqlServer(s));
-            services.AddDbContext<MoneyDbContext>(
+            services.AddDbContext<SentryDbContext>(
                 options => options.UseSqlServer(s));
         }
 
