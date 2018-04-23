@@ -22,11 +22,10 @@ namespace Open.Sentry
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var locationDb = services.GetRequiredService<SentryDbContext>();
-                    CountriesDbTableInitializer.Initialize(locationDb);
-
-                    var moneyDb = services.GetRequiredService<SentryDbContext>();
-                    CurrenciesDbTableInitializer.Initialize(moneyDb);
+                    var dbContext = services.GetRequiredService<SentryDbContext>();
+                    CountriesDbTableInitializer.Initialize(dbContext);
+                    CurrenciesDbTableInitializer.Initialize(dbContext);
+                    CountryCurrenciesDbTableInitializer.Initialize(dbContext);
                 }
                 catch (Exception ex)
                 {
