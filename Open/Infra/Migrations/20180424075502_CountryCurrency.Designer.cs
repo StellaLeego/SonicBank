@@ -10,7 +10,7 @@ using System;
 namespace Open.Infra.Migrations
 {
     [DbContext(typeof(SentryDbContext))]
-    [Migration("20180423121525_CountryCurrency")]
+    [Migration("20180424075502_CountryCurrency")]
     partial class CountryCurrency
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

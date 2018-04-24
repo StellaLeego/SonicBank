@@ -18,7 +18,7 @@ namespace Open.Tests
             list = GetClass.ReadWritePropertyValues(obj);
         }
 
-        private void validatePropertyValues()
+        private void validatePropertyValues() 
         {
             var l = GetClass.ReadWritePropertyValues(obj);
             Assert.AreEqual(l.Count, list.Count);

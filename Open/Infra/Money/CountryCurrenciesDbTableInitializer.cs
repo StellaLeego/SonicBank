@@ -16,11 +16,10 @@ namespace Open.Infra.Money
             {
                 if (!SystemRegionInfo.IsCountry(r)) continue;
 
-                var x = new CountryCurrencyDbRecord
-                {
-                    CountryID = r.ThreeLetterISORegionName,
-                    CurrencyID = r.ISOCurrencySymbol
-                };
+                var x = new CountryCurrencyDbRecord();
+                x.CountryID = r.ThreeLetterISORegionName;
+                x.CurrencyID = r.ISOCurrencySymbol;
+                c.CountryCurrencies.Add(x);
             }
 
             c.SaveChanges();
