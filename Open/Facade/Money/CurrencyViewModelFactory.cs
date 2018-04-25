@@ -1,5 +1,6 @@
 ﻿using System;
 using Open.Domain.Money;
+using Open.Facade.Location;
 
 namespace Open.Facade.Money
 {
@@ -16,6 +17,12 @@ namespace Open.Facade.Money
             if (o is null) return v;
             v.ValidFrom = setNullIfExtremum(o.DbRecord.ValidFrom);
             v.ValidTo = setNullIfExtremum(o.DbRecord.ValidTo);
+            foreach (var c in o.UsedInCountries)
+            {
+                var country = CountryViewModelFactory.Create(c);
+                v.UsedInCountries.Add(country);
+            }
+
             return v;
         }
 

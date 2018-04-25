@@ -35,6 +35,7 @@ namespace Open.Sentry
             setMvcWithAntiForgeryToken(services);
             services.AddScoped<ICountryObjectsRepository, CountryObjectsRepository>();
             services.AddScoped<ICurrencyObjectsRepository, CurrencyObjectsRepository>();
+            services.AddScoped<ICountryCurrencyObjectsRepository, CountryCurrencyObjectsRepository>();
         }
 
         protected virtual void setMvcWithAntiForgeryToken(IServiceCollection services)

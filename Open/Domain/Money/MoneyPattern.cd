@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Open.Domain.Money.CurrencyObject">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAgAAAAAAA=</HashCode>
+      <FileName>Money\CurrencyObject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UsedInCountries" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Open.Domain.Money.CountryCurrencyObject">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Money\CountryCurrencyObject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Country" />
+      <Field Name="Currency" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Open.Domain.Common.TemporalObject&lt;T&gt;">
+    <Position X="3.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\TemporalObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Common.MetricObject&lt;T&gt;">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\MetricObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Common.IdentifiedObject&lt;T&gt;" Collapsed="true">
+    <Position X="1.25" Y="6.75" Width="6" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\IdentifiedObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Domain.Location.CountryObject">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Location\CountryObject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CurrenciesInUse" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Open.Domain.Common.UniqueObject&lt;T&gt;" Collapsed="true">
+    <Position X="3.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\UniqueObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="System.Collections.Generic.IReadOnlyList&lt;T&gt;" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
