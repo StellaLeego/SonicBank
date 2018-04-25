@@ -13,12 +13,18 @@ namespace Open.Tests.Infra.Location
             base.TestInitialize();
             type = typeof(SentryDbContext);
         }
-
+        [TestMethod]
         public void CountriesTest()
         {
             Assert.IsNotNull(db.Countries);
         }
+        [TestMethod]
         public void CurrenciesTest()
+        {
+            Assert.IsNotNull(db.Currencies);
+        }
+        [TestMethod]
+        public void CountryCurrenciesTest()
         {
             Assert.IsNotNull(db.Currencies);
         }
