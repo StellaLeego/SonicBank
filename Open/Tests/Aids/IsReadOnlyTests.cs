@@ -55,9 +55,9 @@ namespace Open.Tests.Aids
         {
             Assert.IsFalse(IsReadOnly.Property<testClass>("A"));
             Assert.IsFalse(IsReadOnly.Property<testClass>("B"));
-            Assert.IsTrue(IsReadOnly.Property<testClass>("C"));
-            Assert.IsFalse(IsReadOnly.Property<testClass>("D"));
-            Assert.IsTrue(IsReadOnly.Property<testClass>("E"));
+            Assert.IsFalse(IsReadOnly.Property<testClass>("C"));
+            Assert.IsTrue(IsReadOnly.Property<testClass>("D"));
+            Assert.IsFalse(IsReadOnly.Property<testClass>("E"));
         }
     }
 }

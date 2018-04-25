@@ -1,12 +1,12 @@
 ﻿using Open.Core;
 
-namespace Open.Data.Common
+namespace Open.Facade.Common
 {
-    public abstract class UniqueDbRecord : TemporalDbRecord
+    public class UniqueEntityViewModel : TemporalViewModel
     {
-        protected string id;
+        private string id;
 
-        public virtual string ID
+        public string ID
         {
             get => getString(ref id, Constants.Unspecified);
             set => id = value;

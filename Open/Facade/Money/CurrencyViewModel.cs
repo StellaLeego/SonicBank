@@ -19,7 +19,7 @@ namespace Open.Facade.Money
         [DisplayName("ISO Currency Code")]
         public string IsoCurrencySymbol
         {
-            get => getValue(ref id, Constants.Unspecified);
+            get => getString(ref id, Constants.Unspecified);
             set => id = value;
         }
 
@@ -27,7 +27,7 @@ namespace Open.Facade.Money
         [DisplayName("Currency Symbol")]
         public string CurrencySymbol
         {
-            get => getValue(ref code, Constants.Unspecified);
+            get => getString(ref code, Constants.Unspecified);
             set => code = value;
         }
 

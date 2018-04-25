@@ -19,7 +19,7 @@ namespace Open.Facade.Location
         [DisplayName("ISO Three Character Code")]
         public string Alpha3Code
         {
-            get => getValue(ref alpha3Code, Constants.Unspecified);
+            get => getString(ref alpha3Code, Constants.Unspecified);
             set => alpha3Code = value;
         }
 
@@ -29,7 +29,7 @@ namespace Open.Facade.Location
         [DisplayName("ISO Two Character Code")]
         public string Alpha2Code
         {
-            get => getValue(ref alpha2Code, Constants.Unspecified);
+            get => getString(ref alpha2Code, Constants.Unspecified);
             set => alpha2Code = value;
         }
         [DisplayName("Currencies in use")]

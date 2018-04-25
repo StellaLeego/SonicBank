@@ -11,12 +11,12 @@ namespace Open.Data.Money
         private CurrencyDbRecord currency;
 
         public string CountryID {
-            get => getValue(ref countryID, Constants.Unspecified);
+            get => getString(ref countryID, Constants.Unspecified);
             set => countryID = value;
         }
 
         public string CurrencyID {
-            get => getValue(ref currencyID, Constants.Unspecified);
+            get => getString(ref currencyID, Constants.Unspecified);
             set => currencyID = value;
         }
 
