@@ -2,7 +2,7 @@
 
 namespace Open.Data.Location
 {
-    public class EmailAddressDbRecord : AddressDbRecord
+    public class WebPageAddressDbRecord : AddressDbRecord
     {
     }
 }

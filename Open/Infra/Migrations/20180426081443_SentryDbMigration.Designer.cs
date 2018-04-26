@@ -13,9 +13,10 @@ using System;
 namespace Open.Infra.Migrations
 {
     [DbContext(typeof(SentryDbContext))]
-    partial class SentryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180426081443_SentryDbMigration")]
+    partial class SentryDbMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

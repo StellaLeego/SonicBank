@@ -17,5 +17,17 @@ namespace Open.Tests.Data.Location
         {
             Assert.AreEqual(typeof(AddressDbRecord), obj.GetType().BaseType);
         }
+
+        [TestMethod]
+        public void NationalDirectDialingPrefixTest()
+        {
+            testReadWriteProperty(() => obj.NationalDirectDialingPrefix, x => obj.NationalDirectDialingPrefix = x);
+        }
+
+        [TestMethod]
+        public void DeviceTest()
+        {
+            testReadWriteProperty(() => obj.Device, x => obj.Device = x);
+        }
     }
 }

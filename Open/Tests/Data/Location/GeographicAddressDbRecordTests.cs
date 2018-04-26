@@ -17,5 +17,17 @@ namespace Open.Tests.Data.Location
         {
             Assert.AreEqual(typeof(AddressDbRecord), obj.GetType().BaseType);
         }
+
+        [TestMethod]
+        public void CountryTest()
+        {
+            testReadWriteProperty(() => obj.Country, x => obj.Country = x);
+        }
+
+        [TestMethod]
+        public void CountryIDTest()
+        {
+            testReadWriteProperty(() => obj.CountryID, x => obj.CountryID = x);
+        }
     }
 }

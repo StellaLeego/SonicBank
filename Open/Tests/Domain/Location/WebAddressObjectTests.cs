@@ -6,12 +6,12 @@ using Open.Domain.Location;
 namespace Open.Tests.Domain.Location
 {
     [TestClass]
-    public class WebAddressObjectTests : DomainObjectsTests<WebAddressObject, WebAddressDbRecord>
+    public class WebAddressObjectTests : DomainObjectsTests<WebAddressObject, WebPageAddressDbRecord>
     {
         protected override WebAddressObject getRandomTestObject()
         {
             createdWithNullArg = new WebAddressObject(null);
-            dbRecordType = typeof(WebAddressDbRecord);
+            dbRecordType = typeof(WebPageAddressDbRecord);
             return GetRandom.Object<WebAddressObject>();
         }
     }

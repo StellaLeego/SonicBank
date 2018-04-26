@@ -18,13 +18,5 @@ namespace Open.Tests.Data.Location
         {
             Assert.AreEqual(typeof(AddressDbRecord), typeof(EmailAddressDbRecord).BaseType);
         }
-
-        [TestMethod]
-        public void EmailAddressTest()
-        {
-            testReadWriteProperty(() => obj.EmailAddress, x => obj.EmailAddress = x);
-            testNullEmptyAndWhitespacesCases(() => obj.EmailAddress, x => obj.EmailAddress = x,
-                () => Constants.Unspecified);
-        }
     }
 }
