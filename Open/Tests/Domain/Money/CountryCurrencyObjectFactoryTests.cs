@@ -31,16 +31,16 @@ namespace Open.Tests.Domain.Money
             Assert.AreEqual(o.DbRecord.Country, r.Country);
             Assert.AreEqual(o.DbRecord.Currency, r.Currency);
         }
-        [TestMethod] public void CreateWithNullArgumentTest() {
+        //[TestMethod] public void CreateWithNullArgumentTest() {
 
-            var o = CountryCurrencyObjectFactory.Create(null, null);
+        //    var o = CountryCurrencyObjectFactory.Create(null, null);
             
-            Assert.AreEqual(o.DbRecord.ValidFrom, DateTime.MinValue);
-            Assert.AreEqual(o.DbRecord.ValidTo, DateTime.MaxValue);
-            Assert.AreEqual(o.Currency.DbRecord, o.DbRecord.Currency);
-            Assert.AreEqual(o.Country.DbRecord, o.DbRecord.Country);
-            Assert.AreEqual(o.DbRecord.CountryID, Constants.Unspecified);
-            Assert.AreEqual(o.DbRecord.CurrencyID, Constants.Unspecified);
-        }
+        //    Assert.AreEqual(o.DbRecord.ValidFrom, DateTime.MinValue);
+        //    Assert.AreEqual(o.DbRecord.ValidTo, DateTime.MaxValue);
+        //    Assert.AreEqual(o.Currency.DbRecord, o.DbRecord.Currency);
+        //    Assert.AreEqual(o.Country.DbRecord, o.DbRecord.Country);
+        //    Assert.AreEqual(o.DbRecord.CountryID, Constants.Unspecified);
+        //    Assert.AreEqual(o.DbRecord.CurrencyID, Constants.Unspecified);
+        //}
     }
 }

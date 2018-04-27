@@ -23,9 +23,7 @@ namespace Open.Sentry
                 try
                 {
                     var dbContext = services.GetRequiredService<SentryDbContext>();
-                    CountriesDbTableInitializer.Initialize(dbContext);
-                    CurrenciesDbTableInitializer.Initialize(dbContext);
-                    CountryCurrenciesDbTableInitializer.Initialize(dbContext);
+                    DbTablesInitializer.Initialize(dbContext);
                 }
                 catch (Exception ex)
                 {

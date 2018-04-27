@@ -23,11 +23,11 @@ namespace Open.Tests.Domain.Money
             Assert.AreEqual(obj.Currency.DbRecord, obj.DbRecord.Currency);
         }
 
-        [TestMethod]
-        public void WhenCreatedWithNullArgumentsTest() {
-            obj = new CountryCurrencyObject(null);
-            Assert.AreEqual(obj.Country.DbRecord, obj.DbRecord.Country);
-            Assert.AreEqual(obj.Currency.DbRecord, obj.DbRecord.Currency);
-        }
+        //[TestMethod]
+        //public void WhenCreatedWithNullArgumentsTest() {
+        //    obj = new CountryCurrencyObject(null);
+        //    Assert.AreEqual(obj.Country.DbRecord, obj.DbRecord.Country);
+        //    Assert.AreEqual(obj.Currency.DbRecord, obj.DbRecord.Currency);
+        //}
     }
 }

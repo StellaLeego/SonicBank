@@ -16,9 +16,9 @@ namespace Open.Tests.Data.Location
         }
 
         [TestMethod]
-        public void IsAbstract()
+        public void IsNotAbstract()
         {
-            Assert.IsTrue(typeof(AddressDbRecord).IsAbstract);
+            Assert.IsFalse(typeof(AddressDbRecord).IsAbstract);
         }
 
         [TestMethod]
