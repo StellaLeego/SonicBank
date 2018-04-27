@@ -20,14 +20,8 @@ namespace Open.Data.Money
             set => currencyID = value;
         }
 
-        public virtual CountryDbRecord Country {
-            get => getValue(ref country);
-            set => country = value;
-        }
+        public virtual CountryDbRecord Country { get; set; }
 
-        public virtual CurrencyDbRecord Currency {
-            get => getValue(ref currency);
-            set => currency = value;
-        }  
+        public virtual CurrencyDbRecord Currency { get; set; }  
     }
 }
