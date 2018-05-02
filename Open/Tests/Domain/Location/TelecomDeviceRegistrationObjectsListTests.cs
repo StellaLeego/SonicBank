@@ -9,12 +9,12 @@ using Open.Domain.Location;
 
 namespace Open.Tests.Domain.Location
 {
-    [TestClass] public class TelecomDeviceRegistrationObjectsListTests : DomainObjectsListTests<TelecomDeviceRegistationObjectsList, TelecomDeviceRegistrationObject>
+    [TestClass] public class TelecomDeviceRegistrationObjectsListTests : DomainObjectsListTests<TelecomDeviceRegistrationObjectsList, TelecomDeviceRegistrationObject>
     {
-        protected override TelecomDeviceRegistationObjectsList getRandomTestObject() {
-            createWithNullArgs = new TelecomDeviceRegistationObjectsList(null, null);
+        protected override TelecomDeviceRegistrationObjectsList getRandomTestObject() {
+            createWithNullArgs = new TelecomDeviceRegistrationObjectsList(null, null);
             var l = GetRandom.Object<List<TelecomDeviceRegistrationDbRecord>>();
-            return new TelecomDeviceRegistationObjectsList(l, GetRandom.Object<RepositoryPage>());
+            return new TelecomDeviceRegistrationObjectsList(l, GetRandom.Object<RepositoryPage>());
         }
     }
 }
