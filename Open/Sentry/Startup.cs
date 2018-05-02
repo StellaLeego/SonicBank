@@ -36,6 +36,8 @@ namespace Open.Sentry
             services.AddScoped<ICountryObjectsRepository, CountryObjectsRepository>();
             services.AddScoped<ICurrencyObjectsRepository, CurrencyObjectsRepository>();
             services.AddScoped<ICountryCurrencyObjectsRepository, CountryCurrencyObjectsRepository>();
+            services.AddScoped<IAddressObjectsRepository, AddressObjectsRepository>();
+            services.AddScoped<ITelecomDeviceRegistrationObjectsRepository, TelecomDeviceRegistrationObjectsRepository>();
         }
 
         protected virtual void setMvcWithAntiForgeryToken(IServiceCollection services)
