@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Open.Core;
+using Open.Domain.Location;
+namespace Open.Facade.Location {
 
-namespace Open.Facade.Location
-{
-    class AddressViewModelsList
-    {
+    public class AddressViewModelsList : PaginatedList<AddressViewModel> {
+        public AddressViewModelsList(IPaginatedList<IAddressObject> list) {
+            if (list is null) return;
+            PageIndex = list.PageIndex;
+            TotalPages = list.TotalPages;
+            foreach (var e in list) { Add(AddressViewModelFactory.Create(e)); }
+        }
     }
 }

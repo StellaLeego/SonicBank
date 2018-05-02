@@ -14,7 +14,7 @@ namespace Open.Tests.Domain.Location
         [TestInitialize]
         public override void TestInitialize() {
             base.TestInitialize();
-            type = typeof(TelecomDeviceRegistationObjectFactory);
+            type = typeof(TelecomDeviceRegistrationObjectFactory);
         }
 
         [TestMethod]
@@ -23,7 +23,7 @@ namespace Open.Tests.Domain.Location
             var address = new GeographicAddressObject(r.Address);
             var device = new TelecomAddressObject(r.Device);
 
-            var o = TelecomDeviceRegistationObjectFactory.Create(address, device, r.ValidFrom, r.ValidTo);
+            var o = TelecomDeviceRegistrationObjectFactory.Create(address, device, r.ValidFrom, r.ValidTo);
             Assert.AreEqual(o.DbRecord.ValidFrom, r.ValidFrom);
             Assert.AreEqual(o.DbRecord.ValidTo, r.ValidTo);
             Assert.AreEqual(o.Address.DbRecord, r.Address);
@@ -36,7 +36,7 @@ namespace Open.Tests.Domain.Location
 
         [TestMethod]
         public void CreateWithNullArgumentTest() {
-            var o = TelecomDeviceRegistationObjectFactory.Create(null, null);
+            var o = TelecomDeviceRegistrationObjectFactory.Create(null, null);
             Assert.AreEqual(o.DbRecord.ValidFrom, DateTime.MinValue);
             Assert.AreEqual(o.DbRecord.ValidTo, DateTime.MaxValue);
             Assert.AreEqual(o.Address.DbRecord, o.DbRecord.Address);

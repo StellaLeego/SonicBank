@@ -56,7 +56,7 @@
     <Compile Include="Location\IAddressObjectsRepository.cs" />
     <Compile Include="Location\ICountryObjectsRepository.cs" />
     <Compile Include="Location\TelecomAddressObject.cs" />
-    <Compile Include="Location\TelecomDeviceRegistationObjectFactory.cs" />
+    <Compile Include="Location\TelecomDeviceRegistrationObjectFactory.cs" />
     <Compile Include="Location\TelecomDeviceRegistrationObjectsList.cs" />
     <Compile Include="Location\TelecomDeviceRegistrationObject.cs" />
     <Compile Include="Location\WebAddressObject.cs" />

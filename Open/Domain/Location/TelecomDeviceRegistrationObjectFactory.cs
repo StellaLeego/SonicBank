@@ -7,7 +7,7 @@ using Open.Data.Location;
 
 namespace Open.Domain.Location
 {
-    public static class TelecomDeviceRegistationObjectFactory
+    public static class TelecomDeviceRegistrationObjectFactory
     {
         public static TelecomDeviceRegistrationObject Create(GeographicAddressObject address,
             TelecomAddressObject device, DateTime? validFrom = null, DateTime? validTo = null) {

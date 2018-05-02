@@ -23,5 +23,10 @@ namespace Open.Tests.Facade.Location
         {
             testReadWriteProperty(()=> obj.EmailAddress, x => obj.EmailAddress = x);
         }
+
+        [TestMethod]
+        public void ToStringTest() {
+            Assert.AreEqual(obj.EmailAddress, obj.ToString());
+        }
     }
 }

@@ -4,12 +4,9 @@ using Open.Data.Location;
 
 namespace Open.Domain.Location
 {
-    public static class AddressObjectFactory
-    {
-        public static IAddressObject Create(AddressDbRecord dbRecord)
-        {
-            switch (dbRecord)
-            {
+    public static class AddressObjectFactory {
+        public static IAddressObject Create(AddressDbRecord dbRecord) {
+            switch (dbRecord) {
                 case WebPageAddressDbRecord web:
                     return create(web);
                 case EmailAddressDbRecord email:
@@ -20,32 +17,21 @@ namespace Open.Domain.Location
 
             return create(dbRecord as GeographicAddressDbRecord);
         }
-
-        private static WebAddressObject create(WebPageAddressDbRecord dbRecord)
-        {
+        private static WebAddressObject create(WebPageAddressDbRecord dbRecord) {
             return new WebAddressObject(dbRecord);
         }
-
-        private static EmailAddressObject create(EmailAddressDbRecord dbRecord)
-        {
+        private static EmailAddressObject create(EmailAddressDbRecord dbRecord) {
             return new EmailAddressObject(dbRecord);
         }
-
-        private static GeographicAddressObject create(GeographicAddressDbRecord dbRecord)
-        {
+        private static GeographicAddressObject create(GeographicAddressDbRecord dbRecord) {
             return new GeographicAddressObject(dbRecord);
         }
-
-        private static TelecomAddressObject create(TelecomAddressDbRecord dbRecord)
-        {
+        private static TelecomAddressObject create(TelecomAddressDbRecord dbRecord) {
             return new TelecomAddressObject(dbRecord);
         }
-
         public static WebAddressObject CreateWeb(string id, string address,
-            DateTime? validFrom = null, DateTime? validTo = null)
-        {
-            var r = new WebPageAddressDbRecord
-            {
+            DateTime? validFrom = null, DateTime? validTo = null) {
+            var r = new WebPageAddressDbRecord {
                 ID = id,
                 Address = address,
                 ValidFrom = validFrom ?? DateTime.MinValue,
@@ -53,12 +39,9 @@ namespace Open.Domain.Location
             };
             return new WebAddressObject(r);
         }
-
         public static EmailAddressObject CreateEmail(string id, string address,
-            DateTime? validFrom = null, DateTime? validTo = null)
-        {
-            var r = new EmailAddressDbRecord
-            {
+            DateTime? validFrom = null, DateTime? validTo = null) {
+            var r = new EmailAddressDbRecord {
                 ID = id,
                 Address = address,
                 ValidFrom = validFrom ?? DateTime.MinValue,
@@ -66,13 +49,10 @@ namespace Open.Domain.Location
             };
             return new EmailAddressObject(r);
         }
-
         public static GeographicAddressObject CreateAddress(string id, string addressLine,
             string city, string regionOrState, string zipOrPostalCode, string countryId,
-            DateTime? validFrom = null, DateTime? validTo = null)
-        {
-            var r = new GeographicAddressDbRecord()
-            {
+            DateTime? validFrom = null, DateTime? validTo = null) {
+            var r = new GeographicAddressDbRecord {
                 ID = id,
                 Address = addressLine,
                 ZipOrPostCodeOrExtension = zipOrPostalCode,
@@ -84,14 +64,12 @@ namespace Open.Domain.Location
             };
             return new GeographicAddressObject(r);
         }
-
         public static TelecomAddressObject CreateDevice(string id, string countryCode,
-            string areaCode, string number, string extension,
-            string nationalDirectDialingPrefix, TelecomDevice deviceType, 
-            DateTime? validFrom = null, DateTime? validTo = null)
-        {
-            var r = new TelecomAddressDbRecord
-            {
+            string areaCode,
+            string number, string extension, string nationalDirectDialingPrefix,
+            TelecomDevice deviceType,
+            DateTime? validFrom = null, DateTime? validTo = null) {
+            var r = new TelecomAddressDbRecord {
                 ID = id,
                 Address = number,
                 ZipOrPostCodeOrExtension = extension,
@@ -106,4 +84,3 @@ namespace Open.Domain.Location
         }
     }
 }
-
