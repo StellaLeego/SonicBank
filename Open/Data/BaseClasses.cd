@@ -12,52 +12,129 @@
     <TypeIdentifier />
   </Class>
   <Class Name="Open.Data.Common.UniqueDbRecord">
-    <Position X="4.75" Y="1.5" Width="1.5" />
+    <Position X="7.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>Common\UniqueDbRecord.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Open.Data.Common.IdentifiedDbRecord">
-    <Position X="2.75" Y="1.5" Width="1.5" />
+    <Position X="7.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAgAAQAIAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Common\IdentifiedDbRecord.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Open.Data.Common.MetricDbRecord" Collapsed="true">
-    <Position X="1.75" Y="4.5" Width="1.5" />
+  <Class Name="Open.Data.Common.MetricDbRecord">
+    <Position X="6.5" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Common\MetricDbRecord.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Open.Data.Location.CountryDbRecord" Collapsed="true">
-    <Position X="4" Y="4.5" Width="1.5" />
+  <Class Name="Open.Data.Location.CountryDbRecord">
+    <Position X="8.75" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Location\CountryDbRecord.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Open.Data.Money.CurrencyDbRecord" Collapsed="true">
-    <Position X="0.5" Y="5.75" Width="1.5" />
+  <Class Name="Open.Data.Money.CurrencyDbRecord">
+    <Position X="5.5" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Money\CurrencyDbRecord.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Open.Data.Quantity.MeasureDbRecord" Collapsed="true">
-    <Position X="2.75" Y="5.75" Width="1.5" />
+  <Class Name="Open.Data.Quantity.MeasureDbRecord">
+    <Position X="7.75" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Quantity\MeasureDbRecord.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Open.Data.Quantity.UnitDbRecord" Collapsed="true">
-    <Position X="5" Y="5.75" Width="1.5" />
+  <Class Name="Open.Data.Quantity.UnitDbRecord">
+    <Position X="10" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Quantity\UnitDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Location.TelecomDeviceRegistrationDbRecord">
+    <Position X="9.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAACABAAAgAAAAAAAAAAAAIAAAACAAAAEEAAAAA=</HashCode>
+      <FileName>Location\TelecomDeviceRegistrationDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Money.CountryCurrencyDbRecord">
+    <Position X="4.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAIABAACAIQAAACAAAAAAAAAgA=</HashCode>
+      <FileName>Money\CountryCurrencyDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Location.AddressDbRecord">
+    <Position X="12" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAIAAQAAAAAAAIAUAACAAAAAAAAAAE=</HashCode>
+      <FileName>Location\AddressDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Location.EmailAddressDbRecord">
+    <Position X="9.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Location\EmailAddressDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Location.GeographicAddressDbRecord">
+    <Position X="11" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAIQAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Location\GeographicAddressDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Location.TelecomAddressDbRecord">
+    <Position X="12.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAgAAAAAAAAAAAAE=</HashCode>
+      <FileName>Location\TelecomAddressDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Location.WebPageAddressDbRecord">
+    <Position X="14.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Location\WebPageAddressDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Project.PaymentMethodDbRecord">
+    <Position X="2.75" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAIAAAAgACACCAAgAkAAEABQABAAEAAA=</HashCode>
+      <FileName>Project\PaymentMethodDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Project.CheckDbRecord">
+    <Position X="0.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAgAAA=</HashCode>
+      <FileName>Project\CheckDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Project.CreditCardDbRecord">
+    <Position X="2.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Project\CreditCardDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Project.DebitCardDbRecord">
+    <Position X="4.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Project\DebitCardDbRecord.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -10,6 +10,13 @@ namespace Open.Core
             if (string.IsNullOrWhiteSpace(field)) field = (value ?? string.Empty).Trim();
             return field;
         }
+
+        protected internal decimal getDecimal(ref decimal field, decimal value = 0)
+        {
+            if (field.Equals(null)) field = value;
+            return field;
+        }
+
         protected internal T getValue<T>(ref T field) where T : class, new() {
             field = field ?? new T();
             return field;

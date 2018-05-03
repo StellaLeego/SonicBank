@@ -19,6 +19,15 @@ namespace Open.Tests.Core
             public DateTime T;
             public string Name { get; set; }
             public DateTime Date { get; set; }
+            public decimal D;
+        }
+
+        [TestMethod]
+        public void getDecimalTest()
+        {
+            obj.D = decimal.Zero;
+            decimal expected = obj.getDecimal(ref obj.D);
+            Assert.AreEqual(obj.D, expected);
         }
 
         private void testGetValue(string field, string value, string expected)
