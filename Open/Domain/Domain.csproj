@@ -72,6 +72,7 @@
     <Compile Include="Project\IPaymentMethodObject.cs" />
     <Compile Include="Project\IPaymentMethodObjectRepository.cs" />
     <Compile Include="Project\PaymentMethodObject.cs" />
+    <Compile Include="Project\PaymentMethodObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quantity\MeasureObject.cs" />
     <Compile Include="Quantity\UnitObject.cs" />
