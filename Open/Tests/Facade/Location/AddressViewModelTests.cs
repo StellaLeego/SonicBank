@@ -17,7 +17,7 @@ namespace Open.Tests.Facade.Location {
         [TestMethod] public void AddressTypeTest() {
             Assert.AreEqual("testClass", obj.AddressType);
             Assert.AreEqual("WebPage", new WebPageAddressViewModel().AddressType);
-            Assert.AreEqual("EMail", new EmailAddressViewModel().AddressType);
+            Assert.AreEqual("Email", new EmailAddressViewModel().AddressType);
             Assert.AreEqual("Geographic", new GeographicAddressViewModel().AddressType);
             Assert.AreEqual("Telecom", new TelecomAddressViewModel().AddressType);
         }

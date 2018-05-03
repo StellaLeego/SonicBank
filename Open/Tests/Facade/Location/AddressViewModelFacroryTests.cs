@@ -54,7 +54,7 @@ namespace Open.Tests.Facade.Location {
             Assert.AreEqual(v.City, o.DbRecord.CityOrAreaCode);
             Assert.AreEqual(v.RegionOrState, o.DbRecord.RegionOrStateOrCountryCode);
             Assert.AreEqual(v.ZipOrPostalCode, o.DbRecord.ZipOrPostCodeOrExtension);
-            Assert.AreEqual(v.Country, o.DbRecord.Country.ID);
+            Assert.AreEqual(v.Country, o.DbRecord.CountryID);
             Assert.AreEqual(v.RegisteredTelecomAddresses.Count, o.RegisteredTelecomDevices.Count);
         }
         [TestMethod] public void CreateTelecomAddressViewModelTest() {
