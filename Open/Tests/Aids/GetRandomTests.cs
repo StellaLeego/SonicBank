@@ -250,7 +250,7 @@ namespace Open.Tests.Aids
         [TestMethod]
         public void UInt64Test()
         {
-            var d = 1000000UL;
+            var d = 10000000000UL;
             doGetRandomTest(GetRandom.UInt64, (ulong) 100, (ulong) 200);
             doGetRandomTest(GetRandom.UInt64, ulong.MinValue, ulong.MaxValue);
             doGetRandomTest(GetRandom.UInt64, ulong.MinValue, ulong.MinValue + d);

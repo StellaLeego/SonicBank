@@ -25,10 +25,14 @@ namespace Open.Tests.Data.Money
         [TestMethod]
         public void CountryTest() {
             testReadWriteProperty(() => obj.Country, x => obj.Country = x);
+            obj.Country = null;
+            Assert.IsNull(obj.Country);
         }
         [TestMethod]
         public void CurrencyTest() {
             testReadWriteProperty(() => obj.Currency, x => obj.Currency = x);
+            obj.Currency = null;
+            Assert.IsNull(obj.Currency);
         }
     }
 }

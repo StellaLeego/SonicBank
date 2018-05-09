@@ -1,22 +1,19 @@
-﻿using Open.Core;
-using Open.Data.Common;
+﻿using Open.Data.Common;
 using Open.Data.Location;
 
 namespace Open.Data.Money
 {
     public class CountryCurrencyDbRecord : TemporalDbRecord {
         private string countryID;
-        private CountryDbRecord country;
         private string currencyID;
-        private CurrencyDbRecord currency;
 
         public string CountryID {
-            get => getString(ref countryID, Constants.Unspecified);
+            get => getString(ref countryID);
             set => countryID = value;
         }
 
         public string CurrencyID {
-            get => getString(ref currencyID, Constants.Unspecified);
+            get => getString(ref currencyID);
             set => currencyID = value;
         }
 

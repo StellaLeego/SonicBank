@@ -41,10 +41,11 @@ namespace Open.Core
             var values = GetClass.ReadWritePropertyValues(this);
             foreach (var value in values)
             {
+                if (value is null) continue;
                 if (value.ToString().ToLower().Contains(searchString)) return true;
             }
 
-            return false;
+            return GetType().Name.ToLower().Contains(searchString);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Open.Tests.Data.Location
         {
             testReadWriteProperty(() => obj.Device, x => obj.Device = x);
             obj.Device = null;
-            Assert.IsNotNull(obj.Device);
+            Assert.IsNull(obj.Device);
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace Open.Tests.Data.Location
         {
             testReadWriteProperty(() => obj.Address, x => obj.Address = x);
             obj.Address = null;
-            Assert.IsNotNull(obj.Address);
+            Assert.IsNull(obj.Address);
         }
     }
 }

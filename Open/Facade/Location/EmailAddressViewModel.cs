@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using Open.Core;
 
 namespace Open.Facade.Location
@@ -7,7 +8,9 @@ namespace Open.Facade.Location
     {
         private string emailAddress;
 
+        [Required]
         [DisplayName("Email")]
+        [RegularExpression(@"(?!.*\.\.)(^[^\.][^@\s]+@[^@\s]+\.[^@\s\.]+$)")]
         public string EmailAddress
         {
             get => getString(ref emailAddress);

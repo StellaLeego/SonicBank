@@ -7,20 +7,22 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    <a asp-action=@ViewBag.ActionCreate>Create New</a>
+    @RenderSection("Create")
 </p>
 
 <form asp-action=@ViewBag.ActionIndex method="get">
     <div class="form-horizontal">
         <p>
-            Find by: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]"/>
-            <input type="submit" value="Search" class="btn btn-default"/>
+            Find by: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
             <a asp-action=@ViewBag.ActionIndex>Back to Full List</a>
         </p>
     </div>
 </form>
 
+
 @RenderBody()
+
 
 @{
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
@@ -41,3 +43,4 @@
    class="btn btn-default @nextDisabled">
     Next
 </a>
+
