@@ -1,22 +1,22 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Open.Infra.Location;
+using Open.Infra.Money;
 
-namespace Open.Tests.Infra.Location
+namespace Open.Tests.Infra.Money
 {
     [TestClass]
-    public class CountryObjectsRepositoryTests : BaseTests
+    public class CurrencyObjectsRepositoryTests : BaseTests
     {
         [TestInitialize]
         public override void TestInitialize()
         {
             base.TestInitialize();
-            type = typeof(CountryObjectsRepository);
+            type = typeof(CurrencyObjectsRepository);
         }
 
         [TestMethod]
-        public void CanCreate()
+        public void CanCreateTest()
         {
-            Assert.IsNotNull(new CountryObjectsRepository(null));
+            Assert.IsNotNull(new CurrencyObjectsRepository(null));
         }
 
         [TestMethod]

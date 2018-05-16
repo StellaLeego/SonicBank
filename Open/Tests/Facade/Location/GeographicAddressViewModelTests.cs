@@ -15,7 +15,7 @@ namespace Open.Tests.Facade.Location {
             Assert.AreEqual(obj.GetType().BaseType, typeof(AddressViewModel));
         }
 
-        [TestMethod] public void AadressLineTest() {
+        [TestMethod] public void AddressLineTest() {
             testReadWriteProperty(() => obj.AddressLine, x => obj.AddressLine = x);
         }
 

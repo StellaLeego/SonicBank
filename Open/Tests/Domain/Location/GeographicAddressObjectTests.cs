@@ -43,7 +43,8 @@ namespace Open.Tests.Domain.Location
         public void WhenCreatedWithNullArgumentsTest()
         {
             obj = new GeographicAddressObject(null);
-            Assert.AreEqual(obj.Country.DbRecord, obj.DbRecord.Country);
+            Assert.IsNull(obj.DbRecord.Country);
+            Assert.IsNotNull(obj.Country.DbRecord);
         }
     }
 }

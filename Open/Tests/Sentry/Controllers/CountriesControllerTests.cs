@@ -8,7 +8,7 @@ using Open.Sentry.Controllers;
 
 namespace Open.Tests.Sentry.Controllers
 {
-    [TestClass]
+    //[TestClass]
     public class CountriesControllerTests : AcceptanceTests
     {
         [TestMethod]

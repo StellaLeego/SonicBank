@@ -100,6 +100,7 @@ namespace Open.Tests
             list.RemoveAll(o => o.Contains(displayClass));
             list.RemoveAll(o => o.Contains("<"));
             list.RemoveAll(o => o.Contains(">"));
+            list.RemoveAll(o => o.Contains(".Migrations."));
         }
 
         private void removeTested()

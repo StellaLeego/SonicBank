@@ -1,18 +1,16 @@
-﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Open.Aids;
-using Open.Infra.Location;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Open.Infra.Money;
 
-namespace Open.Tests.Infra.Location
+namespace Open.Tests.Infra.Money
 {
     [TestClass]
-    public class CountriesDbTableInitializerTests : BaseTests
+    public class CurrenciesDbTableInitializerTests : BaseTests
     {
         [TestInitialize]
         public override void TestInitialize()
         {
             base.TestInitialize();
-            type = typeof(CountriesDbTableInitializer);
+            type = typeof(CurrenciesDbTableInitializer);
         }
 
         [TestMethod]
