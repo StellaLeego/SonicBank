@@ -8,7 +8,7 @@ namespace Open.Tests
 {
     public class BaseTests
     {
-        private const string notTested = "<0> is not tested";
+        private const string notTested = "<{0}> is not tested";
         private const string notSpecified = "Class is not specified";
         private List<string> members { get; set; }
         protected Type type;

@@ -25,7 +25,8 @@ namespace Open.Tests.Domain.Location
         }
 
         [TestMethod]
-        public void WhenCreatedWithNullArvgumentsTest() {
+        public void WhenCreatedWithNullArgumentsTest()
+        {
             obj = new TelecomDeviceRegistrationObject(null);
             Assert.AreEqual(obj.Address.DbRecord, obj.DbRecord.Address);
             Assert.AreEqual(obj.Device.DbRecord, obj.DbRecord.Device);

@@ -17,5 +17,17 @@ namespace Open.Tests.Infra
         {
             isAllClassesTested(assembly, Namespace("Location"));
         }
+
+        [TestMethod]
+        public void IsMoneyTested()
+        {
+            isAllClassesTested(assembly, Namespace("Money"));
+        }
+
+        [TestMethod]
+        public void IsTested()
+        {
+            isAllClassesTested(base.Namespace("Infra"));
+        }
     }
 }

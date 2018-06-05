@@ -24,7 +24,7 @@ namespace Open.Infra
             createCountryCurrencyTable(b);
         }
 
-        private static void createCountryCurrencyTable(ModelBuilder b)
+        internal static void createCountryCurrencyTable(ModelBuilder b)
         {
             const string table = "CountryCurrency";
             createPrimaryKey<CountryCurrencyDbRecord>(b, table, a => new {a.CountryID, a.CurrencyID});
@@ -32,7 +32,7 @@ namespace Open.Infra
             createForeignKey<CountryCurrencyDbRecord, CurrencyDbRecord>(b, table, x => x.CurrencyID, x => x.Currency);
         }
 
-        private static void createTelecomAddressRegistrationTable(ModelBuilder b)
+        internal static void createTelecomAddressRegistrationTable(ModelBuilder b)
         {
             const string table = "TelecomDeviceRegistration";
             createPrimaryKey<TelecomDeviceRegistrationDbRecord>(b, table, a => new { a.AddressID, a.DeviceID });
@@ -43,7 +43,7 @@ namespace Open.Infra
 
         }
 
-        private static void createAddressTable(ModelBuilder b)
+        internal static void createAddressTable(ModelBuilder b)
         {
             const string table = "Address";
             b.Entity<AddressDbRecord>().ToTable(table);
@@ -53,14 +53,14 @@ namespace Open.Infra
             createForeignKey<GeographicAddressDbRecord, CountryDbRecord>(b, table, x => x.CountryID, x => x.Country);
         }
 
-        private static void createPrimaryKey<TEntity>(ModelBuilder b,
+        internal static void createPrimaryKey<TEntity>(ModelBuilder b,
             string tableName, Expression<Func<TEntity, object>> primaryKey)
             where TEntity : class
         {
             b.Entity<TEntity>().ToTable(tableName).HasKey(primaryKey);
         }
 
-        private static void createForeignKey<TEntity, TRelatedEntity>(ModelBuilder b,
+        internal static void createForeignKey<TEntity, TRelatedEntity>(ModelBuilder b,
             string tableName, Expression<Func<TEntity, object>> foreignKey,
             Expression<Func<TEntity, TRelatedEntity>> getRelatedEntity)
             where TEntity : class where TRelatedEntity : class

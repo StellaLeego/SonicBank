@@ -7,23 +7,23 @@ namespace Open.Domain.Location
     public sealed class GeographicAddressObject : AddressObject<GeographicAddressDbRecord>
     {
         public readonly CountryObject Country;
-        private readonly List<TelecomAddressObject> registeredTelecomDevices;
+        private readonly List<TelecomAddressObject> registeredDevices;
 
         public GeographicAddressObject(GeographicAddressDbRecord r) : base(r ?? new GeographicAddressDbRecord())
         {
             Country = new CountryObject(DbRecord.Country);
-            registeredTelecomDevices = new List<TelecomAddressObject>();
+            registeredDevices = new List<TelecomAddressObject>();
         }
 
-        public IReadOnlyList<TelecomAddressObject> RegisteredTelecomDevices => registeredTelecomDevices.AsReadOnly();
+        public IReadOnlyList<TelecomAddressObject> RegisteredTelecomDevices => registeredDevices.AsReadOnly();
 
-        public void RegisteredTelecomDevice(TelecomAddressObject telecomDeviceAddress)
+        public void RegisteredTelecomDevice(TelecomAddressObject adr)
         {
-            if (telecomDeviceAddress is null) return;
-            if (telecomDeviceAddress.DbRecord.ID == Constants.Unspecified) return;
-            if (registeredTelecomDevices.Find(
-                x=>x.DbRecord.ID == telecomDeviceAddress.DbRecord.ID) != null) return;
-            registeredTelecomDevices.Add(telecomDeviceAddress);
+            if (adr is null) return;
+            if (adr.DbRecord.ID == Constants.Unspecified) return;
+            if (registeredDevices.Find(
+                    x => x.DbRecord.ID == adr.DbRecord.ID) != null) return;
+            registeredDevices.Add(adr);
         }
     }
 }
