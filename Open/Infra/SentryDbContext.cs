@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Open.Data.Location;
 using Open.Data.Money;
+using Open.Data.Project;
 
 namespace Open.Infra
 {
@@ -14,6 +15,7 @@ namespace Open.Infra
         public DbSet<CountryCurrencyDbRecord> CountryCurrencies { get; set; }
         public DbSet<AddressDbRecord> Addresses { get; set; }
         public DbSet<TelecomDeviceRegistrationDbRecord> TelecomDeviceRegistrations { get; set; }
+        public DbSet<PaymentDbRecord> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder b) {
             base.OnModelCreating(b);
@@ -22,6 +24,7 @@ namespace Open.Infra
             createAddressTable(b);
             createTelecomAddressRegistrationTable(b);
             createCountryCurrencyTable(b);
+            createPaymentsTable(b);
         }
 
         internal static void createCountryCurrencyTable(ModelBuilder b)
@@ -51,6 +54,17 @@ namespace Open.Infra
             b.Entity<EmailAddressDbRecord>().ToTable(table);
             b.Entity<TelecomAddressDbRecord>().ToTable(table);
             createForeignKey<GeographicAddressDbRecord, CountryDbRecord>(b, table, x => x.CountryID, x => x.Country);
+        }
+
+        internal static void createPaymentsTable(ModelBuilder b)
+        {
+            const string table = "Payments";
+            b.Entity<PaymentDbRecord>().ToTable(table);
+            b.Entity<PaymentCardDbRecord>().ToTable(table);
+            b.Entity<CheckDbRecord>().ToTable(table);
+            b.Entity<CashDbRecord>().ToTable(table);
+            b.Entity<DebitCardDbRecord>().ToTable(table);
+            b.Entity<CreditCardDbRecord>().ToTable(table);
         }
 
         internal static void createPrimaryKey<TEntity>(ModelBuilder b,

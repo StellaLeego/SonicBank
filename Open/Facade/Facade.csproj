@@ -57,6 +57,7 @@
     <Compile Include="Money\CurrencyViewModel.cs" />
     <Compile Include="Money\CurrencyViewModelFactory.cs" />
     <Compile Include="Money\CurrencyViewModelsList.cs" />
+    <Compile Include="Project\PaymentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

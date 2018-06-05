@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Open.Infra.Migrations
 {
-    public partial class SentryDbMigration : Migration
+    public partial class Migrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,6 +36,32 @@ namespace Open.Infra.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Currency", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    CheckNumber = table.Column<string>(nullable: true),
+                    CreditLimit = table.Column<string>(nullable: true),
+                    CardAssociationName = table.Column<string>(nullable: true),
+                    CardNumber = table.Column<string>(nullable: true),
+                    DailyWithDrawalLimit = table.Column<string>(nullable: true),
+                    ID = table.Column<string>(nullable: false),
+                    Amount = table.Column<string>(nullable: true),
+                    Currency = table.Column<string>(nullable: true),
+                    Discriminator = table.Column<string>(nullable: false),
+                    Memo = table.Column<string>(nullable: true),
+                    Payee = table.Column<string>(nullable: true),
+                    PayeeAccountNumber = table.Column<string>(nullable: true),
+                    Payer = table.Column<string>(nullable: true),
+                    PayerAccountNumber = table.Column<string>(nullable: true),
+                    ValidFrom = table.Column<DateTime>(nullable: false),
+                    ValidTo = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -137,6 +163,9 @@ namespace Open.Infra.Migrations
         {
             migrationBuilder.DropTable(
                 name: "CountryCurrency");
+
+            migrationBuilder.DropTable(
+                name: "Payments");
 
             migrationBuilder.DropTable(
                 name: "TelecomDeviceRegistration");

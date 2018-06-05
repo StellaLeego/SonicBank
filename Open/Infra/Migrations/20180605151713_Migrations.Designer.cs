@@ -13,14 +13,14 @@ using System;
 namespace Open.Infra.Migrations
 {
     [DbContext(typeof(SentryDbContext))]
-    [Migration("20180426081443_SentryDbMigration")]
-    partial class SentryDbMigration
+    [Migration("20180605151713_Migrations")]
+    partial class Migrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
+                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Open.Data.Location.AddressDbRecord", b =>
@@ -120,6 +120,39 @@ namespace Open.Infra.Migrations
                     b.ToTable("Currency");
                 });
 
+            modelBuilder.Entity("Open.Data.Project.PaymentDbRecord", b =>
+                {
+                    b.Property<string>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Amount");
+
+                    b.Property<string>("Currency");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<string>("Memo");
+
+                    b.Property<string>("Payee");
+
+                    b.Property<string>("PayeeAccountNumber");
+
+                    b.Property<string>("Payer");
+
+                    b.Property<string>("PayerAccountNumber");
+
+                    b.Property<DateTime>("ValidFrom");
+
+                    b.Property<DateTime>("ValidTo");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Payments");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("PaymentDbRecord");
+                });
+
             modelBuilder.Entity("Open.Data.Location.EmailAddressDbRecord", b =>
                 {
                     b.HasBaseType("Open.Data.Location.AddressDbRecord");
@@ -164,6 +197,63 @@ namespace Open.Infra.Migrations
                     b.ToTable("Address");
 
                     b.HasDiscriminator().HasValue("WebPageAddressDbRecord");
+                });
+
+            modelBuilder.Entity("Open.Data.Project.CashDbRecord", b =>
+                {
+                    b.HasBaseType("Open.Data.Project.PaymentDbRecord");
+
+
+                    b.ToTable("Payments");
+
+                    b.HasDiscriminator().HasValue("CashDbRecord");
+                });
+
+            modelBuilder.Entity("Open.Data.Project.CheckDbRecord", b =>
+                {
+                    b.HasBaseType("Open.Data.Project.PaymentDbRecord");
+
+                    b.Property<string>("CheckNumber");
+
+                    b.ToTable("Payments");
+
+                    b.HasDiscriminator().HasValue("CheckDbRecord");
+                });
+
+            modelBuilder.Entity("Open.Data.Project.PaymentCardDbRecord", b =>
+                {
+                    b.HasBaseType("Open.Data.Project.PaymentDbRecord");
+
+                    b.Property<string>("CardAssociationName");
+
+                    b.Property<string>("CardNumber");
+
+                    b.Property<string>("DailyWithDrawalLimit");
+
+                    b.ToTable("Payments");
+
+                    b.HasDiscriminator().HasValue("PaymentCardDbRecord");
+                });
+
+            modelBuilder.Entity("Open.Data.Project.CreditCardDbRecord", b =>
+                {
+                    b.HasBaseType("Open.Data.Project.PaymentCardDbRecord");
+
+                    b.Property<string>("CreditLimit");
+
+                    b.ToTable("Payments");
+
+                    b.HasDiscriminator().HasValue("CreditCardDbRecord");
+                });
+
+            modelBuilder.Entity("Open.Data.Project.DebitCardDbRecord", b =>
+                {
+                    b.HasBaseType("Open.Data.Project.PaymentCardDbRecord");
+
+
+                    b.ToTable("Payments");
+
+                    b.HasDiscriminator().HasValue("DebitCardDbRecord");
                 });
 
             modelBuilder.Entity("Open.Data.Location.TelecomDeviceRegistrationDbRecord", b =>

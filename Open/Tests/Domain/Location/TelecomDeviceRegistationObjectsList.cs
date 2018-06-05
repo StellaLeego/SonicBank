@@ -1,4 +1,5 @@
-﻿using Open.Core;
+﻿using System.Collections.Generic;
+using Open.Core;
 using Open.Data.Location;
 
 namespace Open.Domain.Location

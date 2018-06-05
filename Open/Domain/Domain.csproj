@@ -78,6 +78,7 @@
     <Compile Include="Project\PaymentCardObject.cs" />
     <Compile Include="Project\PaymentObject.cs" />
     <Compile Include="Project\PaymentObjectFactory.cs" />
+    <Compile Include="Project\PaymentObjectsList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quantity\MeasureObject.cs" />
     <Compile Include="Quantity\UnitObject.cs" />
