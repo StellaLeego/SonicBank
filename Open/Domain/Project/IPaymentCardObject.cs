@@ -1,6 +1,6 @@
 ﻿namespace Open.Domain.Project
 {
-    interface IPaymentMethodObject
+    public interface IPaymentCardObject
     {
     }
 }

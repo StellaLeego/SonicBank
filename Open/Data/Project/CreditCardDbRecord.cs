@@ -1,14 +1,12 @@
-﻿using System;
-
-namespace Open.Data.Project
+﻿namespace Open.Data.Project
 {
-    public class CreditCardDbRecord : PaymentMethodDbRecord
+    public class CreditCardDbRecord : PaymentCardDbRecord
     {
-        private decimal creditLimit;
+        private string creditLimit;
 
-        public decimal CreditLimit
+        public string CreditLimit
         {
-            get => getDecimal(ref creditLimit);
+            get => getString(ref creditLimit);
             set => creditLimit = value;
         }
     }

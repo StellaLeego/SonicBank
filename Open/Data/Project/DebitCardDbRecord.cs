@@ -1,6 +1,6 @@
 ﻿namespace Open.Data.Project
 {
-    public class DebitCardDbRecord : PaymentMethodDbRecord
+    public class DebitCardDbRecord : PaymentCardDbRecord
     {
     }
 }

@@ -1,13 +1,15 @@
-﻿namespace Open.Data.Project
-{
-    public class CheckDbRecord : PaymentMethodDbRecord
-    {
-        private string bankIdentificationNumber;
+﻿using System;
 
-        public string BankIdentificationNumber
+namespace Open.Data.Project
+{
+    public class CheckDbRecord : PaymentDbRecord
+    {
+        private string checkNumber;
+
+        public string CheckNumber
         {
-            get => getString(ref bankIdentificationNumber);
-            set => bankIdentificationNumber = value;
+            get => getString(ref checkNumber);
+            set => checkNumber = value;
         }
     }
 }
