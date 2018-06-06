@@ -57,7 +57,13 @@
     <Compile Include="Money\CurrencyViewModel.cs" />
     <Compile Include="Money\CurrencyViewModelFactory.cs" />
     <Compile Include="Money\CurrencyViewModelsList.cs" />
+    <Compile Include="Project\CashViewModel.cs" />
+    <Compile Include="Project\CheckViewModel.cs" />
+    <Compile Include="Project\CreditCardViewModel.cs" />
+    <Compile Include="Project\DebitCardViewModel.cs" />
     <Compile Include="Project\PaymentViewModel.cs" />
+    <Compile Include="Project\PaymentViewModelFactory.cs" />
+    <Compile Include="Project\PaymentViewModelsList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
