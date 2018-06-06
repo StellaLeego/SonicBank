@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Open.Core;
 
 namespace Open.Facade.Location
 {

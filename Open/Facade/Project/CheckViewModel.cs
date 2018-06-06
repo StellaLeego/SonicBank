@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Open.Facade.Project
 {
-    class CheckViewModel
+    public class CheckViewModel : PaymentViewModel
     {
+        private string checkNumber;
+
+        [DisplayName("Check number")]
+        public string CheckNumber
+        {
+            get => getString(ref checkNumber);
+            set => checkNumber = value;
+        }
     }
 }
