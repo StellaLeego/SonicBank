@@ -13,7 +13,7 @@ namespace Open.Tests.Infra.Money
             base.TestInitialize();
             type = typeof(SentryDbContext);
         }
-
+        [TestMethod]
         public void CurrenciesTest()
         {
             Assert.IsNotNull(db.Currencies);

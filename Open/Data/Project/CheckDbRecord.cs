@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Open.Data.Project
+﻿namespace Open.Data.Project
 {
     public class CheckDbRecord : PaymentDbRecord
     {
