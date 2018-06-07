@@ -116,8 +116,7 @@ namespace Open.Domain.Project
         }
 
         public static CashObject CreateCash(string id, string amount, 
-            string currency, string memo, string payer,
-            string payerAccountNumber, string payee, string payeeAccountNumber,
+            string currency, string memo, string payer, string payee,
             DateTime? validFrom = null, DateTime? validTo = null)
         {
             var r = new CashDbRecord
@@ -128,8 +127,6 @@ namespace Open.Domain.Project
                 Memo = memo,
                 Payer = payer,
                 Payee = payee,
-                PayerAccountNumber = payerAccountNumber,
-                PayeeAccountNumber = payeeAccountNumber,
                 ValidFrom = validFrom ?? DateTime.MinValue,
                 ValidTo = validTo ?? DateTime.MaxValue
             };

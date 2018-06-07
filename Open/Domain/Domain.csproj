@@ -75,6 +75,7 @@
     <Compile Include="Project\DebitCardObject.cs" />
     <Compile Include="Project\IPaymentCardObject.cs" />
     <Compile Include="Project\IPaymentObject.cs" />
+    <Compile Include="Project\IPaymentObjectsRepository.cs" />
     <Compile Include="Project\PaymentCardObject.cs" />
     <Compile Include="Project\PaymentObject.cs" />
     <Compile Include="Project\PaymentObjectFactory.cs" />

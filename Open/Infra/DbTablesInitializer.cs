@@ -1,5 +1,6 @@
 ﻿using Open.Infra.Location;
 using Open.Infra.Money;
+using Open.Infra.Project;
 
 namespace Open.Infra
 {
@@ -11,6 +12,7 @@ namespace Open.Infra
             CurrenciesDbTableInitializer.Initialize(dbContext);
             CountryCurrenciesDbTableInitializer.Initialize(dbContext);
             AddressDbTableInitializer.Initialize(dbContext);
+            PaymentDbTableInitializer.Initialize(dbContext);
         }
     }
 }
