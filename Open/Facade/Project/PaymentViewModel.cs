@@ -21,7 +21,7 @@ namespace Open.Facade.Project
             get
             {
                 var name = GetType().Name;
-                var suffix = typeof(PaymentViewModel).Name;
+                var suffix = "ViewModel";
                 var idx = name.IndexOf(suffix, StringComparison.Ordinal);
                 if (idx >= 0) name = name.Substring(0, idx);
                 return name;

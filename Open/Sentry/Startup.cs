@@ -6,9 +6,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Open.Domain.Location;
 using Open.Domain.Money;
+using Open.Domain.Project;
 using Open.Infra;
 using Open.Infra.Location;
 using Open.Infra.Money;
+using Open.Infra.Project;
 using Open.Sentry.Data;
 using Open.Sentry.Models;
 using Open.Sentry.Services;
@@ -38,6 +40,7 @@ namespace Open.Sentry
             services.AddScoped<ICountryCurrencyObjectsRepository, CountryCurrencyObjectsRepository>();
             services.AddScoped<IAddressObjectsRepository, AddressObjectsRepository>();
             services.AddScoped<ITelecomDeviceRegistrationObjectsRepository, TelecomDeviceRegistrationObjectsRepository>();
+            services.AddScoped<IPaymentObjectsRepository, PaymentObjectsRepository>();
         }
 
         protected virtual void setMvcWithAntiForgeryToken(IServiceCollection services)
