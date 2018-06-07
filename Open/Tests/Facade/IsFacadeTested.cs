@@ -29,5 +29,10 @@ namespace Open.Tests.Facade
         {
             isAllClassesTested(assembly, Namespace("Money"));
         }
+        [TestMethod]
+        public void IsProjectTested()
+        {
+            isAllClassesTested(assembly, Namespace("Project"));
+        }
     }
 }

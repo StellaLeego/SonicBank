@@ -35,5 +35,10 @@ namespace Open.Tests.Data
         {
             isAllClassesTested(assembly, Namespace("Common"));
         }
+        [TestMethod]
+        public void IsProjectTested()
+        {
+            isAllClassesTested(assembly, Namespace("Project"));
+        }
     }
 }

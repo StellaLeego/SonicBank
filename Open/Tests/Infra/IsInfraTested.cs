@@ -29,5 +29,11 @@ namespace Open.Tests.Infra
         {
             isAllClassesTested(base.Namespace("Infra"));
         }
+
+        [TestMethod]
+        public void IsProjectTested()
+        {
+            isAllClassesTested(assembly, Namespace("Project"));
+        }
     }
 }

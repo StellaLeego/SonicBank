@@ -35,5 +35,10 @@ namespace Open.Tests.Domain
         {
             isAllClassesTested(assembly, Namespace("Quantity"));
         }
+        [TestMethod]
+        public void IsProjectTested()
+        {
+            isAllClassesTested(assembly, Namespace("Project"));
+        }
     }
 }
