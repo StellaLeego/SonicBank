@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
-using Open.Core;
 using Open.Data.Location;
 
 namespace Open.Tests.Data.Location
