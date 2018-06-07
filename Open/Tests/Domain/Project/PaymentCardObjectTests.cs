@@ -1,19 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
 using Open.Data.Project;
 using Open.Domain.Project;
 
 namespace Open.Tests.Domain.Project
 {
-    class PaymentCardObjectTests : DomainObjectsTests<PaymentCardObject, PaymentCardDbRecord>
+    [TestClass]
+    public class PaymentCardObjectTests : DomainObjectsTests<PaymentCardObject<DebitCardDbRecord>, DebitCardDbRecord>
     {
-        protected override PaymentCardObject getRandomTestObject()
+        class testClass : PaymentCardObject<DebitCardDbRecord>
         {
-            createdWithNullArg = new DebitCardObject(null);
-            dbRecordType = typeof(DebitCardDbRecord);
-            return GetRandom.Object<DebitCardObject>();
+            public testClass(DebitCardDbRecord r) : base(r) { }
+        }
+
+
+        protected override PaymentCardObject<DebitCardDbRecord> getRandomTestObject()
+        {
+            createdWithNullArg = new testClass(null);
+            dbRecordType = typeof(PaymentCardDbRecord);
+            return GetRandom.Object<testClass>();
+        }
+
+        [TestMethod]
+        public void IsPaymentCardObjectTest()
+        {
+            Assert.IsInstanceOfType(obj, typeof(IPaymentCardObject));
         }
     }
 }
