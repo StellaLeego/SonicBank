@@ -85,10 +85,8 @@ namespace Open.Domain.Project
                 PayerAccountNumber = payerAccountNumber,
                 CardAssociationName = cardAssociationName,
                 CardNumber = cardNumber,
+                CreditLimit = creditLimit,
                 DailyWithDrawalLimit = dailyWithDrawalLimit,
-                ValidFrom = validFrom ?? DateTime.MinValue,
-                ValidTo = validTo ?? DateTime.MaxValue,
-                CreditLimit = creditLimit
             };
             return new CreditCardObject(r);
         }
