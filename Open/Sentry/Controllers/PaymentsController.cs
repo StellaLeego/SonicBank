@@ -13,6 +13,14 @@ namespace Sentry.Controllers
         private readonly IPaymentObjectsRepository payments;
         internal const string cashProperties = "ID, Payer, Payee, Amount, Currency, Memo, ValidFrom, ValidTo";
 
+        internal const string checkProperties =
+            "ID, Payer, Payee, Amount, Currency, Memo, PayerAccountNumber, PayeeAccountNumber, CheckNumber, ValidFrom, ValidTo";
+
+        internal const string debitProperties =
+            "ID, Payer, Payee, Amount, Currency, Memo, PayerAccountNumber, PayeeAccountNumber, DailyWithDrawalLimit, CardNumber, CardAssociationName, ValidFrom, ValidTo";
+
+        internal const string creditProperties =
+            "ID, Payer, Payee, Amount, Currency, Memo, PayerAccountNumber, PayeeAccountNumber, DailyWithDrawalLimit, CardNumber, CardAssociationName, CreditLimit, ValidFrom, ValidTo";
 
         public PaymentsController(IPaymentObjectsRepository r)
         {
@@ -174,6 +182,117 @@ namespace Sentry.Controllers
             var o = PaymentObjectFactory.CreateCash(c.ID, c.Amount, c.Currency, c.Memo, c.Payer,
                 c.Payee, c.ValidFrom, c.ValidTo);
             await payments.AddObject(o);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCash([Bind(cashProperties)] CashViewModel c)
+        {
+            if (!ModelState.IsValid) return View("EditCash", c);
+            var o = await payments.GetObject(c.ID) as CashObject;
+            o.DbRecord.Payer = c.Payer;
+            o.DbRecord.Payee = c.Payee;
+            o.DbRecord.Amount = c.Amount;
+            o.DbRecord.Currency = c.Currency;
+            o.DbRecord.Memo = c.Memo;
+            o.DbRecord.ValidFrom = c.ValidFrom ?? DateTime.MinValue;
+            o.DbRecord.ValidTo = c.ValidTo ?? DateTime.MaxValue;
+            await payments.UpdateObject(o);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult>
+            CreateCheck([Bind(checkProperties)] CheckViewModel c)
+        {
+            if (!ModelState.IsValid) return View(c);
+            c.ID = Guid.NewGuid().ToString();
+            var o = PaymentObjectFactory.CreateCheck(c.ID, c.Amount, c.Currency, c.Memo, c.Payer, c.PayerAccountNumber, c.Payee, c.PayeeAccountNumber, c.CheckNumber, c.ValidFrom, c.ValidTo);
+            await payments.AddObject(o);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCheck([Bind(checkProperties)] CheckViewModel c)
+        {
+            if (!ModelState.IsValid) return View("EditCheck", c);
+            var o = await payments.GetObject(c.ID) as CheckObject;
+            o.DbRecord.Payer = c.Payer;
+            o.DbRecord.PayerAccountNumber = c.PayerAccountNumber;
+            o.DbRecord.Payee = c.Payee;
+            o.DbRecord.PayeeAccountNumber = c.PayeeAccountNumber;
+            o.DbRecord.Amount = c.Amount;
+            o.DbRecord.Currency = c.Currency;
+            o.DbRecord.CheckNumber = c.CheckNumber;
+            o.DbRecord.Memo = c.Memo;
+            o.DbRecord.ValidFrom = c.ValidFrom ?? DateTime.MinValue;
+            o.DbRecord.ValidTo = c.ValidTo ?? DateTime.MaxValue;
+            await payments.UpdateObject(o);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult>
+            CreateDebitCard([Bind(debitProperties)] DebitCardViewModel c)
+        {
+            if (!ModelState.IsValid) return View(c);
+            c.ID = Guid.NewGuid().ToString();
+            var o = PaymentObjectFactory.CreateDebit(c.ID, c.Amount, c.Currency, c.Memo, c.Payer, c.PayerAccountNumber,c.CardAssociationName,c.CardNumber,c.DailyWithdrawalLimit, c.Payee, c.PayeeAccountNumber, c.ValidFrom, c.ValidTo);
+            await payments.AddObject(o);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditDebitCard([Bind(debitProperties)] DebitCardViewModel c)
+        {
+            if (!ModelState.IsValid) return View("EditDebitCard", c);
+            var o = await payments.GetObject(c.ID) as DebitCardObject;
+            o.DbRecord.Payer = c.Payer;
+            o.DbRecord.PayerAccountNumber = c.PayerAccountNumber;
+            o.DbRecord.Payee = c.Payee;
+            o.DbRecord.PayeeAccountNumber = c.PayeeAccountNumber;
+            o.DbRecord.Amount = c.Amount;
+            o.DbRecord.Currency = c.Currency;
+            o.DbRecord.CardAssociationName = c.CardAssociationName;
+            o.DbRecord.CardNumber = c.CardNumber;
+            o.DbRecord.DailyWithDrawalLimit = c.DailyWithdrawalLimit;
+            o.DbRecord.Memo = c.Memo;
+            o.DbRecord.ValidFrom = c.ValidFrom ?? DateTime.MinValue;
+            o.DbRecord.ValidTo = c.ValidTo ?? DateTime.MaxValue;
+            await payments.UpdateObject(o);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult>
+            CreateCreditCard([Bind(creditProperties)] CreditCardViewModel c)
+        {
+            if (!ModelState.IsValid) return View(c);
+            c.ID = Guid.NewGuid().ToString();
+            var o = PaymentObjectFactory.CreateCredit(c.ID, c.Amount, c.Currency, c.Memo, c.Payer, c.PayerAccountNumber, c.CardAssociationName, c.CardNumber, c.DailyWithdrawalLimit, c.Payee, c.PayeeAccountNumber,c.CreditLimit, c.ValidFrom, c.ValidTo);
+            await payments.AddObject(o);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCreditCard([Bind(creditProperties)] CreditCardViewModel c)
+        {
+            if (!ModelState.IsValid) return View("EditCreditCard", c);
+            var o = await payments.GetObject(c.ID) as CreditCardObject;
+            o.DbRecord.Payer = c.Payer;
+            o.DbRecord.PayerAccountNumber = c.PayerAccountNumber;
+            o.DbRecord.Payee = c.Payee;
+            o.DbRecord.PayeeAccountNumber = c.PayeeAccountNumber;
+            o.DbRecord.Amount = c.Amount;
+            o.DbRecord.Currency = c.Currency;
+            o.DbRecord.CardAssociationName = c.CardAssociationName;
+            o.DbRecord.CardNumber = c.CardNumber;
+            o.DbRecord.DailyWithDrawalLimit = c.DailyWithdrawalLimit;
+            o.DbRecord.Memo = c.Memo;
+            o.DbRecord.CreditLimit = c.CreditLimit;
+            o.DbRecord.ValidFrom = c.ValidFrom ?? DateTime.MinValue;
+            o.DbRecord.ValidTo = c.ValidTo ?? DateTime.MaxValue;
+            await payments.UpdateObject(o);
             return RedirectToAction("Index");
         }
     }
