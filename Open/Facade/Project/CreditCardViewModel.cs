@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Open.Facade.Project
 {
-    class CreditCardViewModel
+    public class CreditCardViewModel : DebitCardViewModel
     {
+        private string creditLimit;
+        [DisplayName("Credit limit")]
+        public string CreditLimit
+        {
+            get => getString(ref creditLimit);
+            set => creditLimit = value;
+        }
     }
 }
