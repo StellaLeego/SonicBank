@@ -1,0 +1,21 @@
+﻿@using Open.Facade.Project
+@model CreditCardViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    ViewBag.SubTitle = $"{Model.PaymentType}";
+    ViewBag.Button = "Delete";
+    Layout = "_DeletePartial";
+}
+
+<body>
+@Html.Partial("_ViewCreditCard", Model);
+</body>
+
+@section Actions{
+    @Html.ActionLink("Back to List", "Index")
+}
+
+
+
+

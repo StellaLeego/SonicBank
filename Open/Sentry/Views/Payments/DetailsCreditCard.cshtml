@@ -1,0 +1,18 @@
+﻿@using Open.Facade.Project
+@model CreditCardViewModel
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.SubTitle = $"{Model.PaymentType}";
+    Layout = "_DetailsPartial";
+}
+
+<body>
+    @Html.Partial("_ViewCreditCard", Model);
+</body>
+
+@section Actions
+    {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+    @Html.ActionLink("Back to List", "Index")
+}

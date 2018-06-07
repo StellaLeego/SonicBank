@@ -1,0 +1,17 @@
+﻿@using Open.Sentry.Extensions
+@model Open.Facade.Project.CreditCardViewModel
+
+@Html.HiddenFor(a => a.ID)
+@Html.EditingControlsFor(a => a.Payer)
+@Html.EditingControlsFor(a => a.PayerAccountNumber)
+@Html.EditingControlsFor(a => a.CardNumber)
+@Html.EditingControlsFor(a => a.CardAssociationName)
+@Html.EditingControlsFor(a => a.DailyWithdrawalLimit)
+@Html.EditingControlsFor(a => a.CreditLimit)
+@Html.EditingControlsFor(a => a.Payee)
+@Html.EditingControlsFor(a => a.PayeeAccountNumber)
+@Html.EditingControlsFor(a => a.Amount)
+@Html.EditingControlsFor(a => a.Currency)
+@Html.EditingControlsFor(a => a.Memo)
+@Html.EditingControlsFor(a => a.ValidFrom)
+@Html.EditingControlsFor(a => a.ValidTo)
