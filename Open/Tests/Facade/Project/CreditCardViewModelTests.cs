@@ -15,7 +15,7 @@ namespace Open.Tests.Facade.Project
         [TestMethod]
         public void IsPaymentViewModelTest()
         {
-            Assert.AreEqual(obj.GetType().BaseType, typeof(PaymentViewModel));
+            Assert.AreEqual(obj.GetType().BaseType, typeof(DebitCardViewModel));
         }
 
         [TestMethod]
