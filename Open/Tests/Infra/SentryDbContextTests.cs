@@ -48,7 +48,11 @@ namespace Open.Tests.Infra
         {
             Assert.Inconclusive();
         }
-
+        [TestMethod]
+        public void PaymentsTest()
+        {
+            Assert.Inconclusive();
+        }
         [TestMethod]
         public void AddressesTest()
         {
