@@ -24,7 +24,6 @@ namespace Open.Facade.Project
             set => cardAssociationName = value;
         }
         [Required]
-        [RegularExpression("([0-9]+)", ErrorMessage = "Please enter Number")]
         [DisplayName("Daily withdrawal limit")]
         public string DailyWithdrawalLimit
         {

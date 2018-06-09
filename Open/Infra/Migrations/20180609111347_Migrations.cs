@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Open.Infra.Migrations
 {
-    public partial class migrations : Migration
+    public partial class Migrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

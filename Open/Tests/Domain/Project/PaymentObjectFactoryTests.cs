@@ -38,8 +38,7 @@ namespace Open.Tests.Domain.Project
                 r.PayerAccountNumber, r.CardAssociationName, r.CardNumber, r.DailyWithDrawalLimit, r.Payee,
                 r.PayeeAccountNumber, r.CreditLimit, r.ValidFrom, r.ValidTo);
             Assert.IsInstanceOfType(o, typeof(CreditCardObject));
-            testVariables(o.DbRecord, r.ID, r.Amount, r.Currency, r.Memo, r.Payer, r.Payee, r.ValidFrom,
-                r.ValidTo, r.PayeeAccountNumber, r.PayerAccountNumber);
+            testVariables(o.DbRecord, r.ID, r.Amount, r.Currency, r.Memo, r.Payer, r.Payee, r.ValidFrom = DateTime.MinValue, r.ValidTo = DateTime.MaxValue, r.PayeeAccountNumber, r.PayerAccountNumber);
             testCardVariables(o.DbRecord, r.CardAssociationName, r.CardNumber, r.DailyWithDrawalLimit);
             Assert.AreEqual(r.CreditLimit, o.DbRecord.CreditLimit);
         }
@@ -61,7 +60,7 @@ namespace Open.Tests.Domain.Project
                 r.ValidFrom, r.ValidTo);
             Assert.IsInstanceOfType(o, typeof(CashObject));
             testVariables(o.DbRecord, r.ID, r.Amount, r.Currency, r.Memo, r.Payer, r.Payee, r.ValidFrom,
-                r.ValidTo, r.PayeeAccountNumber, r.PayerAccountNumber);
+                r.ValidTo);
         }
 
         [TestMethod]
@@ -73,9 +72,7 @@ namespace Open.Tests.Domain.Project
                 Assert.IsInstanceOfType(o, typeof(T));
             }
             test<DebitCardObject>(GetRandom.Object<DebitCardDbRecord>());
-            test<DebitCardObject>(GetRandom.Object<PaymentCardDbRecord>());
-            test<CreditCardDbRecord>(GetRandom.Object<CreditCardDbRecord>());
-            test<CreditCardDbRecord>(GetRandom.Object<PaymentCardDbRecord>());
+            test<CreditCardObject>(GetRandom.Object<CreditCardDbRecord>());
             test<CheckObject>(GetRandom.Object<CheckDbRecord>());
             test<CashObject>(GetRandom.Object<CashDbRecord>());
             test<CashObject>(GetRandom.Object<PaymentDbRecord>());

@@ -30,7 +30,7 @@ namespace Open.Facade.Project
         }
 
         [Required]
-        [StringLength(30, MinimumLength = 5, ErrorMessage = "Name cant be less than 5 characters and longer than 30 characters")]
+        [StringLength(30, MinimumLength = 4, ErrorMessage = "Name cant be less than 4 characters and longer than 30 characters")]
         [DisplayName("Payer")]
         public string Payer
         {
@@ -39,7 +39,6 @@ namespace Open.Facade.Project
         }
 
         [Required]
-        [RegularExpression("([0-9]+)", ErrorMessage = "Please enter Number")]
         [DisplayName("Payers account number")]
         public string PayerAccountNumber
         {
@@ -47,7 +46,7 @@ namespace Open.Facade.Project
             set => payerAccountNumber = value;
         }
         [Required]
-        [StringLength(30, MinimumLength = 5, ErrorMessage = "Name cant be less than 5 characters and longer than 30 characters")]
+        [StringLength(30, MinimumLength = 4, ErrorMessage = "Name cant be less than 4 characters and longer than 30 characters")]
         [DisplayName("Payee")]
         public string Payee
         {
@@ -56,7 +55,6 @@ namespace Open.Facade.Project
         }
 
         [Required]
-        [RegularExpression("([0-9]+)", ErrorMessage = "Please enter Number")]
         [DisplayName("Payees account number")]
         public string PayeeAccountNumber
         {
@@ -64,7 +62,8 @@ namespace Open.Facade.Project
             set => payeeAccountNumber = value;
         }
         [Required]
-        [RegularExpression("([0-9]+)", ErrorMessage = "Please enter Number")]
+        [RegularExpression(@"^\d+\.\d{0,2}$", ErrorMessage = "Invalid Target Price, Maximum Two Decimal Points")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Target Price, Max 18 digits")]
         [DisplayName("Amount")]
         public string Amount
         {
