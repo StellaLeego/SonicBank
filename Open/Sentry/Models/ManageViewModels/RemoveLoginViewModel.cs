@@ -1,7 +1,5 @@
-﻿namespace Open.Sentry.Models.ManageViewModels
-{
-    public class RemoveLoginViewModel
-    {
+﻿namespace Open.Sentry.Models.ManageViewModels {
+    public class RemoveLoginViewModel {
         public string LoginProvider { get; set; }
         public string ProviderKey { get; set; }
     }

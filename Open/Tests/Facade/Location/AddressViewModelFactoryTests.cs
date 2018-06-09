@@ -4,14 +4,20 @@ using Open.Aids;
 using Open.Core;
 using Open.Domain.Location;
 using Open.Facade.Location;
+
 namespace Open.Tests.Facade.Location {
-    [TestClass] public class AddressViewModelFactoryTests : BaseTests {
+    [TestClass]
+    public class AddressViewModelFactoryTests : BaseTests {
         private const string u = Constants.Unspecified;
-        [TestInitialize] public override void TestInitialize() {
+
+        [TestInitialize]
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(AddressViewModelFactory);
         }
-        [TestMethod] public void CreateTest() {
+
+        [TestMethod]
+        public void CreateTest() {
             var v = AddressViewModelFactory.Create(null) as GeographicAddressViewModel;
             Assert.IsNotNull(v);
             Assert.AreEqual(v.ID, u);
@@ -25,7 +31,8 @@ namespace Open.Tests.Facade.Location {
             Assert.AreEqual(v.RegisteredTelecomAddresses.Count, 0);
         }
 
-        [TestMethod] public void CreateWebAddressViewModelTest() {
+        [TestMethod]
+        public void CreateWebAddressViewModelTest() {
             var o = GetRandom.Object<WebAddressObject>();
             var v = AddressViewModelFactory.Create(o) as WebPageAddressViewModel;
             Assert.IsNotNull(v);
@@ -34,7 +41,9 @@ namespace Open.Tests.Facade.Location {
             Assert.AreEqual(v.ValidTo, o.DbRecord.ValidTo);
             Assert.AreEqual(v.Url, o.DbRecord.Address);
         }
-        [TestMethod] public void CreateEMailAddressViewModelTest() {
+
+        [TestMethod]
+        public void CreateEMailAddressViewModelTest() {
             var o = GetRandom.Object<EmailAddressObject>();
             var v = AddressViewModelFactory.Create(o) as EmailAddressViewModel;
             Assert.IsNotNull(v);
@@ -43,7 +52,9 @@ namespace Open.Tests.Facade.Location {
             Assert.AreEqual(v.ValidTo, o.DbRecord.ValidTo);
             Assert.AreEqual(v.EmailAddress, o.DbRecord.Address);
         }
-        [TestMethod] public void CreateGeographicAddressViewModelTest() {
+
+        [TestMethod]
+        public void CreateGeographicAddressViewModelTest() {
             var o = GetRandom.Object<GeographicAddressObject>();
             var v = AddressViewModelFactory.Create(o) as GeographicAddressViewModel;
             Assert.IsNotNull(v);
@@ -57,7 +68,9 @@ namespace Open.Tests.Facade.Location {
             Assert.AreEqual(v.Country, o.DbRecord.CountryID);
             Assert.AreEqual(v.RegisteredTelecomAddresses.Count, o.RegisteredTelecomDevices.Count);
         }
-        [TestMethod] public void CreateTelecomAddressViewModelTest() {
+
+        [TestMethod]
+        public void CreateTelecomAddressViewModelTest() {
             var o = GetRandom.Object<TelecomAddressObject>();
             var v = AddressViewModelFactory.Create(o) as TelecomAddressViewModel;
             Assert.IsNotNull(v);
@@ -73,7 +86,8 @@ namespace Open.Tests.Facade.Location {
             Assert.AreEqual(v.RegisteredInAddresses.Count, o.RegisteredInAddresses.Count);
         }
 
-        [TestMethod] public void CreateWithExtremumDatesTest() {
+        [TestMethod]
+        public void CreateWithExtremumDatesTest() {
             var o = GetRandom.Object<WebAddressObject>();
             o.DbRecord.ValidFrom = DateTime.MinValue;
             o.DbRecord.ValidTo = DateTime.MaxValue;

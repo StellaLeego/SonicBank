@@ -1,9 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Open.Tests.Sentry.Controllers
-{
+﻿namespace Open.Tests.Sentry.Controllers {
     //[TestClass]
-    public class HomeControllerTests
-    {
-    }
+    public class HomeControllerTests { }
 }

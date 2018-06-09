@@ -1,16 +1,13 @@
 ﻿using System;
 
-namespace Open.Core
-{
-    public class RepositoryPage
-    {
+namespace Open.Core {
+    public class RepositoryPage {
         public const int DefaultSize = 10;
 
-        public RepositoryPage(int itemsCount, int? pageIndex = null, int? pageSize = null)
-        {
+        public RepositoryPage(int itemsCount, int? pageIndex = null, int? pageSize = null) {
             PageIndex = pageIndex ?? 1;
             PageSize = pageSize ?? DefaultSize;
-            TotalPages = (int)Math.Ceiling(itemsCount / (double)PageSize);
+            TotalPages = (int) Math.Ceiling(itemsCount / (double) PageSize);
             FirstItemIndex = (PageIndex - 1) * PageSize;
         }
 

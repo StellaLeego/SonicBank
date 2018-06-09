@@ -3,39 +3,32 @@ using Open.Data.Location;
 using Open.Domain.Location;
 using Open.Infra;
 
-namespace Open.Tests.Infra
-{
+namespace Open.Tests.Infra {
     [TestClass]
-    public class BaseRepositoryTests : BaseTests
-    {
+    public class BaseRepositoryTests : BaseTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(BaseRepository<CountryObject, CountryDbRecord>);
         }
 
         [TestMethod]
-        public void GetObjectTest()
-        {
+        public void GetObjectTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void AddObjectTest()
-        {
+        public void AddObjectTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void UpdateObjectTest()
-        {
+        public void UpdateObjectTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void DeleteObjectTest()
-        {
+        public void DeleteObjectTest() {
             Assert.Inconclusive();
         }
     }

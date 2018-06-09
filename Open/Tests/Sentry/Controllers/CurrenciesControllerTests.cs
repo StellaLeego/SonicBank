@@ -6,22 +6,18 @@ using Open.Aids;
 using Open.Facade.Money;
 using Open.Sentry.Controllers;
 
-namespace Open.Tests.Sentry.Controllers
-{
+namespace Open.Tests.Sentry.Controllers {
     [TestClass]
-    public class CurrenciesControllerTests : AcceptanceTests
-    {
+    public class CurrenciesControllerTests : AcceptanceTests {
         [TestMethod]
-        public async Task IndexTestWhenLoggedOut()
-        {
+        public async Task IndexTestWhenLoggedOut() {
             Assert.Inconclusive();
             var response = await client.GetAsync("/currencies");
             Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
         }
 
         [TestMethod]
-        public async Task IndexWhenLoggedIn()
-        {
+        public async Task IndexWhenLoggedIn() {
             Assert.Inconclusive();
             TestAuthenticationHandler.IsLoggedIn = true;
             var response = await client.GetAsync("/currencies");
@@ -31,8 +27,7 @@ namespace Open.Tests.Sentry.Controllers
         }
 
         [TestMethod]
-        public void RepositoryTest()
-        {
+        public void RepositoryTest() {
             const string c = ", ";
             var b = new StringBuilder();
             b.Append(GetMember.Name<CurrencyViewModel>(m => m.IsoCurrencySymbol));

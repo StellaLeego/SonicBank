@@ -2,28 +2,23 @@
 using Open.Aids;
 using Open.Data.Common;
 
-namespace Open.Tests.Data.Common
-{
+namespace Open.Tests.Data.Common {
     [TestClass]
-    public class MetricDbRecordTests : ObjectTests<MetricDbRecord>
-    {
-        private class testClass : MetricDbRecord { }
-
-        protected override MetricDbRecord getRandomTestObject()
-        {
+    public class MetricDbRecordTests : ObjectTests<MetricDbRecord> {
+        protected override MetricDbRecord getRandomTestObject() {
             return GetRandom.Object<testClass>();
         }
 
         [TestMethod]
-        public void IsAbstract()
-        {
+        public void IsAbstract() {
             Assert.IsTrue(typeof(MetricDbRecord).IsAbstract);
         }
 
         [TestMethod]
-        public void BaseTypeIsRootObjectDbRecord()
-        {
+        public void BaseTypeIsRootObjectDbRecord() {
             Assert.AreEqual(typeof(IdentifiedDbRecord), typeof(MetricDbRecord).BaseType);
         }
+
+        private class testClass : MetricDbRecord { }
     }
 }

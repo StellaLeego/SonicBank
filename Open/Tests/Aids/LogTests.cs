@@ -3,49 +3,26 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
 
-namespace Open.Tests.Aids
-{
+namespace Open.Tests.Aids {
     [TestClass]
-    public class LogTests : BaseTests
-    {
-        internal class testLogBook : ILogBook
-        {
-            public string LoggedMessage { get; private set; }
-            public Exception LoggedException { get; private set; }
-            public List<Exception> loggedExceptions { get; } = new List<Exception>();
-
-            public void WriteEntry(string message)
-            {
-                LoggedMessage = message;
-            }
-
-            public void WriteEntry(Exception e)
-            {
-                LoggedException = e;
-                loggedExceptions.Add(e);
-            }
-        }
-
+    public class LogTests : BaseTests {
         private testLogBook logBook;
 
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(Log);
             logBook = new testLogBook();
         }
 
         [TestCleanup]
-        public override void TestCleanup()
-        {
+        public override void TestCleanup() {
             base.TestCleanup();
             Log.logBook = null;
         }
 
         [TestMethod]
-        public void MessageTest()
-        {
+        public void MessageTest() {
             var message = "any message";
             Log.Message(message);
             Assert.IsNull(logBook.LoggedMessage);
@@ -55,14 +32,28 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void ExceptionTest()
-        {
+        public void ExceptionTest() {
             var exception = new NotImplementedException();
             Log.Exception(exception);
             Assert.IsNull(logBook.LoggedException);
             Log.logBook = logBook;
             Log.Exception(exception);
             Assert.AreEqual(exception, logBook.LoggedException);
+        }
+
+        internal class testLogBook : ILogBook {
+            public string LoggedMessage { get; private set; }
+            public Exception LoggedException { get; private set; }
+            public List<Exception> loggedExceptions { get; } = new List<Exception>();
+
+            public void WriteEntry(string message) {
+                LoggedMessage = message;
+            }
+
+            public void WriteEntry(Exception e) {
+                LoggedException = e;
+                loggedExceptions.Add(e);
+            }
         }
     }
 }

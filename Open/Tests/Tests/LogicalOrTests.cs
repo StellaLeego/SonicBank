@@ -1,14 +1,11 @@
 ﻿using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Open.Tests.Tests
-{
+namespace Open.Tests.Tests {
     [TestClass]
-    public class LogicalOrTests
-    {
+    public class LogicalOrTests {
         [TestMethod]
-        public void BitwuseOrTest()
-        {
+        public void BitwuseOrTest() {
             Assert.AreEqual(12, (int) (BindingFlags.Instance | BindingFlags.Static));
             Assert.AreEqual(12, 4 | 8);
             Assert.AreEqual(true, false | true);
@@ -17,12 +14,11 @@ namespace Open.Tests.Tests
         }
 
         [TestMethod]
-        public void OrIsImpossibleTest()
-        {
-            bool or(bool x, bool y)
-            {
+        public void OrIsImpossibleTest() {
+            bool or(bool x, bool y) {
                 return x || y;
             }
+
             Assert.AreEqual(false, or(false, false));
             Assert.AreEqual(true, or(true, false));
             // works only for booleans and we cant use for other variables

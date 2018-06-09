@@ -2,12 +2,9 @@
 using System.Linq;
 using Open.Data.Project;
 
-namespace Open.Infra.Project
-{
-    public static class PaymentDbTableInitializer
-    {
-        public static void Initialize(SentryDbContext c)
-        {
+namespace Open.Infra.Project {
+    public static class PaymentDbTableInitializer {
+        public static void Initialize(SentryDbContext c) {
             c.Database.EnsureCreated();
             if (c.Payments.Any()) return;
             initCashPayments(c);
@@ -18,11 +15,9 @@ namespace Open.Infra.Project
         }
 
 
-        private static void initCashPayments(SentryDbContext c)
-        {
+        private static void initCashPayments(SentryDbContext c) {
             add(c,
-                new CashDbRecord
-                {
+                new CashDbRecord {
                     Amount = "50",
                     Currency = "EUR",
                     Memo = "Eilse eest",
@@ -33,11 +28,9 @@ namespace Open.Infra.Project
                 });
         }
 
-        private static void initCheckPayments(SentryDbContext c)
-        {
+        private static void initCheckPayments(SentryDbContext c) {
             add(c,
-                new CheckDbRecord
-                {
+                new CheckDbRecord {
                     Amount = "10",
                     Currency = "USD",
                     Memo = "Toit",
@@ -48,11 +41,9 @@ namespace Open.Infra.Project
                 });
         }
 
-        private static void initCreditPayments(SentryDbContext c)
-        {
+        private static void initCreditPayments(SentryDbContext c) {
             add(c,
-                new CreditCardDbRecord()
-                {
+                new CreditCardDbRecord {
                     Amount = "10",
                     Currency = "USD",
                     Memo = "Lilled Liisule",
@@ -66,11 +57,10 @@ namespace Open.Infra.Project
                     CreditLimit = "534196"
                 });
         }
-        private static void initDebitPayments(SentryDbContext c)
-        {
+
+        private static void initDebitPayments(SentryDbContext c) {
             add(c,
-                new DebitCardDbRecord()
-                {
+                new DebitCardDbRecord {
                     Amount = "3.70",
                     Currency = "EUR",
                     Memo = "Smuuti Blendrerist",
@@ -84,8 +74,7 @@ namespace Open.Infra.Project
                 });
         }
 
-        private static string add(SentryDbContext c, PaymentDbRecord payment)
-        {
+        private static string add(SentryDbContext c, PaymentDbRecord payment) {
             payment.ID = Guid.NewGuid().ToString();
             c.Payments.Add(payment);
             return payment.ID;

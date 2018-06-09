@@ -1,11 +1,10 @@
 ﻿using Open.Data.Location;
 using Open.Domain.Common;
 
-namespace Open.Domain.Location
-{
+namespace Open.Domain.Location {
     public class TelecomDeviceRegistrationObject : TemporalObject<TelecomDeviceRegistrationDbRecord> {
-        public readonly TelecomAddressObject Device;
         public readonly GeographicAddressObject Address;
+        public readonly TelecomAddressObject Device;
 
         public TelecomDeviceRegistrationObject(TelecomDeviceRegistrationDbRecord dbRecord) : base(dbRecord) {
             DbRecord.Address = DbRecord.Address ?? new GeographicAddressDbRecord();

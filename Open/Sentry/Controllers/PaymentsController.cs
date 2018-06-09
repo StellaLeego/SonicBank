@@ -6,11 +6,8 @@ using Open.Data.Project;
 using Open.Domain.Project;
 using Open.Facade.Project;
 
-namespace Sentry.Controllers
-{
-    public class PaymentsController : Controller
-    {
-        private readonly IPaymentObjectsRepository payments;
+namespace Sentry.Controllers {
+    public class PaymentsController : Controller {
         internal const string cashProperties = "ID, Payer, Payee, Amount, Currency, Memo, ValidFrom, ValidTo";
 
         internal const string checkProperties =
@@ -22,16 +19,16 @@ namespace Sentry.Controllers
         internal const string creditProperties =
             "ID, Payer, Payee, Amount, Currency, Memo, PayerAccountNumber, PayeeAccountNumber, DailyWithDrawalLimit, CardNumber, CardAssociationName, CreditLimit, ValidFrom, ValidTo";
 
-        public PaymentsController(IPaymentObjectsRepository r)
-        {
+        private readonly IPaymentObjectsRepository payments;
+
+        public PaymentsController(IPaymentObjectsRepository r) {
             payments = r;
         }
 
         public async Task<IActionResult> Index(string sortOrder = null,
             string currentFilter = null,
             string searchString = null,
-            int? page = null)
-        {
+            int? page = null) {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["SortPaymentsType"] = string.IsNullOrEmpty(sortOrder) ? "type_desc" : "";
             ViewData["SortToString"] = sortOrder == "string" ? "string_desc" : "string";
@@ -54,8 +51,8 @@ namespace Sentry.Controllers
             var l = await payments.GetObjectsList();
             return View(new PaymentViewModelsList(l));
         }
-        private Func<PaymentDbRecord, object> getSortFunction(string sortOrder)
-        {
+
+        private Func<PaymentDbRecord, object> getSortFunction(string sortOrder) {
             if (string.IsNullOrWhiteSpace(sortOrder)) return x => x.GetType().Name;
             if (sortOrder.StartsWith("type")) return x => x.GetType().Name;
             if (sortOrder.StartsWith("payer")) return x => x.Payer;
@@ -67,11 +64,9 @@ namespace Sentry.Controllers
             return x => x.ValidFrom;
         }
 
-        public async Task<IActionResult> Delete(string id)
-        {
+        public async Task<IActionResult> Delete(string id) {
             var c = await payments.GetObject(id);
-            switch (c)
-            {
+            switch (c) {
                 case CashObject cash:
                     return View("DeleteCash",
                         PaymentViewModelFactory.Create(cash) as CashViewModel);
@@ -88,56 +83,49 @@ namespace Sentry.Controllers
 
             return RedirectToAction("Index");
         }
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(string id) {
             var c = await payments.GetObject(id);
             await payments.DeleteObject(c);
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Edit(string id)
-        {
+        public async Task<IActionResult> Edit(string id) {
             var payment = await payments.GetObject(id);
-            switch (payment)
-            {
-                case CashObject _: return RedirectToAction("EditCash", new { id });
-                case CheckObject _: return RedirectToAction("EditCheck", new { id });
-                case CreditCardObject _: return RedirectToAction("EditCreditCard", new { id });
-                default: return RedirectToAction("EditDebitCard", new { id });
+            switch (payment) {
+                case CashObject _: return RedirectToAction("EditCash", new {id});
+                case CheckObject _: return RedirectToAction("EditCheck", new {id});
+                case CreditCardObject _: return RedirectToAction("EditCreditCard", new {id});
+                default: return RedirectToAction("EditDebitCard", new {id});
             }
         }
 
-        public async Task<IActionResult> EditCash(string id)
-        {
+        public async Task<IActionResult> EditCash(string id) {
             var payment = await payments.GetObject(id);
             return View(PaymentViewModelFactory.Create(payment) as CashViewModel);
         }
 
-        public async Task<IActionResult> EditCheck(string id)
-        {
+        public async Task<IActionResult> EditCheck(string id) {
             var payment = await payments.GetObject(id);
             return View(PaymentViewModelFactory.Create(payment) as CheckViewModel);
         }
 
-        public async Task<IActionResult> EditCreditCard(string id)
-        {
+        public async Task<IActionResult> EditCreditCard(string id) {
             var payment = await payments.GetObject(id);
             return View(PaymentViewModelFactory.Create(payment) as CreditCardViewModel);
         }
 
-        public async Task<IActionResult> EditDebitCard(string id)
-        {
+        public async Task<IActionResult> EditDebitCard(string id) {
             var payment = await payments.GetObject(id);
             return View(PaymentViewModelFactory.Create(payment) as DebitCardViewModel);
         }
 
-        public async Task<IActionResult> Details(string id)
-        {
+        public async Task<IActionResult> Details(string id) {
             var c = await payments.GetObject(id);
 
-            switch (c)
-            {
+            switch (c) {
                 case CashObject cash:
                     return View("DetailsCash",
                         PaymentViewModelFactory.Create(cash) as CashViewModel);
@@ -155,28 +143,26 @@ namespace Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult CreateCash()
-        {
+        public IActionResult CreateCash() {
             return View("CreateCash", new CashViewModel());
         }
 
-        public IActionResult CreateCheck()
-        {
+        public IActionResult CreateCheck() {
             return View("CreateCheck", new CheckViewModel());
         }
-        public IActionResult CreateCreditCard()
-        {
+
+        public IActionResult CreateCreditCard() {
             return View("CreateCreditCard", new CreditCardViewModel());
         }
-        public IActionResult CreateDebitCard()
-        {
+
+        public IActionResult CreateDebitCard() {
             return View("CreateDebitCard", new DebitCardViewModel());
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult>
-            CreateCash([Bind(cashProperties)] CashViewModel c)
-        {
+            CreateCash([Bind(cashProperties)] CashViewModel c) {
             if (!ModelState.IsValid) return View(c);
             c.ID = Guid.NewGuid().ToString();
             var o = PaymentObjectFactory.CreateCash(c.ID, c.Amount, c.Currency, c.Memo, c.Payer,
@@ -185,9 +171,9 @@ namespace Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCash([Bind(cashProperties)] CashViewModel c)
-        {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCash([Bind(cashProperties)] CashViewModel c) {
             if (!ModelState.IsValid) return View("EditCash", c);
             var o = await payments.GetObject(c.ID) as CashObject;
             o.DbRecord.Payer = c.Payer;
@@ -201,20 +187,21 @@ namespace Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult>
-            CreateCheck([Bind(checkProperties)] CheckViewModel c)
-        {
+            CreateCheck([Bind(checkProperties)] CheckViewModel c) {
             if (!ModelState.IsValid) return View(c);
             c.ID = Guid.NewGuid().ToString();
-            var o = PaymentObjectFactory.CreateCheck(c.ID, c.Amount, c.Currency, c.Memo, c.Payer, c.PayerAccountNumber, c.Payee, c.PayeeAccountNumber, c.CheckNumber, c.ValidFrom, c.ValidTo);
+            var o = PaymentObjectFactory.CreateCheck(c.ID, c.Amount, c.Currency, c.Memo, c.Payer, c.PayerAccountNumber,
+                c.Payee, c.PayeeAccountNumber, c.CheckNumber, c.ValidFrom, c.ValidTo);
             await payments.AddObject(o);
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCheck([Bind(checkProperties)] CheckViewModel c)
-        {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCheck([Bind(checkProperties)] CheckViewModel c) {
             if (!ModelState.IsValid) return View("EditCheck", c);
             var o = await payments.GetObject(c.ID) as CheckObject;
             o.DbRecord.Payer = c.Payer;
@@ -231,20 +218,22 @@ namespace Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult>
-            CreateDebitCard([Bind(debitProperties)] DebitCardViewModel c)
-        {
+            CreateDebitCard([Bind(debitProperties)] DebitCardViewModel c) {
             if (!ModelState.IsValid) return View(c);
             c.ID = Guid.NewGuid().ToString();
-            var o = PaymentObjectFactory.CreateDebit(c.ID, c.Amount, c.Currency, c.Memo, c.Payer, c.PayerAccountNumber,c.CardAssociationName,c.CardNumber,c.DailyWithdrawalLimit, c.Payee, c.PayeeAccountNumber, c.ValidFrom, c.ValidTo);
+            var o = PaymentObjectFactory.CreateDebit(c.ID, c.Amount, c.Currency, c.Memo, c.Payer, c.PayerAccountNumber,
+                c.CardAssociationName, c.CardNumber, c.DailyWithdrawalLimit, c.Payee, c.PayeeAccountNumber, c.ValidFrom,
+                c.ValidTo);
             await payments.AddObject(o);
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditDebitCard([Bind(debitProperties)] DebitCardViewModel c)
-        {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditDebitCard([Bind(debitProperties)] DebitCardViewModel c) {
             if (!ModelState.IsValid) return View("EditDebitCard", c);
             var o = await payments.GetObject(c.ID) as DebitCardObject;
             o.DbRecord.Payer = c.Payer;
@@ -263,20 +252,22 @@ namespace Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult>
-            CreateCreditCard([Bind(creditProperties)] CreditCardViewModel c)
-        {
+            CreateCreditCard([Bind(creditProperties)] CreditCardViewModel c) {
             if (!ModelState.IsValid) return View(c);
             c.ID = Guid.NewGuid().ToString();
-            var o = PaymentObjectFactory.CreateCredit(c.ID, c.Amount, c.Currency, c.Memo, c.Payer, c.PayerAccountNumber, c.CardAssociationName, c.CardNumber, c.DailyWithdrawalLimit, c.Payee, c.PayeeAccountNumber,c.CreditLimit, c.ValidFrom, c.ValidTo);
+            var o = PaymentObjectFactory.CreateCredit(c.ID, c.Amount, c.Currency, c.Memo, c.Payer, c.PayerAccountNumber,
+                c.CardAssociationName, c.CardNumber, c.DailyWithdrawalLimit, c.Payee, c.PayeeAccountNumber,
+                c.CreditLimit, c.ValidFrom, c.ValidTo);
             await payments.AddObject(o);
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCreditCard([Bind(creditProperties)] CreditCardViewModel c)
-        {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCreditCard([Bind(creditProperties)] CreditCardViewModel c) {
             if (!ModelState.IsValid) return View("EditCreditCard", c);
             var o = await payments.GetObject(c.ID) as CreditCardObject;
             o.DbRecord.Payer = c.Payer;

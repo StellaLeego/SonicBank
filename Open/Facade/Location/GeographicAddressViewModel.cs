@@ -2,16 +2,17 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Open.Core;
+
 namespace Open.Facade.Location {
     public class GeographicAddressViewModel : AddressViewModel {
-
         private string addressLine;
         private string city;
+        private string country;
         private string regionOrState;
         private string zipOrPostalCode;
-        private string country;
 
-        [DisplayName("Address Line"), Required]
+        [DisplayName("Address Line")]
+        [Required]
         public string AddressLine {
             get => getString(ref addressLine);
             set => addressLine = value;

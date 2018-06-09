@@ -5,33 +5,28 @@ using Open.Data.Common;
 using Open.Domain.Common;
 using Open.Domain.Location;
 
-namespace Open.Tests.Domain
-{
+namespace Open.Tests.Domain {
     [TestClass]
     public abstract class DomainObjectsTests<TObject, TRecord> : ObjectTests<TObject>
-    where TObject : TemporalObject<TRecord>
-    where TRecord : TemporalDbRecord, new()
-    {
+        where TObject : TemporalObject<TRecord>
+        where TRecord : TemporalDbRecord, new() {
         protected TObject createdWithNullArg;
         protected Type dbRecordType;
 
         [TestMethod]
-        public void DbRecordTest()
-        {
+        public void DbRecordTest() {
             Assert.IsNotNull(obj.DbRecord);
             Assert.IsInstanceOfType(obj.DbRecord, dbRecordType);
         }
 
         [TestMethod]
-        public void CanCreateWithNullArgumentTest()
-        {
+        public void CanCreateWithNullArgumentTest() {
             Assert.IsNotNull(createdWithNullArg.DbRecord);
             Assert.IsInstanceOfType(createdWithNullArg.DbRecord, dbRecordType);
         }
 
         [TestMethod]
-        public void DbRecordIsReadOnlyTest()
-        {
+        public void DbRecordIsReadOnlyTest() {
             var name = GetMember.Name<CountryObject>(x => x.DbRecord);
             Assert.IsTrue(IsReadOnly.Field<CountryObject>(name));
         }

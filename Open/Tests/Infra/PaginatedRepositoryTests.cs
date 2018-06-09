@@ -3,51 +3,42 @@ using Open.Data.Location;
 using Open.Domain.Location;
 using Open.Infra;
 
-namespace Open.Tests.Infra
-{
+namespace Open.Tests.Infra {
     [TestClass]
-    public class PaginatedRepositoryTests : BaseTests
-    {
+    public class PaginatedRepositoryTests : BaseTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(PaginatedRepository<CountryObject, CountryDbRecord>);
         }
 
         [TestMethod]
-        public void SearchStringTest()
-        {
+        public void SearchStringTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void PageIndexTest()
-        {
+        public void PageIndexTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void PageSizeTest()
-        {
+        public void PageSizeTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void SortOrderTest()
-        {
+        public void SortOrderTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void SortFunctionTest()
-        {
+        public void SortFunctionTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void GetObjectsListTest()
-        {
+        public void GetObjectsListTest() {
             Assert.Inconclusive();
         }
     }

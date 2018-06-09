@@ -2,14 +2,10 @@
 using Open.Domain.Money;
 using Open.Facade.Location;
 
-namespace Open.Facade.Money
-{
-    public static class CurrencyViewModelFactory
-    {
-        public static CurrencyViewModel Create(CurrencyObject o)
-        {
-            var v = new CurrencyViewModel
-            {
+namespace Open.Facade.Money {
+    public static class CurrencyViewModelFactory {
+        public static CurrencyViewModel Create(CurrencyObject o) {
+            var v = new CurrencyViewModel {
                 Name = o?.DbRecord.Name,
                 IsoCurrencySymbol = o?.DbRecord.ID,
                 CurrencySymbol = o?.DbRecord.Code
@@ -17,8 +13,7 @@ namespace Open.Facade.Money
             if (o is null) return v;
             v.ValidFrom = setNullIfExtremum(o.DbRecord.ValidFrom);
             v.ValidTo = setNullIfExtremum(o.DbRecord.ValidTo);
-            foreach (var c in o.UsedInCountries)
-            {
+            foreach (var c in o.UsedInCountries) {
                 var country = CountryViewModelFactory.Create(c);
                 v.UsedInCountries.Add(country);
             }
@@ -26,8 +21,7 @@ namespace Open.Facade.Money
             return v;
         }
 
-        private static DateTime? setNullIfExtremum(DateTime d)
-        {
+        private static DateTime? setNullIfExtremum(DateTime d) {
             if (d.Date >= DateTime.MaxValue.Date) return null;
             if (d.Date <= DateTime.MinValue.AddDays(1).Date) return null;
             return d;

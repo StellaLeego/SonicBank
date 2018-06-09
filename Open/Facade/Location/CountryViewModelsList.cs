@@ -3,24 +3,17 @@ using System.Linq;
 using Open.Core;
 using Open.Domain.Location;
 
-namespace Open.Facade.Location
-{
-    public class CountryViewModelsList : PaginatedList<CountryViewModel>
-    {
-        public CountryViewModelsList(IPaginatedList<CountryObject> l, string sortOrder = null)
-        {
+namespace Open.Facade.Location {
+    public class CountryViewModelsList : PaginatedList<CountryViewModel> {
+        public CountryViewModelsList(IPaginatedList<CountryObject> l, string sortOrder = null) {
             if (l is null) return;
             PageIndex = l.PageIndex;
             TotalPages = l.TotalPages;
             var countries = new List<CountryViewModel>();
             IOrderedEnumerable<CountryViewModel> ordered;
-            foreach (var e in l)
-            {
-                countries.Add(CountryViewModelFactory.Create(e));
-            }
+            foreach (var e in l) countries.Add(CountryViewModelFactory.Create(e));
 
-            switch (sortOrder)
-            {
+            switch (sortOrder) {
                 case "name_desc":
                     ordered = countries.OrderByDescending(s => s.Name);
                     break;
@@ -52,6 +45,7 @@ namespace Open.Facade.Location
                     ordered = countries.OrderBy(s => s.Name);
                     break;
             }
+
             AddRange(ordered);
         }
     }

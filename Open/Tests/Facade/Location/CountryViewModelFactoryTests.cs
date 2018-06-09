@@ -5,21 +5,17 @@ using Open.Core;
 using Open.Domain.Location;
 using Open.Facade.Location;
 
-namespace Open.Tests.Facade.Location
-{
+namespace Open.Tests.Facade.Location {
     [TestClass]
-    public class CountryViewModelFactoryTests : BaseTests
-    {
+    public class CountryViewModelFactoryTests : BaseTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(CountryViewModelFactory);
         }
 
         [TestMethod]
-        public void CreateTest()
-        {
+        public void CreateTest() {
             var o = GetRandom.Object<CountryObject>();
             var v = CountryViewModelFactory.Create(o);
             Assert.AreEqual(v.Name, o.DbRecord.Name);
@@ -30,8 +26,7 @@ namespace Open.Tests.Facade.Location
         }
 
         [TestMethod]
-        public void CreateNullTest()
-        {
+        public void CreateNullTest() {
             var v = CountryViewModelFactory.Create(null);
             Assert.AreEqual(v.Name, Constants.Unspecified);
             Assert.AreEqual(v.ValidFrom, null);
@@ -41,8 +36,7 @@ namespace Open.Tests.Facade.Location
         }
 
         [TestMethod]
-        public void CreateWithExtremumDatesTest()
-        {
+        public void CreateWithExtremumDatesTest() {
             var o = GetRandom.Object<CountryObject>();
             o.DbRecord.ValidFrom = DateTime.MinValue;
             o.DbRecord.ValidTo = DateTime.MaxValue;

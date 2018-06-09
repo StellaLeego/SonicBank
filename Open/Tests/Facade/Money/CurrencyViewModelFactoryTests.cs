@@ -5,21 +5,17 @@ using Open.Core;
 using Open.Domain.Money;
 using Open.Facade.Money;
 
-namespace Open.Tests.Facade.Money
-{
+namespace Open.Tests.Facade.Money {
     [TestClass]
-    public class CurrencyViewModelFactoryTests : BaseTests
-    {
+    public class CurrencyViewModelFactoryTests : BaseTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(CurrencyViewModelFactory);
         }
 
         [TestMethod]
-        public void CreateTest()
-        {
+        public void CreateTest() {
             var o = GetRandom.Object<CurrencyObject>();
             var v = CurrencyViewModelFactory.Create(o);
             Assert.AreEqual(v.Name, o.DbRecord.Name);
@@ -30,8 +26,7 @@ namespace Open.Tests.Facade.Money
         }
 
         [TestMethod]
-        public void CreateNullTest()
-        {
+        public void CreateNullTest() {
             var v = CurrencyViewModelFactory.Create(null);
             Assert.AreEqual(v.Name, Constants.Unspecified);
             Assert.AreEqual(v.ValidFrom, null);
@@ -41,8 +36,7 @@ namespace Open.Tests.Facade.Money
         }
 
         [TestMethod]
-        public void CreateWithExtremumDatesTest()
-        {
+        public void CreateWithExtremumDatesTest() {
             var o = GetRandom.Object<CurrencyObject>();
             o.DbRecord.ValidFrom = DateTime.MinValue;
             o.DbRecord.ValidTo = DateTime.MaxValue;

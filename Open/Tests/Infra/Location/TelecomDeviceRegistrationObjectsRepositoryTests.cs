@@ -1,57 +1,47 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Infra.Location;
 
-namespace Open.Tests.Infra.Location
-{
+namespace Open.Tests.Infra.Location {
     [TestClass]
-    public class TelecomDeviceRegistrationObjectsRepositoryTests : BaseTests
-    {
+    public class TelecomDeviceRegistrationObjectsRepositoryTests : BaseTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(TelecomDeviceRegistrationObjectsRepository);
         }
 
         [TestMethod]
-        public void CanCreate()
-        {
+        public void CanCreate() {
             Assert.IsNotNull(new TelecomDeviceRegistrationObjectsRepository(null));
         }
 
         [TestMethod]
-        public void GetObjectTest()
-        {
+        public void GetObjectTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void AddObjectTest()
-        {
+        public void AddObjectTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void UpdateObjectTest()
-        {
+        public void UpdateObjectTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void DeleteObjectTest()
-        {
+        public void DeleteObjectTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void LoadAddressesTest()
-        {
+        public void LoadAddressesTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void LoadDevicesTest()
-        {
+        public void LoadDevicesTest() {
             Assert.Inconclusive();
         }
     }

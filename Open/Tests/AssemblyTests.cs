@@ -4,10 +4,9 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
 
-namespace Open.Tests
-{
-    public class AssemblyTests
-    {
+namespace Open.Tests {
+    public class AssemblyTests {
+        private List<string> list;
         private static string isNotTested => "<{0}> is not tested";
 
         private static string noClassesInAssembly =>
@@ -28,22 +27,17 @@ namespace Open.Tests
 
         private static string shell32 => "Shell32.";
 
-        private List<string> list;
-
         [TestInitialize]
-        public void CreateList()
-        {
+        public void CreateList() {
             list = new List<string>();
         }
 
-        protected virtual string Namespace(string name)
-        {
+        protected virtual string Namespace(string name) {
             return $"{assembly}.{name}";
         }
 
         protected void isAllClassesTested(string assemblyName,
-            string namespaceName = null)
-        {
+            string namespaceName = null) {
             var l = getAssemblyClasses(assemblyName);
             removeInterfaces(l);
             list = toClassNamesList(l);
@@ -53,38 +47,31 @@ namespace Open.Tests
             if (list.Count == 0) return;
 
             report(isNotTested, list[0]);
-
         }
 
-        private static void report(string message, params object[] parameters)
-        {
-            Assert.Fail(message,parameters);
+        private static void report(string message, params object[] parameters) {
+            Assert.Fail(message, parameters);
         }
 
-        private static List<Type> getAssemblyClasses(string assemblyName)
-        {
+        private static List<Type> getAssemblyClasses(string assemblyName) {
             var l = GetSolution.TypesForAssembly(assemblyName);
             if (l.Count == 0) report(noClassesInAssembly, assemblyName);
             return l;
         }
 
-        private static void removeInterfaces(IList<Type> types)
-        {
-            for (var i = types.Count; i > 0; i--)
-            {
+        private static void removeInterfaces(IList<Type> types) {
+            for (var i = types.Count; i > 0; i--) {
                 var e = types[i - 1];
-                if(!e.IsInterface) continue;
+                if (!e.IsInterface) continue;
                 types.Remove(e);
             }
         }
 
-        private static List<string> toClassNamesList(List<Type> l)
-        {
+        private static List<string> toClassNamesList(List<Type> l) {
             return l.Select(o => o.FullName).ToList();
         }
 
-        private void removeNotInNamespace(string namespaceName)
-        {
+        private void removeNotInNamespace(string namespaceName) {
             if (string.IsNullOrEmpty(namespaceName)) return;
 
             list.RemoveAll(o => !o.StartsWith(namespaceName));
@@ -93,8 +80,7 @@ namespace Open.Tests
             report(noClassesInNamespace, namespaceName);
         }
 
-        private void removeSurrogateClasses()
-        {
+        private void removeSurrogateClasses() {
             list.RemoveAll(o => o.Contains(shell32));
             list.RemoveAll(o => o.Contains(internalClass));
             list.RemoveAll(o => o.Contains(displayClass));
@@ -103,36 +89,31 @@ namespace Open.Tests
             list.RemoveAll(o => o.Contains(".Migrations."));
         }
 
-        private void removeTested()
-        {
+        private void removeTested() {
             var tests = GetSolution.TypeNamesForAssembly(testAssembly);
-            for (var i = list.Count; i > 0; i--)
-            {
+            for (var i = list.Count; i > 0; i--) {
                 var className = list[i - 1];
                 var testName = toTestName(className);
                 var t = tests.Find(o => o.EndsWith(testName));
-                if (ReferenceEquals(null,t)) continue;
+                if (ReferenceEquals(null, t)) continue;
 
-                list.RemoveAt(i-1);
+                list.RemoveAt(i - 1);
             }
         }
 
-        private static string toTestName(string className)
-        {
+        private static string toTestName(string className) {
             className = removeAssemblyName(className);
             className = removeGenericsChars(className);
             return className + "Tests";
         }
 
-        private static string removeGenericsChars(string className)
-        {
+        private static string removeGenericsChars(string className) {
             var idx = className.IndexOf(genericsChar);
             if (idx > 0) className = className.Substring(0, idx);
             return className;
         }
 
-        private static string removeAssemblyName(string className)
-        {
+        private static string removeAssemblyName(string className) {
             return className.Substring(assembly.Length);
         }
     }

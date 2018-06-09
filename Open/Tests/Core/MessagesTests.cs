@@ -3,21 +3,17 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
 using Open.Core;
 
-namespace Open.Tests.Core
-{
+namespace Open.Tests.Core {
     [TestClass]
-    public class MessagesTests : BaseTests
-    {
+    public class MessagesTests : BaseTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(Messages);
         }
 
         [TestMethod]
-        public void ValueIsAlreadyInUseTest()
-        {
+        public void ValueIsAlreadyInUseTest() {
             var value = GetRandom.String();
             var member = GetRandom.String();
             var s = string.Format(Messages.ValueIsAlreadyInUse, value, member);

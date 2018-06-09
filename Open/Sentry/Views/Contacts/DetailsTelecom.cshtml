@@ -1,5 +1,5 @@
 ﻿@using Open.Facade.Location
-@model TelecomAddressViewModel
+@model Open.Facade.Location.TelecomAddressViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -8,11 +8,10 @@
 }
 
 <body>
-    @Html.Partial("_ViewTelecom", Model)
+@Html.Partial("_ViewTelecom", Model)
 </body>
 
 @section Actions{
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+    @Html.ActionLink("Edit", "Edit", new {id = Model.ID})
     @Html.ActionLink("Back to List", "Index")
 }
-

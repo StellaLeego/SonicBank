@@ -1,5 +1,4 @@
-﻿@using Open.Facade.Location
-@using Open.Sentry.Extensions
+﻿@using Open.Sentry.Extensions
 @model Open.Facade.Location.CountryViewModel
 
 @{
@@ -10,11 +9,11 @@
 }
 
 <body>
-    @Html.EditingControlsFor(model => model.Alpha3Code)
-    @Html.EditingControlsFor(model => model.Alpha2Code)
-    @Html.EditingControlsFor(model => model.Name)
-    @Html.EditingControlsFor(model => model.ValidFrom)
-    @Html.EditingControlsFor(model => model.ValidTo)
+@Html.EditingControlsFor(model => model.Alpha3Code)
+@Html.EditingControlsFor(model => model.Alpha2Code)
+@Html.EditingControlsFor(model => model.Name)
+@Html.EditingControlsFor(model => model.ValidFrom)
+@Html.EditingControlsFor(model => model.ValidTo)
 </body>
 
 @section Actions

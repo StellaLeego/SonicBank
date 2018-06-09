@@ -2,8 +2,7 @@
 using Open.Core;
 using Open.Data.Location;
 
-namespace Open.Domain.Location
-{
+namespace Open.Domain.Location {
     public static class AddressObjectFactory {
         public static IAddressObject Create(AddressDbRecord dbRecord) {
             switch (dbRecord) {
@@ -17,18 +16,23 @@ namespace Open.Domain.Location
 
             return create(dbRecord as GeographicAddressDbRecord);
         }
+
         private static WebAddressObject create(WebPageAddressDbRecord dbRecord) {
             return new WebAddressObject(dbRecord);
         }
+
         private static EmailAddressObject create(EmailAddressDbRecord dbRecord) {
             return new EmailAddressObject(dbRecord);
         }
+
         private static GeographicAddressObject create(GeographicAddressDbRecord dbRecord) {
             return new GeographicAddressObject(dbRecord);
         }
+
         private static TelecomAddressObject create(TelecomAddressDbRecord dbRecord) {
             return new TelecomAddressObject(dbRecord);
         }
+
         public static WebAddressObject CreateWeb(string id, string address,
             DateTime? validFrom = null, DateTime? validTo = null) {
             var r = new WebPageAddressDbRecord {
@@ -39,6 +43,7 @@ namespace Open.Domain.Location
             };
             return new WebAddressObject(r);
         }
+
         public static EmailAddressObject CreateEmail(string id, string address,
             DateTime? validFrom = null, DateTime? validTo = null) {
             var r = new EmailAddressDbRecord {
@@ -49,6 +54,7 @@ namespace Open.Domain.Location
             };
             return new EmailAddressObject(r);
         }
+
         public static GeographicAddressObject CreateAddress(string id, string addressLine,
             string city, string regionOrState, string zipOrPostalCode, string countryId,
             DateTime? validFrom = null, DateTime? validTo = null) {
@@ -64,6 +70,7 @@ namespace Open.Domain.Location
             };
             return new GeographicAddressObject(r);
         }
+
         public static TelecomAddressObject CreateDevice(string id, string countryCode,
             string areaCode,
             string number, string extension, string nationalDirectDialingPrefix,

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Open.Aids;
 using Open.Core;
@@ -10,17 +10,14 @@ using Open.Domain.Location;
 using Open.Domain.Money;
 using Open.Facade.Location;
 
-namespace Open.Sentry.Controllers
-{
+namespace Open.Sentry.Controllers {
     [Authorize]
-    public class CountriesController : Controller
-    {
-        private readonly ICountryObjectsRepository repository;
-        private readonly ICountryCurrencyObjectsRepository currencies;
+    public class CountriesController : Controller {
         internal const string properties = "Alpha3Code, Alpha2Code, Name, ValidFrom, ValidTo";
+        private readonly ICountryCurrencyObjectsRepository currencies;
+        private readonly ICountryObjectsRepository repository;
 
-        public CountriesController(ICountryObjectsRepository r, ICountryCurrencyObjectsRepository c)
-        {
+        public CountriesController(ICountryObjectsRepository r, ICountryCurrencyObjectsRepository c) {
             repository = r;
             currencies = c;
         }
@@ -28,10 +25,9 @@ namespace Open.Sentry.Controllers
         public async Task<IActionResult> Index(string sortOrder = null,
             string currentFilter = null,
             string searchString = null,
-            int? page = null)
-        {
+            int? page = null) {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["SortName"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["SortName"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["SortAlpha3"] = sortOrder == "alpha3" ? "alpha3_desc" : "alpha3";
             ViewData["SortAlpha2"] = sortOrder == "alpha2" ? "alpha2_desc" : "alpha2";
             ViewData["SortValidFrom"] = sortOrder == "validFrom" ? "validFrom_desc" : "validFrom";
@@ -56,17 +52,14 @@ namespace Open.Sentry.Controllers
             if (sortOrder.StartsWith("alpha3")) return x => x.ID;
             if (sortOrder.StartsWith("aplha2")) return x => x.Code;
             return x => x.Name;
-
         }
 
-        public IActionResult Create()
-        {
+        public IActionResult Create() {
             return View();
         }
 
-        [HttpPost]//[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind(properties)] CountryViewModel c)
-        {
+        [HttpPost] //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind(properties)] CountryViewModel c) {
             await validateId(c.Alpha3Code, ModelState);
             if (!ModelState.IsValid) return View(c);
             var o = CountryObjectFactory.Create(c.Alpha3Code, c.Name, c.Alpha2Code, c.ValidFrom, c.ValidTo);
@@ -74,16 +67,14 @@ namespace Open.Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Edit(string id)
-        {
+        public async Task<IActionResult> Edit(string id) {
             var c = await repository.GetObject(id);
             return View(CountryViewModelFactory.Create(c));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind(properties)] CountryViewModel c)
-        {
+        public async Task<IActionResult> Edit([Bind(properties)] CountryViewModel c) {
             if (!ModelState.IsValid) return View(c);
             var o = await repository.GetObject(c.Alpha3Code);
             o.DbRecord.Name = c.Name;
@@ -94,40 +85,35 @@ namespace Open.Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Details(string id)
-        {
+        public async Task<IActionResult> Details(string id) {
             var c = await repository.GetObject(id);
             await currencies.LoadCurrencies(c);
             return View(CountryViewModelFactory.Create(c));
         }
 
-        public async Task<IActionResult> Delete(string id)
-        {
+        public async Task<IActionResult> Delete(string id) {
             var c = await repository.GetObject(id);
             return View(CountryViewModelFactory.Create(c));
         }
 
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
+        [HttpPost]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(string id) {
             var c = await repository.GetObject(id);
             repository.DeleteObject(c);
             return RedirectToAction("Index");
         }
 
-        private async Task validateId(string id, ModelStateDictionary d)
-        {
+        private async Task validateId(string id, ModelStateDictionary d) {
             if (await isIdInUse(id))
                 d.AddModelError(string.Empty, idIsInUseMessage(id));
         }
 
-        private async Task<bool> isIdInUse(string id)
-        {
+        private async Task<bool> isIdInUse(string id) {
             return (await repository.GetObject(id))?.DbRecord?.ID == id;
         }
 
-        private static string idIsInUseMessage(string id)
-        {
+        private static string idIsInUseMessage(string id) {
             var name = GetMember.DisplayName<CountryViewModel>(c => c.Alpha3Code);
             return string.Format(Messages.ValueIsAlreadyInUse, id, name);
         }

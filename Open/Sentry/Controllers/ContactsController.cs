@@ -5,32 +5,42 @@ using Open.Core;
 using Open.Data.Location;
 using Open.Domain.Location;
 using Open.Facade.Location;
-namespace Open.Sentry.Controllers
-{
-    public class ContactsController : Controller
-    {
 
-        private readonly IAddressObjectsRepository addresses;
-        private readonly ITelecomDeviceRegistrationObjectsRepository deviceRegistrations;
+namespace Open.Sentry.Controllers {
+    public class ContactsController : Controller {
         internal const string emailProperties = "ID, EmailAddress, ValidFrom, ValidTo";
         internal const string webProperties = "ID, Url, ValidFrom, ValidTo";
+
         internal const string telecomProperties =
             "ID, CountryCode, AreaCode, Number, Extension, NationalDirectDialingPrefix, DeviceType, ValidFrom, ValidTo";
+
         internal const string adrProperties =
             "ID, AddressLine, City, RegionOrState, ZipOrPostalCode, Country, ValidFrom, ValidTo";
 
+        private readonly IAddressObjectsRepository addresses;
+        private readonly ITelecomDeviceRegistrationObjectsRepository deviceRegistrations;
+
+        public async Task<IActionResult> AddDevice(string adr, string dev) {
+            var r = new TelecomDeviceRegistrationDbRecord {
+                AddressID = adr,
+                DeviceID = dev
+            };
+            await deviceRegistrations.AddObject(new TelecomDeviceRegistrationObject(r));
+            return RedirectToAction("EditAddress", new {id = adr});
+        }
+
         #region other code ...
+
         public ContactsController(IAddressObjectsRepository a,
-            ITelecomDeviceRegistrationObjectsRepository d)
-        {
+            ITelecomDeviceRegistrationObjectsRepository d) {
             addresses = a;
             deviceRegistrations = d;
         }
+
         public async Task<IActionResult> Index(string sortOrder = null,
             string currentFilter = null,
             string searchString = null,
-            int? page = null)
-        {
+            int? page = null) {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["SortAddressType"] = string.IsNullOrEmpty(sortOrder) ? "type_desc" : "";
             ViewData["SortToString"] = sortOrder == "string" ? "string_desc" : "string";
@@ -48,20 +58,19 @@ namespace Open.Sentry.Controllers
             var l = await addresses.GetObjectsList();
             return View(new AddressViewModelsList(l));
         }
-        private Func<AddressDbRecord, object> getSortFunction(string sortOrder)
-        {
+
+        private Func<AddressDbRecord, object> getSortFunction(string sortOrder) {
             if (string.IsNullOrWhiteSpace(sortOrder)) return x => x.GetType().Name;
             if (sortOrder.StartsWith("type")) return x => x.GetType().Name;
             if (sortOrder.StartsWith("validTo")) return x => x.ValidTo;
             if (sortOrder.StartsWith("validFrom")) return x => x.ValidFrom;
             return x => x.Address;
         }
-        public async Task<IActionResult> Delete(string id)
-        {
+
+        public async Task<IActionResult> Delete(string id) {
             var c = await addresses.GetObject(id);
 
-            switch (c)
-            {
+            switch (c) {
                 case WebAddressObject web:
                     return View("DeleteWeb",
                         AddressViewModelFactory.Create(web) as WebPageAddressViewModel);
@@ -80,40 +89,39 @@ namespace Open.Sentry.Controllers
 
             return RedirectToAction("Index");
         }
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(string id) {
             var c = await addresses.GetObject(id);
             await addresses.DeleteObject(c);
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Edit(string id)
-        {
+
+        public async Task<IActionResult> Edit(string id) {
             var address = await addresses.GetObject(id);
-            switch (address)
-            {
-                case WebAddressObject _: return RedirectToAction("EditWeb", new { id });
-                case EmailAddressObject _: return RedirectToAction("EditEmail", new { id });
-                case TelecomAddressObject _: return RedirectToAction("EditTelecom", new { id });
-                default: return RedirectToAction("EditAddress", new { id });
+            switch (address) {
+                case WebAddressObject _: return RedirectToAction("EditWeb", new {id});
+                case EmailAddressObject _: return RedirectToAction("EditEmail", new {id});
+                case TelecomAddressObject _: return RedirectToAction("EditTelecom", new {id});
+                default: return RedirectToAction("EditAddress", new {id});
             }
         }
-        public async Task<IActionResult> EditWeb(string id)
-        {
+
+        public async Task<IActionResult> EditWeb(string id) {
             var address = await addresses.GetObject(id);
             return View(AddressViewModelFactory.Create(address) as WebPageAddressViewModel);
         }
-        public async Task<IActionResult> EditEmail(string id)
-        {
+
+        public async Task<IActionResult> EditEmail(string id) {
             var address = await addresses.GetObject(id);
             return View(AddressViewModelFactory.Create(address) as EmailAddressViewModel);
         }
+
         public async Task<IActionResult> EditAddress(string id,
             string currentFilter = null,
             string searchString = null,
-            int? page = null)
-        {
-
+            int? page = null) {
             if (searchString != null) page = 1;
             else searchString = currentFilter;
             ViewData["CurrentFilter"] = searchString;
@@ -124,24 +132,24 @@ namespace Open.Sentry.Controllers
                 devices = new AddressViewModelsList(await addresses.GetDevicesList());
             var a = await addresses.GetObject(id) as GeographicAddressObject ?? new GeographicAddressObject(null);
             await deviceRegistrations.LoadDevices(a);
-            var adr = AddressViewModelFactory.Create(a) as GeographicAddressViewModel ?? new GeographicAddressViewModel();
+            var adr = AddressViewModelFactory.Create(a) as GeographicAddressViewModel ??
+                      new GeographicAddressViewModel();
             foreach (var device in adr.RegisteredTelecomAddresses)
                 devices.RemoveAll(x => x.Contact == device.Contact);
             ViewBag.Devices = devices;
             return View(adr);
         }
-        public async Task<IActionResult> EditTelecom(string id)
-        {
+
+        public async Task<IActionResult> EditTelecom(string id) {
             var address = await addresses.GetObject(id) as TelecomAddressObject;
             await deviceRegistrations.LoadAddresses(address);
             return View(AddressViewModelFactory.Create(address) as TelecomAddressViewModel);
         }
-        public async Task<IActionResult> Details(string id)
-        {
+
+        public async Task<IActionResult> Details(string id) {
             var c = await addresses.GetObject(id);
 
-            switch (c)
-            {
+            switch (c) {
                 case WebAddressObject web:
                     return View("DetailsWeb",
                         AddressViewModelFactory.Create(web) as WebPageAddressViewModel);
@@ -161,27 +169,26 @@ namespace Open.Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult CreateWeb()
-        {
+        public IActionResult CreateWeb() {
             return View("CreateWeb", new WebPageAddressViewModel());
         }
-        public IActionResult CreateEmail()
-        {
+
+        public IActionResult CreateEmail() {
             return View("CreateEmail", new EmailAddressViewModel());
         }
-        public IActionResult CreateTelecom()
-        {
+
+        public IActionResult CreateTelecom() {
             return View("CreateTelecom", new TelecomAddressViewModel());
         }
-        public IActionResult CreateAddress()
-        {
+
+        public IActionResult CreateAddress() {
             return View("CreateAddress", new GeographicAddressViewModel());
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult>
-            CreateWeb([Bind(webProperties)] WebPageAddressViewModel c)
-        {
+            CreateWeb([Bind(webProperties)] WebPageAddressViewModel c) {
             if (!ModelState.IsValid) return View(c);
             c.ID = Guid.NewGuid().ToString();
             var o = AddressObjectFactory.CreateWeb(c.ID, c.Url, c.ValidFrom, c.ValidTo);
@@ -189,9 +196,9 @@ namespace Open.Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditWeb([Bind(webProperties)] WebPageAddressViewModel c)
-        {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditWeb([Bind(webProperties)] WebPageAddressViewModel c) {
             if (!ModelState.IsValid) return View("EditWeb", c);
             var o = await addresses.GetObject(c.ID) as WebAddressObject;
             o.DbRecord.Address = c.Url;
@@ -201,10 +208,10 @@ namespace Open.Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateEmail(
-            [Bind(emailProperties)] EmailAddressViewModel c)
-        {
+            [Bind(emailProperties)] EmailAddressViewModel c) {
             if (!ModelState.IsValid) return View(c);
             c.ID = Guid.NewGuid().ToString();
             var o = AddressObjectFactory.CreateEmail(c.ID, c.EmailAddress, c.ValidFrom, c.ValidTo);
@@ -212,9 +219,9 @@ namespace Open.Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditEmail([Bind(emailProperties)] EmailAddressViewModel c)
-        {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditEmail([Bind(emailProperties)] EmailAddressViewModel c) {
             if (!ModelState.IsValid) return View("EditEmail", c);
             var o = await addresses.GetObject(c.ID) as EmailAddressObject;
             o.DbRecord.Address = c.EmailAddress;
@@ -224,10 +231,10 @@ namespace Open.Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateTelecom(
-            [Bind(telecomProperties)] TelecomAddressViewModel c)
-        {
+            [Bind(telecomProperties)] TelecomAddressViewModel c) {
             if (!ModelState.IsValid) return View(c);
             c.ID = Guid.NewGuid().ToString();
             var o = AddressObjectFactory.CreateDevice(c.ID, c.CountryCode, c.AreaCode,
@@ -239,8 +246,7 @@ namespace Open.Sentry.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditTelecom(
-            [Bind(telecomProperties)] TelecomAddressViewModel c)
-        {
+            [Bind(telecomProperties)] TelecomAddressViewModel c) {
             if (!ModelState.IsValid) return View("EditTelecom", c);
             var o = await addresses.GetObject(c.ID) as TelecomAddressObject;
             o.DbRecord.Address = c.Number;
@@ -256,10 +262,10 @@ namespace Open.Sentry.Controllers
         }
 
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAddress(
-            [Bind(adrProperties)] GeographicAddressViewModel c)
-        {
+            [Bind(adrProperties)] GeographicAddressViewModel c) {
             if (!ModelState.IsValid) return View(c);
             c.ID = Guid.NewGuid().ToString();
             var o = AddressObjectFactory.CreateAddress(c.ID, c.AddressLine, c.City,
@@ -271,8 +277,7 @@ namespace Open.Sentry.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditAddress(
-            [Bind(adrProperties)] GeographicAddressViewModel c)
-        {
+            [Bind(adrProperties)] GeographicAddressViewModel c) {
             if (!ModelState.IsValid) return View("EditAddress", c);
             var o = await addresses.GetObject(c.ID) as GeographicAddressObject;
             o.DbRecord.Address = c.AddressLine;
@@ -286,27 +291,12 @@ namespace Open.Sentry.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> RemoveDevice(string adr, string dev)
-        {
+        public async Task<IActionResult> RemoveDevice(string adr, string dev) {
             var o = await deviceRegistrations.GetObject(adr, dev);
             await deviceRegistrations.DeleteObject(o);
-            return RedirectToAction("EditAddress", new { id = adr });
+            return RedirectToAction("EditAddress", new {id = adr});
         }
-
 
         #endregion
-        public async Task<IActionResult> AddDevice(string adr, string dev)
-        {
-            var r = new TelecomDeviceRegistrationDbRecord
-            {
-                AddressID = adr,
-                DeviceID = dev
-            };
-            await deviceRegistrations.AddObject(new TelecomDeviceRegistrationObject(r));
-            return RedirectToAction("EditAddress", new { id = adr });
-        }
     }
 }
-
-
-

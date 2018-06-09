@@ -6,36 +6,28 @@ using Open.Aids;
 using Open.Core;
 using Open.Data.Location;
 
-namespace Open.Tests.Aids
-{
+namespace Open.Tests.Aids {
     [TestClass]
-    public class GetRandomTests : BaseTests
-    {
+    public class GetRandomTests : BaseTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(GetRandom);
         }
 
-        private static void doGetRandomTest<T>(Func<T, T, T> funct, T min, T max) where T : IComparable
-        {
+        private static void doGetRandomTest<T>(Func<T, T, T> funct, T min, T max) where T : IComparable {
             doTests(funct, min);
             doTests(funct, max);
             doTests(funct, min, max);
             doTests((x, y) => funct(max, min), min, max);
         }
 
-        private static void doTests<T>(Func<T, T, T> funct, T min, T max) where T : IComparable
-        {
+        private static void doTests<T>(Func<T, T, T> funct, T min, T max) where T : IComparable {
             var l = new List<T>();
-            for (var i = 0; i < 10; i++)
-            {
+            for (var i = 0; i < 10; i++) {
                 T r;
-                do
-                {
+                do {
                     r = funct(min, max);
-
                 } while (l.Contains(r));
 
                 Assert.IsInstanceOfType(r, typeof(T));
@@ -45,30 +37,25 @@ namespace Open.Tests.Aids
             }
         }
 
-        private static void doTests<T>(Func<T, T, T> funct, T x)
-        {
+        private static void doTests<T>(Func<T, T, T> funct, T x) {
             Assert.AreEqual(x, funct(x, x));
         }
 
-        private static void doTests<T>(Func<T> funct)
-        {
+        private static void doTests<T>(Func<T> funct) {
             var l = new List<T>();
-            for (var i = 0; i < 10; i++)
-            {
+            for (var i = 0; i < 10; i++) {
                 T r;
-                do
-                {
+                do {
                     r = funct();
-                }
-                while (l.Contains(r));
+                } while (l.Contains(r));
+
                 Assert.IsInstanceOfType(r, typeof(T));
                 l.Add(r);
             }
         }
 
         [TestMethod]
-        public void BoolTest()
-        {
+        public void BoolTest() {
             var b = GetRandom.Bool();
             Assert.IsInstanceOfType(b, typeof(bool));
             while (true)
@@ -77,8 +64,7 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void CharTest()
-        {
+        public void CharTest() {
             doGetRandomTest(GetRandom.Char, 'a', 'z');
             doGetRandomTest(GetRandom.Char, 'A', 'Z');
             doGetRandomTest(GetRandom.Char, char.MinValue, char.MaxValue);
@@ -87,14 +73,12 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void ColorTest()
-        {
+        public void ColorTest() {
             doTests(GetRandom.Color);
         }
 
         [TestMethod]
-        public void DateTimeTest()
-        {
+        public void DateTimeTest() {
             var now = DateTime.Now;
             var min = DateTime.MinValue;
             var max = DateTime.MaxValue;
@@ -105,8 +89,7 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void DecimalTest()
-        {
+        public void DecimalTest() {
             var d = 10M;
             doGetRandomTest(GetRandom.Decimal, 100M, 200M);
             doGetRandomTest(GetRandom.Decimal, -200M, 100M);
@@ -117,8 +100,7 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void DoubleTest()
-        {
+        public void DoubleTest() {
             var d = 10000;
             doGetRandomTest(GetRandom.Double, (double) 10, 110);
             doGetRandomTest(GetRandom.Double, (double) -110, -10);
@@ -129,8 +111,7 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void EnumTest()
-        {
+        public void EnumTest() {
             var e = GetRandom.Enum<IsoGender>();
             Assert.IsInstanceOfType(e, typeof(IsoGender));
             while (true)
@@ -139,8 +120,7 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void FloatTest()
-        {
+        public void FloatTest() {
             var d = 10F;
             doGetRandomTest(GetRandom.Float, 10F, 110F);
             doGetRandomTest(GetRandom.Float, -110F, -10F);
@@ -149,31 +129,29 @@ namespace Open.Tests.Aids
             doGetRandomTest(GetRandom.Float, float.MaxValue / d, float.MaxValue);
             doGetRandomTest(GetRandom.Float, float.MinValue, float.MinValue / d);
         }
+
         [TestMethod]
-        public void Int8Test()
-        {
+        public void Int8Test() {
             doGetRandomTest(GetRandom.Int8, (sbyte) 10, (sbyte) 110);
-            doGetRandomTest(GetRandom.Int8, (sbyte)-110, (sbyte)-10);
-            doGetRandomTest(GetRandom.Int8, (sbyte)-50, (sbyte)50);
+            doGetRandomTest(GetRandom.Int8, (sbyte) -110, (sbyte) -10);
+            doGetRandomTest(GetRandom.Int8, (sbyte) -50, (sbyte) 50);
             doGetRandomTest(GetRandom.Int8, sbyte.MinValue, (sbyte) (sbyte.MinValue + 100));
             doGetRandomTest(GetRandom.Int8, (sbyte) (sbyte.MaxValue - 100), sbyte.MaxValue);
             doGetRandomTest(GetRandom.Int8, sbyte.MinValue, sbyte.MaxValue);
         }
 
         [TestMethod]
-        public void Int16Test()
-        {
-            doGetRandomTest(GetRandom.Int16, (short)100, (short)200);
-            doGetRandomTest(GetRandom.Int16, (short)-200, (short)100);
-            doGetRandomTest(GetRandom.Int16, (short)-400, (short)-200);
+        public void Int16Test() {
+            doGetRandomTest(GetRandom.Int16, (short) 100, (short) 200);
+            doGetRandomTest(GetRandom.Int16, (short) -200, (short) 100);
+            doGetRandomTest(GetRandom.Int16, (short) -400, (short) -200);
             doGetRandomTest(GetRandom.Int16, short.MinValue, (short) (short.MinValue + 200));
             doGetRandomTest(GetRandom.Int16, (short) (short.MaxValue - 100), short.MaxValue);
             doGetRandomTest(GetRandom.Int16, short.MinValue, short.MaxValue);
         }
 
         [TestMethod]
-        public void Int32Test()
-        {
+        public void Int32Test() {
             doGetRandomTest(GetRandom.Int32, 100, 200);
             doGetRandomTest(GetRandom.Int32, -200, 100);
             doGetRandomTest(GetRandom.Int32, -400, -200);
@@ -183,20 +161,18 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void Int64Test()
-        {
+        public void Int64Test() {
             var d = 1000000000L;
             doGetRandomTest(GetRandom.Int64, (long) 100, 200);
-            doGetRandomTest(GetRandom.Int64, (long)-200, 100);
-            doGetRandomTest(GetRandom.Int64, (long)-400, -200);
-            doGetRandomTest(GetRandom.Int64,long.MinValue, long.MaxValue);
+            doGetRandomTest(GetRandom.Int64, (long) -200, 100);
+            doGetRandomTest(GetRandom.Int64, (long) -400, -200);
+            doGetRandomTest(GetRandom.Int64, long.MinValue, long.MaxValue);
             doGetRandomTest(GetRandom.Int64, long.MinValue, long.MinValue + d);
             doGetRandomTest(GetRandom.Int64, long.MaxValue - d, long.MaxValue);
         }
 
         [TestMethod]
-        public void ObjectTest()
-        {
+        public void ObjectTest() {
             Assert.IsNull(GetRandom.Object(null));
             var o = GetRandom.Object(typeof(CountryDbRecord)) as CountryDbRecord;
             Assert.IsNotNull(o);
@@ -209,47 +185,41 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void StringTest()
-        {
+        public void StringTest() {
             doTests(() => GetRandom.String());
         }
 
         [TestMethod]
-        public void TimeSpanTest()
-        {
+        public void TimeSpanTest() {
             doTests(GetRandom.TimeSpan);
         }
 
         [TestMethod]
-        public void UInt8Test()
-        {
-            doGetRandomTest(GetRandom.UInt8, (byte)10, (byte)110);
+        public void UInt8Test() {
+            doGetRandomTest(GetRandom.UInt8, (byte) 10, (byte) 110);
             doGetRandomTest(GetRandom.UInt8, byte.MinValue, (byte) (byte.MinValue + 100));
             doGetRandomTest(GetRandom.UInt8, (byte) (byte.MaxValue - 100), byte.MaxValue);
             doGetRandomTest(GetRandom.UInt8, byte.MinValue, byte.MaxValue);
         }
 
         [TestMethod]
-        public void UInt16Test()
-        {
-            doGetRandomTest(GetRandom.UInt16, (ushort)100, (ushort)200);
-            doGetRandomTest(GetRandom.UInt16, ushort.MinValue, (ushort)(ushort.MinValue + 200));
-            doGetRandomTest(GetRandom.UInt16, (ushort)(ushort.MaxValue - 100), ushort.MaxValue);
+        public void UInt16Test() {
+            doGetRandomTest(GetRandom.UInt16, (ushort) 100, (ushort) 200);
+            doGetRandomTest(GetRandom.UInt16, ushort.MinValue, (ushort) (ushort.MinValue + 200));
+            doGetRandomTest(GetRandom.UInt16, (ushort) (ushort.MaxValue - 100), ushort.MaxValue);
             doGetRandomTest(GetRandom.UInt16, ushort.MinValue, ushort.MaxValue);
         }
 
         [TestMethod]
-        public void UInt32Test()
-        {
-            doGetRandomTest(GetRandom.UInt32, (uint)100, (uint)200);
+        public void UInt32Test() {
+            doGetRandomTest(GetRandom.UInt32, (uint) 100, (uint) 200);
             doGetRandomTest(GetRandom.UInt32, uint.MinValue, uint.MinValue + 200);
             doGetRandomTest(GetRandom.UInt32, uint.MaxValue - 100, uint.MaxValue);
             doGetRandomTest(GetRandom.UInt32, uint.MinValue, uint.MaxValue);
         }
 
         [TestMethod]
-        public void UInt64Test()
-        {
+        public void UInt64Test() {
             var d = 10000000000UL;
             doGetRandomTest(GetRandom.UInt64, (ulong) 100, (ulong) 200);
             doGetRandomTest(GetRandom.UInt64, ulong.MinValue, ulong.MaxValue);
@@ -258,14 +228,13 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void ValueTest()
-        {
-            void test(Type x, Type y = null)
-            {
+        public void ValueTest() {
+            void test(Type x, Type y = null) {
                 Assert.IsInstanceOfType(GetRandom.Value(x), y ?? x);
                 if (y is null) return;
                 Assert.IsInstanceOfType(GetRandom.Value(y), y);
             }
+
             test(typeof(bool?), typeof(bool));
             test(typeof(char?), typeof(char));
             test(typeof(Color?), typeof(Color));

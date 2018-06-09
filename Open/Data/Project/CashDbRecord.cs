@@ -1,6 +1,3 @@
-﻿namespace Open.Data.Project
-{
-    public class CashDbRecord : PaymentDbRecord
-    {
-    }
+﻿namespace Open.Data.Project {
+    public class CashDbRecord : PaymentDbRecord { }
 }

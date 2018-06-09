@@ -1,41 +1,40 @@
-﻿
-using System;
+﻿using System;
 using Open.Core;
 using Open.Domain.Location;
+
 namespace Open.Facade.Location {
     public static class AddressViewModelFactory {
+        public static AddressViewModel Create(IAddressObject o) {
+            switch (o) {
+                case WebAddressObject web:
+                    return create(web);
+                case EmailAddressObject email:
+                    return create(email);
+                case TelecomAddressObject device:
+                    return create(device);
+            }
 
-        public static AddressViewModel Create(IAddressObject o)
-        {
-                switch (o)
-                {
-                    case WebAddressObject web:
-                        return create(web);
-                    case EmailAddressObject email:
-                        return create(email);
-                    case TelecomAddressObject device:
-                        return create(device);
-                }
-
-                return create(o as GeographicAddressObject);
+            return create(o as GeographicAddressObject);
         }
 
         private static WebPageAddressViewModel create(WebAddressObject o) {
             var v = new WebPageAddressViewModel {
-                Url = o?.DbRecord?.Address,
+                Url = o?.DbRecord?.Address
             };
             setCommonValues(v, o?.DbRecord?.ID, o?.DbRecord?.ValidFrom, o?.DbRecord?.ValidTo);
 
             return v;
         }
+
         private static EmailAddressViewModel create(EmailAddressObject o) {
             var v = new EmailAddressViewModel {
-                EmailAddress = o?.DbRecord?.Address,
+                EmailAddress = o?.DbRecord?.Address
             };
             setCommonValues(v, o?.DbRecord?.ID, o?.DbRecord?.ValidFrom, o?.DbRecord?.ValidTo);
 
             return v;
         }
+
         private static TelecomAddressViewModel create(TelecomAddressObject o) {
             var v = new TelecomAddressViewModel {
                 Number = o?.DbRecord?.Address,
@@ -54,6 +53,7 @@ namespace Open.Facade.Location {
 
             return v;
         }
+
         private static GeographicAddressViewModel create(GeographicAddressObject o) {
             var v = new GeographicAddressViewModel {
                 AddressLine = o?.DbRecord?.Address,
@@ -79,11 +79,11 @@ namespace Open.Facade.Location {
             model.ValidFrom = setNullIfExtremum(validFrom ?? DateTime.MinValue);
             model.ValidTo = setNullIfExtremum(validTo ?? DateTime.MaxValue);
         }
+
         private static DateTime? setNullIfExtremum(DateTime d) {
             if (d.Date >= DateTime.MaxValue.Date) return null;
             if (d.Date <= DateTime.MinValue.AddDays(1).Date) return null;
             return d;
         }
-
     }
 }

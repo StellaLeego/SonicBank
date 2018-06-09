@@ -5,21 +5,19 @@ using Open.Core;
 using Open.Domain.Project;
 using Open.Facade.Project;
 
-namespace Open.Tests.Facade.Project
-{
+namespace Open.Tests.Facade.Project {
     [TestClass]
-    public class PaymentViewModelFactoryTests : BaseTests
-    {
+    public class PaymentViewModelFactoryTests : BaseTests {
         private const string u = Constants.Unspecified;
+
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(PaymentViewModelFactory);
         }
+
         [TestMethod]
-        public void CreateTest()
-        {
+        public void CreateTest() {
             var v = PaymentViewModelFactory.Create(null) as CashViewModel;
             Assert.IsNotNull(v);
             Assert.AreEqual(v.ID, u);
@@ -35,8 +33,7 @@ namespace Open.Tests.Facade.Project
         }
 
         [TestMethod]
-        public void CreateCashTest()
-        {
+        public void CreateCashTest() {
             var o = GetRandom.Object<CashObject>();
             var v = PaymentViewModelFactory.Create(o) as CashViewModel;
             Assert.IsNotNull(v);
@@ -53,8 +50,7 @@ namespace Open.Tests.Facade.Project
         }
 
         [TestMethod]
-        public void CreateCheckTest()
-        {
+        public void CreateCheckTest() {
             var o = GetRandom.Object<CheckObject>();
             var v = PaymentViewModelFactory.Create(o) as CheckViewModel;
             Assert.IsNotNull(v);
@@ -70,9 +66,9 @@ namespace Open.Tests.Facade.Project
             Assert.AreEqual(v.PayerAccountNumber, o.DbRecord.PayerAccountNumber);
             Assert.AreEqual(v.CheckNumber, o.DbRecord.CheckNumber);
         }
+
         [TestMethod]
-        public void CreateDebitCardTest()
-        {
+        public void CreateDebitCardTest() {
             var o = GetRandom.Object<DebitCardObject>();
             var v = PaymentViewModelFactory.Create(o) as DebitCardViewModel;
             Assert.IsNotNull(v);
@@ -90,9 +86,9 @@ namespace Open.Tests.Facade.Project
             Assert.AreEqual(v.CardNumber, o.DbRecord.CardNumber);
             Assert.AreEqual(v.DailyWithdrawalLimit, o.DbRecord.DailyWithDrawalLimit);
         }
+
         [TestMethod]
-        public void CreateCreditCardTest()
-        {
+        public void CreateCreditCardTest() {
             var o = GetRandom.Object<CreditCardObject>();
             var v = PaymentViewModelFactory.Create(o) as CreditCardViewModel;
             Assert.IsNotNull(v);
@@ -113,8 +109,7 @@ namespace Open.Tests.Facade.Project
         }
 
         [TestMethod]
-        public void CreateWithExtremumDatesTest()
-        {
+        public void CreateWithExtremumDatesTest() {
             var o = GetRandom.Object<CashObject>();
             o.DbRecord.ValidFrom = DateTime.MinValue;
             o.DbRecord.ValidTo = DateTime.MaxValue;

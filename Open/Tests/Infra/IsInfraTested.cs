@@ -1,38 +1,31 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Open.Tests.Infra
-{
+namespace Open.Tests.Infra {
     [TestClass]
-    public class IsInfraTested : AssemblyTests
-    {
+    public class IsInfraTested : AssemblyTests {
         private const string assembly = "Open.Infra";
 
-        protected override string Namespace(string name)
-        {
+        protected override string Namespace(string name) {
             return $"{assembly}.{name}";
         }
 
         [TestMethod]
-        public void IsLocationTested()
-        {
+        public void IsLocationTested() {
             isAllClassesTested(assembly, Namespace("Location"));
         }
 
         [TestMethod]
-        public void IsMoneyTested()
-        {
+        public void IsMoneyTested() {
             isAllClassesTested(assembly, Namespace("Money"));
         }
 
         [TestMethod]
-        public void IsTested()
-        {
+        public void IsTested() {
             isAllClassesTested(base.Namespace("Infra"));
         }
 
         [TestMethod]
-        public void IsProjectTested()
-        {
+        public void IsProjectTested() {
             isAllClassesTested(assembly, Namespace("Project"));
         }
     }

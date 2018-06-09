@@ -6,19 +6,16 @@ using Open.Core;
 using Open.Facade.Common;
 using Open.Facade.Money;
 
-namespace Open.Facade.Location
-{
-    public class CountryViewModel : NamedViewModel
-    {
-        private string alpha3Code;
+namespace Open.Facade.Location {
+    public class CountryViewModel : NamedViewModel {
         private string alpha2Code;
+        private string alpha3Code;
 
         [Required]
         [StringLength(3, MinimumLength = 3)]
         [RegularExpression(RegularExpressionFor.EnglishCapitalsOnly)]
         [DisplayName("ISO Three Character Code")]
-        public string Alpha3Code
-        {
+        public string Alpha3Code {
             get => getString(ref alpha3Code, Constants.Unspecified);
             set => alpha3Code = value;
         }
@@ -27,11 +24,11 @@ namespace Open.Facade.Location
         [StringLength(2, MinimumLength = 2)]
         [RegularExpression(RegularExpressionFor.EnglishCapitalsOnly)]
         [DisplayName("ISO Two Character Code")]
-        public string Alpha2Code
-        {
+        public string Alpha2Code {
             get => getString(ref alpha2Code, Constants.Unspecified);
             set => alpha2Code = value;
         }
+
         [DisplayName("Currencies in use")]
         public List<CurrencyViewModel> CurrenciesInUse { get; } = new List<CurrencyViewModel>();
     }

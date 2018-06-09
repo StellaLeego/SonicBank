@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using Open.Facade.Common;
-namespace Open.Facade.Location {
 
+namespace Open.Facade.Location {
     public abstract class AddressViewModel : UniqueEntityViewModel {
         [DisplayName("Address type")]
         public string AddressType {
@@ -14,6 +14,7 @@ namespace Open.Facade.Location {
                 return name;
             }
         }
+
         public string Contact => ToString();
     }
 }

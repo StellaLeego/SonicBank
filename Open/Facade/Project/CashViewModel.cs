@@ -1,6 +1,3 @@
-﻿namespace Open.Facade.Project
-{
-    public class CashViewModel : PaymentViewModel
-    {
-    }
+﻿namespace Open.Facade.Project {
+    public class CashViewModel : PaymentViewModel { }
 }

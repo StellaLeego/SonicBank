@@ -1,81 +1,67 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Infra.Project;
 
-namespace Open.Tests.Infra.Project
-{
+namespace Open.Tests.Infra.Project {
     [TestClass]
-    public class PaymentObjectsRepositoryTests : BaseTests
-    {
+    public class PaymentObjectsRepositoryTests : BaseTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(PaymentObjectsRepository);
         }
 
         [TestMethod]
-        public void SearchStringTest()
-        {
+        public void SearchStringTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void PageIndexTest()
-        {
+        public void PageIndexTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void PageSizeTest()
-        {
+        public void PageSizeTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void SortOrderTest()
-        {
+        public void SortOrderTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void SortFunctionTest()
-        {
+        public void SortFunctionTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void GetObjectsListTest()
-        {
+        public void GetObjectsListTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void GetObjectTest()
-        {
+        public void GetObjectTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void AddObjectTest()
-        {
+        public void AddObjectTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void UpdateObjectTest()
-        {
+        public void UpdateObjectTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void DeleteObjectTest()
-        {
+        public void DeleteObjectTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void IsInitializedTest()
-        {
+        public void IsInitializedTest() {
             Assert.Inconclusive();
         }
     }

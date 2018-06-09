@@ -1,5 +1,4 @@
-﻿@using Open.Sentry.Models.ManageViewModels
-@using Open.Sentry.Views.Manage
+﻿@using Open.Sentry.Views.Manage
 @model Open.Sentry.Models.ManageViewModels.EnableAuthenticatorViewModel
 @{
     ViewData["Title"] = "Enable authenticator";
@@ -37,7 +36,7 @@
                     <form method="post">
                         <div class="form-group">
                             <label asp-for="Code" class="control-label">Verification Code</label>
-                            <input asp-for="Code" class="form-control" autocomplete="off" />
+                            <input asp-for="Code" class="form-control" autocomplete="off"/>
                             <span asp-validation-for="Code" class="text-danger"></span>
                         </div>
                         <button type="submit" class="btn btn-default">Verify</button>

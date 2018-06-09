@@ -6,13 +6,13 @@
     Layout = "_IndexPartial";
 }
 
-@section Create{ 
-    <a asp-action=Create>Create New</a>
+@section Create{
+    <a asp-action="Create">Create New</a>
 }
 
 <body>
 <table class="table">
-    @{ var dummy = Model.FirstOrDefault();}
+    @{ var dummy = Model.FirstOrDefault(); }
     <thead>
     <tr>
         @Html.SortColumnHeaderFor(ViewData["SortAlpha3"], model => dummy.IsoCurrencySymbol)
@@ -24,8 +24,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
-    {
+    @foreach (var item in Model) {
         <tr>
             <td>@Html.DisplayFor(modelItem => item.IsoCurrencySymbol)</td>
             <td>@Html.DisplayFor(modelItem => item.CurrencySymbol)</td>

@@ -2,24 +2,18 @@
 using System.Globalization;
 using System.Linq;
 
-namespace Open.Aids
-{
-    public static class SystemRegionInfo
-    {
-        public static bool IsCountry(RegionInfo r)
-        {
+namespace Open.Aids {
+    public static class SystemRegionInfo {
+        public static bool IsCountry(RegionInfo r) {
             return Safe.Run(() => SystemString.StartsWithLetter(r.ThreeLetterISORegionName), false);
         }
 
-        public static bool IsCurrency(RegionInfo r)
-        {
+        public static bool IsCurrency(RegionInfo r) {
             return Safe.Run(() => SystemString.StartsWithLetter(r.ISOCurrencySymbol), false);
         }
 
-        public static List<RegionInfo> GetRegionsList()
-        {
-            return Safe.Run(() =>
-            {
+        public static List<RegionInfo> GetRegionsList() {
+            return Safe.Run(() => {
                 var cultures = SystemCultureInfo.GetSpecificCultures();
                 var regions = SystemEnumerable.Convert(cultures, SystemCultureInfo.ToRegionInfo);
                 regions = SystemEnumerable.Distinct(regions);

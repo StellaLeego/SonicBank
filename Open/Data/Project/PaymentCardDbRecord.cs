@@ -1,25 +1,20 @@
-﻿namespace Open.Data.Project
-{
-    public class PaymentCardDbRecord : PaymentDbRecord
-    {
-        private string dailyWithDrawalLimit;
-        private string cardNumber;
+﻿namespace Open.Data.Project {
+    public class PaymentCardDbRecord : PaymentDbRecord {
         private string cardAssociationName;
+        private string cardNumber;
+        private string dailyWithDrawalLimit;
 
-        public string DailyWithDrawalLimit
-        {
+        public string DailyWithDrawalLimit {
             get => getString(ref dailyWithDrawalLimit);
             set => dailyWithDrawalLimit = value;
         }
 
-        public string CardNumber
-        {
+        public string CardNumber {
             get => getString(ref cardNumber);
             set => cardNumber = value;
         }
 
-        public string CardAssociationName
-        {
+        public string CardAssociationName {
             get => getString(ref cardAssociationName);
             set => cardAssociationName = value;
         }

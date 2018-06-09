@@ -3,13 +3,10 @@ using Open.Aids;
 using Open.Data.Location;
 using Open.Domain.Location;
 
-namespace Open.Tests.Domain.Location
-{
+namespace Open.Tests.Domain.Location {
     [TestClass]
-    public class EmailAddressObjectTests : DomainObjectsTests<EmailAddressObject, EmailAddressDbRecord>
-    {
-        protected override EmailAddressObject getRandomTestObject()
-        {
+    public class EmailAddressObjectTests : DomainObjectsTests<EmailAddressObject, EmailAddressDbRecord> {
+        protected override EmailAddressObject getRandomTestObject() {
             createdWithNullArg = new EmailAddressObject(null);
             dbRecordType = typeof(EmailAddressDbRecord);
             return GetRandom.Object<EmailAddressObject>();

@@ -1,29 +1,22 @@
-﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Open.Aids;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Infra.Location;
 
-namespace Open.Tests.Infra.Location
-{
+namespace Open.Tests.Infra.Location {
     [TestClass]
-    public class CountriesDbTableInitializerTests : BaseTests
-    {
+    public class CountriesDbTableInitializerTests : BaseTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(CountriesDbTableInitializer);
         }
 
         [TestMethod]
-        public void CantInitializeTest()
-        {
+        public void CantInitializeTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void InitializeTest()
-        {
+        public void InitializeTest() {
             Assert.Inconclusive();
         }
     }

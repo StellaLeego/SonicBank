@@ -2,17 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Open.Sentry.Models;
 
-namespace Open.Sentry.Data
-{
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
+namespace Open.Sentry.Data {
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
+        protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.

@@ -5,57 +5,43 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
 using Open.Facade.Location;
 
-namespace Open.Tests.Aids
-{
+namespace Open.Tests.Aids {
     [TestClass]
-    public class GetClassTests : BaseTests
-    {
+    public class GetClassTests : BaseTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(GetClass);
         }
 
-        internal class classTest : PublicBindingFlagsForTests.testClass
-        {
-            public int E = 0;
-            public string F { get; set; }
-        }
-
         [TestMethod]
-        public void NamespaceTest()
-        {
+        public void NamespaceTest() {
             var t = typeof(object);
             Assert.AreEqual(t.Namespace, GetClass.Namespace(t));
             Assert.AreEqual(string.Empty, GetClass.Namespace(null));
         }
 
         [TestMethod]
-        public void MembersTest()
-        {
+        public void MembersTest() {
             testMember(typeof(classTest));
             testNull(null);
         }
 
         [TestMethod]
-        public void ReadWritePropertyValuesTest()
-        {
+        public void ReadWritePropertyValuesTest() {
             var o = GetRandom.Object<classTest>();
             var l = GetClass.ReadWritePropertyValues(o);
             Assert.AreEqual(1, l.Count);
             Assert.AreEqual(l[0], o.F);
         }
 
-        private static void testNull(Type t)
-        {
+        private static void testNull(Type t) {
             var a = GetClass.Members(t);
             Assert.IsInstanceOfType(a, typeof(List<MemberInfo>));
             Assert.AreEqual(0, a.Count);
         }
 
-        private static void testMember(Type t)
-        {
+        private static void testMember(Type t) {
             var a = GetClass.Members(t, PublicBindingFlagsFor.AllMembers, false);
             var e = t.GetMembers(PublicBindingFlagsFor.AllMembers);
             Assert.AreEqual(e.Length, a.Count);
@@ -65,8 +51,7 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void PropertiesTest()
-        {
+        public void PropertiesTest() {
             var a = GetClass.Properties(typeof(classTest));
             Assert.IsNotNull(a);
             Assert.IsInstanceOfType(a, typeof(List<PropertyInfo>));
@@ -75,14 +60,13 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void PropertyTest()
-        {
-            void test(string name)
-            {
+        public void PropertyTest() {
+            void test(string name) {
                 Assert.AreEqual(name, GetClass.Property<CountryViewModel>(name).Name);
             }
+
             Assert.IsNull(GetClass.Property<CountryViewModel>(null));
-            Assert.IsNull(GetClass.Property<CountryViewModel>(String.Empty));
+            Assert.IsNull(GetClass.Property<CountryViewModel>(string.Empty));
             Assert.IsNull(GetClass.Property<CountryViewModel>("bla bla"));
             test(GetMember.Name<CountryViewModel>(m => m.Alpha3Code));
             test(GetMember.Name<CountryViewModel>(m => m.Alpha2Code));
@@ -90,6 +74,10 @@ namespace Open.Tests.Aids
             test(GetMember.Name<CountryViewModel>(m => m.ValidFrom));
             test(GetMember.Name<CountryViewModel>(m => m.ValidTo));
         }
+
+        internal class classTest : PublicBindingFlagsForTests.testClass {
+            public int E = 0;
+            public string F { get; set; }
+        }
     }
 }
-

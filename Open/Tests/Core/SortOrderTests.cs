@@ -2,23 +2,22 @@
 using Open.Aids;
 using Open.Core;
 
-namespace Open.Tests.Core
-{
+namespace Open.Tests.Core {
     [TestClass]
-    public class SortOrderTests : ClassTests<SortOrder>
-    {
+    public class SortOrderTests : ClassTests<SortOrder> {
         [TestMethod]
-        public void CountTest()
-        {
+        public void CountTest() {
             Assert.AreEqual(2, GetEnum.Count<SortOrder>());
         }
 
         [TestMethod]
-        public void AscendingTest() =>
+        public void AscendingTest() {
             Assert.AreEqual(0, (int) SortOrder.Ascending);
+        }
 
         [TestMethod]
-        public void DescendingTest() =>
+        public void DescendingTest() {
             Assert.AreEqual(1, (int) SortOrder.Descending);
+        }
     }
 }

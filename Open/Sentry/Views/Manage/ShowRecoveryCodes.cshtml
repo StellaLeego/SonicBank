@@ -1,5 +1,4 @@
-﻿@using Open.Sentry.Models.ManageViewModels
-@using Open.Sentry.Views.Manage
+﻿@using Open.Sentry.Views.Manage
 @model Open.Sentry.Models.ManageViewModels.ShowRecoveryCodesViewModel
 @{
     ViewData["Title"] = "Recovery codes";
@@ -18,9 +17,11 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        @for (var row = 0; row < Model.RecoveryCodes.Length; row += 2)
-        {
-            <code>@Model.RecoveryCodes[row]</code><text>&nbsp;</text><code>@Model.RecoveryCodes[row + 1]</code><br />
+        @for (var row = 0; row < Model.RecoveryCodes.Length; row += 2) {
+            <code>@Model.RecoveryCodes[row]</code>
+            <text>&nbsp;</text>
+            <code>@Model.RecoveryCodes[row + 1]</code>
+            <br/>
         }
     </div>
 </div>

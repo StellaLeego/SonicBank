@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Open.Core
-{
-    public interface IPaginatedRepository<TObject, TRecord>
-    {
+namespace Open.Core {
+    public interface IPaginatedRepository<TObject, TRecord> {
         string SearchString { get; set; }
 
         int? PageIndex { get; set; }

@@ -1,17 +1,14 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Open.Facade.Location
-{
-    public class EmailAddressViewModel : AddressViewModel
-    {
+namespace Open.Facade.Location {
+    public class EmailAddressViewModel : AddressViewModel {
         private string emailAddress;
 
         [Required]
         [DisplayName("Email")]
         [RegularExpression(@"(?!.*\.\.)(^[^\.][^@\s]+@[^@\s]+\.[^@\s\.]+$)")]
-        public string EmailAddress
-        {
+        public string EmailAddress {
             get => getString(ref emailAddress);
             set => emailAddress = value;
         }

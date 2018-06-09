@@ -1,5 +1,5 @@
 ﻿@using Open.Facade.Project
-@model DebitCardViewModel
+@model Open.Facade.Project.DebitCardViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -8,11 +8,11 @@
 }
 
 <body>
-    @Html.Partial("_ViewDebitCard", Model);
+@Html.Partial("_ViewDebitCard", Model);
 </body>
 
 @section Actions
-    {
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+{
+    @Html.ActionLink("Edit", "Edit", new {id = Model.ID})
     @Html.ActionLink("Back to List", "Index")
 }

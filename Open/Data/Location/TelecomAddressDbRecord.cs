@@ -1,13 +1,10 @@
 ﻿using Open.Core;
 
-namespace Open.Data.Location
-{
-    public class TelecomAddressDbRecord : AddressDbRecord
-    {
+namespace Open.Data.Location {
+    public class TelecomAddressDbRecord : AddressDbRecord {
         private string prefix;
 
-        public string NationalDirectDialingPrefix
-        {
+        public string NationalDirectDialingPrefix {
             get => getString(ref prefix);
             set => prefix = value;
         }

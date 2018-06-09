@@ -7,31 +7,30 @@
 
 @section Create {
     <t>Create new </t>
-    <a asp-action=CreateCash>Cash</a>
-    <a asp-action=CreateCheck>Check</a>
-    <a asp-action=CreateDebitCard>Debit Card</a>
-    <a asp-action=CreateCreditCard>Credit Card</a>
+    <a asp-action="CreateCash">Cash</a>
+    <a asp-action="CreateCheck">Check</a>
+    <a asp-action="CreateDebitCard">Debit Card</a>
+    <a asp-action="CreateCreditCard">Credit Card</a>
 }
 
 <body>
 <table class="table">
-    @{ var dummy = Model.FirstOrDefault();}
+    @{ var dummy = Model.FirstOrDefault(); }
     <thead>
-        <tr>
-            @Html.SortColumnHeaderFor(ViewData["SortPaymentType"], model => dummy.PaymentType)
-            @Html.SortColumnHeaderFor(ViewData["SortPayer"], model => dummy.Payer)
-            @Html.SortColumnHeaderFor(ViewData["SortPayee"], model => dummy.Payee)
-            @Html.SortColumnHeaderFor(ViewData["SortAmount"], model => dummy.Amount)
-            @Html.SortColumnHeaderFor(ViewData["SortCurrency"], model => dummy.Currency)
-            @Html.SortColumnHeaderFor(ViewData["SortMemo"], model => dummy.Memo)
-            @Html.SortColumnHeaderFor(ViewData["SortValidFrom"], model => dummy.ValidFrom)
-            @Html.SortColumnHeaderFor(ViewData["SortValidFrom"], model => dummy.ValidTo)
-            <th></th>
-        </tr>
+    <tr>
+        @Html.SortColumnHeaderFor(ViewData["SortPaymentType"], model => dummy.PaymentType)
+        @Html.SortColumnHeaderFor(ViewData["SortPayer"], model => dummy.Payer)
+        @Html.SortColumnHeaderFor(ViewData["SortPayee"], model => dummy.Payee)
+        @Html.SortColumnHeaderFor(ViewData["SortAmount"], model => dummy.Amount)
+        @Html.SortColumnHeaderFor(ViewData["SortCurrency"], model => dummy.Currency)
+        @Html.SortColumnHeaderFor(ViewData["SortMemo"], model => dummy.Memo)
+        @Html.SortColumnHeaderFor(ViewData["SortValidFrom"], model => dummy.ValidFrom)
+        @Html.SortColumnHeaderFor(ViewData["SortValidFrom"], model => dummy.ValidTo)
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
-    {
+    @foreach (var item in Model) {
         <tr>
             <td>@Html.DisplayFor(modelItem => item.PaymentType)</td>
             <td>@Html.DisplayFor(modelItem => item.Payer)</td>
@@ -47,4 +46,3 @@
     </tbody>
 </table>
 </body>
-

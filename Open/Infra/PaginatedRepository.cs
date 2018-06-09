@@ -7,16 +7,11 @@ using Open.Core;
 using Open.Data.Common;
 using Open.Domain.Common;
 
-namespace Open.Infra
-{
+namespace Open.Infra {
     public abstract class PaginatedRepository<TObject, TDbRecord> : BaseRepository<TObject, TDbRecord>,
         IPaginatedRepository<TObject, TDbRecord>
         where TObject : UniqueObject<TDbRecord>
-        where TDbRecord : UniqueDbRecord, new()
-    {
-        protected internal abstract PaginatedList<TObject> createList(List<TDbRecord> items,
-            RepositoryPage p);
-
+        where TDbRecord : UniqueDbRecord, new() {
         protected PaginatedRepository(DbSet<TDbRecord> s, DbContext c) : base(s, c) { }
 
         public string SearchString { get; set; }
@@ -25,22 +20,22 @@ namespace Open.Infra
         public SortOrder SortOrder { get; set; }
         public Func<TDbRecord, object> SortFunction { get; set; }
 
-        public async Task<PaginatedList<TObject>> GetObjectsList()
-        {
+        public async Task<PaginatedList<TObject>> GetObjectsList() {
             var countries = getSorted().Where(s => s.Contains(SearchString)).AsNoTracking();
             var count = await countries.CountAsync();
-            var p =  new RepositoryPage(count, PageIndex, PageSize);
+            var p = new RepositoryPage(count, PageIndex, PageSize);
             var items = await countries.Skip(p.FirstItemIndex).Take(p.PageSize).ToListAsync();
             return createList(items, p);
         }
 
-        private IQueryable<TDbRecord> getSet()
-        {
+        protected internal abstract PaginatedList<TObject> createList(List<TDbRecord> items,
+            RepositoryPage p);
+
+        private IQueryable<TDbRecord> getSet() {
             return from s in dbSet select s;
         }
 
-        private IQueryable<TDbRecord> getSorted()
-        {
+        private IQueryable<TDbRecord> getSorted() {
             if (SortFunction is null) return getSet();
             return SortOrder == SortOrder.Descending
                 ? getSet().OrderByDescending(x => SortFunction(x))

@@ -6,22 +6,19 @@ using Open.Data.Project;
 using Open.Domain.Project;
 using Open.Facade.Project;
 
-namespace Open.Tests.Facade.Project
-{
+namespace Open.Tests.Facade.Project {
     [TestClass]
-    public class PaymentViewModelsListTests : ObjectTests<PaymentViewModelsList>
-    {
+    public class PaymentViewModelsListTests : ObjectTests<PaymentViewModelsList> {
         protected override PaymentViewModelsList getRandomTestObject() {
-            var l = new PaymentObjectsList (getRandomAddressDbRecordsList(),
+            var l = new PaymentObjectsList(getRandomAddressDbRecordsList(),
                 GetRandom.Object<RepositoryPage>());
             SetRandom.Values(l);
             return new PaymentViewModelsList(l);
         }
-        private IEnumerable<PaymentDbRecord> getRandomAddressDbRecordsList()
-        {
+
+        private IEnumerable<PaymentDbRecord> getRandomAddressDbRecordsList() {
             var l = new List<PaymentDbRecord>();
-            for (var i = 0; i < GetRandom.UInt8(5, 10); i++)
-            {
+            for (var i = 0; i < GetRandom.UInt8(5, 10); i++) {
                 var x = i % 4;
                 if (x == 0) l.Add(GetRandom.Object<CashDbRecord>());
                 if (x == 1) l.Add(GetRandom.Object<CheckDbRecord>());
@@ -31,11 +28,10 @@ namespace Open.Tests.Facade.Project
 
             return l;
         }
+
         [TestMethod]
-        public void CanCreateWithNullArgumentTest()
-        {
+        public void CanCreateWithNullArgumentTest() {
             Assert.IsNotNull(new PaymentViewModelsList(null));
         }
     }
 }
-

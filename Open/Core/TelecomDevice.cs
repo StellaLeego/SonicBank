@@ -1,7 +1,5 @@
-﻿namespace Open.Core
-{
-    public enum TelecomDevice
-    {
+﻿namespace Open.Core {
+    public enum TelecomDevice {
         NotKnown = 0,
         Phone = 1,
         Fax = 2,

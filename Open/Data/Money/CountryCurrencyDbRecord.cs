@@ -1,8 +1,7 @@
 ﻿using Open.Data.Common;
 using Open.Data.Location;
 
-namespace Open.Data.Money
-{
+namespace Open.Data.Money {
     public class CountryCurrencyDbRecord : TemporalDbRecord {
         private string countryID;
         private string currencyID;
@@ -19,6 +18,6 @@ namespace Open.Data.Money
 
         public virtual CountryDbRecord Country { get; set; }
 
-        public virtual CurrencyDbRecord Currency { get; set; }  
+        public virtual CurrencyDbRecord Currency { get; set; }
     }
 }

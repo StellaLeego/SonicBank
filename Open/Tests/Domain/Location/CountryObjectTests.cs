@@ -6,28 +6,23 @@ using Open.Data.Location;
 using Open.Domain.Location;
 using Open.Domain.Money;
 
-namespace Open.Tests.Domain.Location
-{
+namespace Open.Tests.Domain.Location {
     [TestClass]
-    public class CountryObjectTests : DomainObjectsTests<CountryObject, CountryDbRecord>
-    {
-        protected override CountryObject getRandomTestObject()
-        {
+    public class CountryObjectTests : DomainObjectsTests<CountryObject, CountryDbRecord> {
+        protected override CountryObject getRandomTestObject() {
             createdWithNullArg = new CountryObject(null);
             dbRecordType = typeof(CountryDbRecord);
             return GetRandom.Object<CountryObject>();
         }
 
         [TestMethod]
-        public void CurrenciesInUseTest()
-        {
+        public void CurrenciesInUseTest() {
             Assert.IsNotNull(obj.CurrenciesInUse);
             Assert.IsInstanceOfType(obj.CurrenciesInUse, typeof(IReadOnlyList<CurrencyObject>));
         }
 
         [TestMethod]
-        public void CurrencyInUseTest()
-        {
+        public void CurrencyInUseTest() {
             var currency = GetRandom.Object<CurrencyObject>();
             Assert.IsFalse(obj.CurrenciesInUse.Contains(currency));
             obj.CurrencyInUse(currency);

@@ -1,4 +1,3 @@
-﻿namespace Open.Data.Common
-{
+﻿namespace Open.Data.Common {
     public abstract class MetricDbRecord : IdentifiedDbRecord { }
 }

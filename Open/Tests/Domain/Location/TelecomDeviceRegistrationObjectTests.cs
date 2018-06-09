@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
-using Open.Data.Location;
 using Open.Domain.Location;
 
-namespace Open.Tests.Domain.Location
-{
-    [TestClass] public class TelecomDeviceRegistrationObjectTests : ObjectTests<TelecomDeviceRegistrationObject>
-    {
+namespace Open.Tests.Domain.Location {
+    [TestClass]
+    public class TelecomDeviceRegistrationObjectTests : ObjectTests<TelecomDeviceRegistrationObject> {
         protected override TelecomDeviceRegistrationObject getRandomTestObject() {
             return GetRandom.Object<TelecomDeviceRegistrationObject>();
         }
@@ -25,8 +20,7 @@ namespace Open.Tests.Domain.Location
         }
 
         [TestMethod]
-        public void WhenCreatedWithNullArgumentsTest()
-        {
+        public void WhenCreatedWithNullArgumentsTest() {
             obj = new TelecomDeviceRegistrationObject(null);
             Assert.AreEqual(obj.Address.DbRecord, obj.DbRecord.Address);
             Assert.AreEqual(obj.Device.DbRecord, obj.DbRecord.Device);

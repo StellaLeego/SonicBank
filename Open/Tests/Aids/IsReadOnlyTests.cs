@@ -1,37 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
 
-namespace Open.Tests.Aids
-{
+namespace Open.Tests.Aids {
     [TestClass]
-    public class IsReadOnlyTests : BaseTests
-    {
-        private class testClass
-        {
-            public string A;
-            public readonly string B = "";
-            public testClass()
-            {
-                E = "";
-            }
-            public string C { get; set; }
-            public string D { get; } = "";
-            public string E { get; private set; }
-        }
-
+    public class IsReadOnlyTests : BaseTests {
         private testClass o;
 
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(IsReadOnly);
             o = new testClass {A = "", C = ""};
         }
 
         [TestCleanup]
-        public override void TestCleanup()
-        {
+        public override void TestCleanup() {
             base.TestCleanup();
             Assert.IsNotNull(o.A);
             Assert.IsNotNull(o.B);
@@ -41,8 +24,7 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void FieldTest()
-        {
+        public void FieldTest() {
             Assert.IsFalse(IsReadOnly.Field<testClass>("A"));
             Assert.IsTrue(IsReadOnly.Field<testClass>("B"));
             Assert.IsFalse(IsReadOnly.Field<testClass>("C"));
@@ -51,13 +33,25 @@ namespace Open.Tests.Aids
         }
 
         [TestMethod]
-        public void PropertyTest()
-        {
+        public void PropertyTest() {
             Assert.IsFalse(IsReadOnly.Property<testClass>("A"));
             Assert.IsFalse(IsReadOnly.Property<testClass>("B"));
             Assert.IsFalse(IsReadOnly.Property<testClass>("C"));
             Assert.IsTrue(IsReadOnly.Property<testClass>("D"));
             Assert.IsFalse(IsReadOnly.Property<testClass>("E"));
+        }
+
+        private class testClass {
+            public readonly string B = "";
+            public string A;
+
+            public testClass() {
+                E = "";
+            }
+
+            public string C { get; set; }
+            public string D { get; } = "";
+            public string E { get; }
         }
     }
 }

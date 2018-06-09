@@ -5,18 +5,15 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Open.Tests.Sentry
-{
-    public class TestAuthenticationHandler : AuthenticationHandler<TestAuthenticationOptions>
-    {
+namespace Open.Tests.Sentry {
+    public class TestAuthenticationHandler : AuthenticationHandler<TestAuthenticationOptions> {
         public static bool IsLoggedIn;
 
         public TestAuthenticationHandler(IOptionsMonitor<TestAuthenticationOptions> options,
             ILoggerFactory logger,
             UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock) { }
 
-        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
-        {
+        protected override Task<AuthenticateResult> HandleAuthenticateAsync() {
             var authenticationTicket = new AuthenticationTicket(
                 new ClaimsPrincipal(Options.Identity),
                 new AuthenticationProperties(),

@@ -9,14 +9,14 @@
 }
 
 <body>
-    @Html.HiddenFor(model => model.IsoCurrencySymbol)
-    @Html.EditingControlsFor(model => model.CurrencySymbol)
-    @Html.EditingControlsFor(model => model.Name)
-    @Html.EditingControlsFor(model => model.ValidFrom)
-    @Html.EditingControlsFor(model => model.ValidTo)
+@Html.HiddenFor(model => model.IsoCurrencySymbol)
+@Html.EditingControlsFor(model => model.CurrencySymbol)
+@Html.EditingControlsFor(model => model.Name)
+@Html.EditingControlsFor(model => model.ValidFrom)
+@Html.EditingControlsFor(model => model.ValidTo)
 </body>
 
 @section Actions
-    {
+{
     @Html.ActionLink("Back to List", "Index")
 }

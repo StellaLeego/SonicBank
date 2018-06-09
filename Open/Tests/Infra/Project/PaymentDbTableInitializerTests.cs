@@ -1,27 +1,21 @@
-﻿
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Infra.Project;
 
-namespace Open.Tests.Infra.Project
-{
-    class PaymentDbTableInitializerTests : BaseTests
-    {
+namespace Open.Tests.Infra.Project {
+    internal class PaymentDbTableInitializerTests : BaseTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(PaymentDbTableInitializer);
         }
 
         [TestMethod]
-        public void CantInitializeTest()
-        {
+        public void CantInitializeTest() {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void InitializeTest()
-        {
+        public void InitializeTest() {
             Assert.Inconclusive();
         }
     }

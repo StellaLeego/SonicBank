@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Open.Core;
-namespace Open.Domain.Location {
 
+namespace Open.Domain.Location {
     public interface
         ITelecomDeviceRegistrationObjectsRepository : ICrudRepository<
             TelecomDeviceRegistrationObject> {

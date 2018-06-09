@@ -5,14 +5,17 @@ using Open.Core;
 using Open.Data.Location;
 using Open.Domain.Location;
 using Open.Facade.Location;
+
 namespace Open.Tests.Facade.Location {
-    [TestClass] public class AddressViewModelsListTests : ObjectTests<AddressViewModelsList> {
+    [TestClass]
+    public class AddressViewModelsListTests : ObjectTests<AddressViewModelsList> {
         protected override AddressViewModelsList getRandomTestObject() {
             var l = new AddressObjectsList(getRandomAddressDbRecordsList(),
                 GetRandom.Object<RepositoryPage>());
             SetRandom.Values(l);
             return new AddressViewModelsList(l);
         }
+
         private IEnumerable<AddressDbRecord> getRandomAddressDbRecordsList() {
             var l = new List<AddressDbRecord>();
             for (var i = 0; i < GetRandom.UInt8(5, 10); i++) {
@@ -25,7 +28,9 @@ namespace Open.Tests.Facade.Location {
 
             return l;
         }
-        [TestMethod] public void CanCreateWithNullArgumentTest() {
+
+        [TestMethod]
+        public void CanCreateWithNullArgumentTest() {
             Assert.IsNotNull(new CountryViewModelsList(null));
         }
     }

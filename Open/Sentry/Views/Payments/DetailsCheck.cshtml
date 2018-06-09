@@ -1,5 +1,5 @@
 ﻿@using Open.Facade.Project
-@model CheckViewModel
+@model Open.Facade.Project.CheckViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -8,11 +8,11 @@
 }
 
 <body>
-    @Html.Partial("_ViewCheck", Model);
+@Html.Partial("_ViewCheck", Model);
 </body>
 
 @section Actions
-    {
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+{
+    @Html.ActionLink("Edit", "Edit", new {id = Model.ID})
     @Html.ActionLink("Back to List", "Index")
 }

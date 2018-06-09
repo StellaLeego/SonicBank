@@ -6,31 +6,26 @@ using Open.Data.Location;
 using Open.Domain.Location;
 using Open.Facade.Location;
 
-namespace Open.Tests.Aids
-{
+namespace Open.Tests.Aids {
     [TestClass]
-    public class GetMemberTests : BaseTests
-    {
+    public class GetMemberTests : BaseTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(GetMember);
         }
 
         [TestMethod]
-        public void NameTest()
-        {
+        public void NameTest() {
             Assert.AreEqual("DbRecord", GetMember.Name<CountryObject>(o => o.DbRecord));
             Assert.AreEqual("Name", GetMember.Name<CountryDbRecord>(o => o.Name));
             Assert.AreEqual("NameTest", GetMember.Name<GetMemberTests>(o => o.NameTest()));
-            Assert.AreEqual(string.Empty, GetMember.Name((Expression<Func<CountryDbRecord, object>>)null));
-            Assert.AreEqual(string.Empty, GetMember.Name((Expression<Action<CountryDbRecord>>)null));
+            Assert.AreEqual(string.Empty, GetMember.Name((Expression<Func<CountryDbRecord, object>>) null));
+            Assert.AreEqual(string.Empty, GetMember.Name((Expression<Action<CountryDbRecord>>) null));
         }
 
         [TestMethod]
-        public void DisplayNameTest()
-        {
+        public void DisplayNameTest() {
             Assert.AreEqual("DbRecord", GetMember.DisplayName<CountryObject>(o => o.DbRecord));
             Assert.AreEqual("Valid From", GetMember.DisplayName<CountryViewModel>(o => o.ValidFrom));
             Assert.AreEqual("Name", GetMember.DisplayName<CountryViewModel>(o => o.Name));

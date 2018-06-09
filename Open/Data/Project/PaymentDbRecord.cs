@@ -1,50 +1,46 @@
 ﻿using Open.Data.Common;
 
-namespace Open.Data.Project
-{
-    public class PaymentDbRecord : UniqueDbRecord
-    {
-        private string payer;
-        private string payee;
+namespace Open.Data.Project {
+    public class PaymentDbRecord : UniqueDbRecord {
         private string amount;
         private string currency;
-        private string payerAccountNumber;
-        private string payeeAccountNumber;
         private string memo;
+        private string payee;
+        private string payeeAccountNumber;
+        private string payer;
+        private string payerAccountNumber;
 
-        public string Payer
-        {
+        public string Payer {
             get => getString(ref payer);
             set => payer = value;
         }
-        public string Payee
-        {
+
+        public string Payee {
             get => getString(ref payee);
             set => payee = value;
         }
-        public string Amount
-        {
+
+        public string Amount {
             get => getString(ref amount);
             set => amount = value;
         }
 
-        public string Currency
-        {
+        public string Currency {
             get => getString(ref currency);
             set => currency = value;
         }
-        public string PayerAccountNumber
-        {
+
+        public string PayerAccountNumber {
             get => getString(ref payerAccountNumber);
             set => payerAccountNumber = value;
         }
-        public string PayeeAccountNumber
-        {
+
+        public string PayeeAccountNumber {
             get => getString(ref payeeAccountNumber);
             set => payeeAccountNumber = value;
         }
-        public string Memo
-        {
+
+        public string Memo {
             get => getString(ref memo);
             set => memo = value;
         }

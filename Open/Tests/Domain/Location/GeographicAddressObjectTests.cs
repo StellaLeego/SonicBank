@@ -5,28 +5,23 @@ using Open.Aids;
 using Open.Data.Location;
 using Open.Domain.Location;
 
-namespace Open.Tests.Domain.Location
-{
+namespace Open.Tests.Domain.Location {
     [TestClass]
-    public class GeographicAddressObjectTests : DomainObjectsTests<GeographicAddressObject, GeographicAddressDbRecord>
-    {
-        protected override GeographicAddressObject getRandomTestObject()
-        {
+    public class GeographicAddressObjectTests : DomainObjectsTests<GeographicAddressObject, GeographicAddressDbRecord> {
+        protected override GeographicAddressObject getRandomTestObject() {
             createdWithNullArg = new GeographicAddressObject(null);
             dbRecordType = typeof(GeographicAddressDbRecord);
             return GetRandom.Object<GeographicAddressObject>();
         }
 
         [TestMethod]
-        public void RegisteredTelecomDevicesTest()
-        {
+        public void RegisteredTelecomDevicesTest() {
             Assert.IsNotNull(obj.RegisteredTelecomDevices);
             Assert.IsInstanceOfType(obj.RegisteredTelecomDevices, typeof(IReadOnlyList<TelecomAddressObject>));
         }
 
         [TestMethod]
-        public void RegisteredTelecomDeviceTest()
-        {
+        public void RegisteredTelecomDeviceTest() {
             var device = GetRandom.Object<TelecomAddressObject>();
             Assert.IsFalse(obj.RegisteredTelecomDevices.Contains(device));
             obj.RegisteredTelecomDevice(device);
@@ -34,14 +29,12 @@ namespace Open.Tests.Domain.Location
         }
 
         [TestMethod]
-        public void CountryTest()
-        {
+        public void CountryTest() {
             Assert.AreEqual(obj.Country.DbRecord, obj.DbRecord.Country);
         }
 
         [TestMethod]
-        public void WhenCreatedWithNullArgumentsTest()
-        {
+        public void WhenCreatedWithNullArgumentsTest() {
             obj = new GeographicAddressObject(null);
             Assert.IsNull(obj.DbRecord.Country);
             Assert.IsNotNull(obj.Country.DbRecord);

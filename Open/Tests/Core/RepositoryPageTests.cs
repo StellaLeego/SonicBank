@@ -3,19 +3,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
 using Open.Core;
 
-namespace Open.Tests.Core
-{
+namespace Open.Tests.Core {
     [TestClass]
-    public class RepositoryPageTests : ObjectTests<RepositoryPage>
-    {
-        private int pageIndex;
+    public class RepositoryPageTests : ObjectTests<RepositoryPage> {
+        private int firstItemIndex;
         private int itemsCount;
+        private int pageIndex;
         private int pageSize;
         private int totalPages;
-        private int firstItemIndex;
 
-        protected override RepositoryPage getRandomTestObject()
-        {
+        protected override RepositoryPage getRandomTestObject() {
             itemsCount = GetRandom.UInt8(100);
             pageSize = GetRandom.UInt8(2, 10);
             totalPages = (int) Math.Ceiling(itemsCount / (double) pageSize);
@@ -25,33 +22,28 @@ namespace Open.Tests.Core
         }
 
         [TestMethod]
-        public void DefaultSizeTest()
-        {
+        public void DefaultSizeTest() {
             Assert.AreEqual(RepositoryPage.DefaultSize, new RepositoryPage(itemsCount).PageSize);
         }
 
         [TestMethod]
-        public void PageIndexTest()
-        {
+        public void PageIndexTest() {
             Assert.AreEqual(1, new RepositoryPage(itemsCount).PageIndex);
             Assert.AreEqual(pageIndex, obj.PageIndex);
         }
 
         [TestMethod]
-        public void PageSizeTest()
-        {
+        public void PageSizeTest() {
             Assert.AreEqual(pageSize, obj.PageSize);
         }
 
         [TestMethod]
-        public void TotalPagesTest()
-        {
+        public void TotalPagesTest() {
             Assert.AreEqual(totalPages, obj.TotalPages);
         }
 
         [TestMethod]
-        public void FirstItemIndexTest()
-        {
+        public void FirstItemIndexTest() {
             Assert.AreEqual(firstItemIndex, obj.FirstItemIndex);
         }
     }

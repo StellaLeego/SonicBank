@@ -16,31 +16,26 @@ using Open.Infra;
 using Open.Infra.Location;
 using Open.Sentry;
 
-namespace Open.Tests.Sentry
-{
-    public abstract class AcceptanceTests
-    {
+namespace Open.Tests.Sentry {
+    public abstract class AcceptanceTests {
         protected readonly Assembly assembly;
         protected readonly HttpClient client;
-        protected ICountryObjectsRepository repository;
         protected string path;
+        protected ICountryObjectsRepository repository;
 
-        protected AcceptanceTests()
-        {
+        protected AcceptanceTests() {
             assembly = typeof(Startup).GetTypeInfo().Assembly;
             path = getPath();
             var server = new TestServer(new WebHostBuilder()
-            .UseContentRoot(path)
-            .UseStartup<TestStartup>()
-            .ConfigureServices(services => configure(services, assembly)));
+                .UseContentRoot(path)
+                .UseStartup<TestStartup>()
+                .ConfigureServices(services => configure(services, assembly)));
             initTestDatabase(server);
             client = server.CreateClient();
         }
 
-        private void initTestDatabase(TestServer server)
-        {
-            using (var scope = server.Host.Services.CreateScope())
-            {
+        private void initTestDatabase(TestServer server) {
+            using (var scope = server.Host.Services.CreateScope()) {
                 var services = scope.ServiceProvider;
                 repository = services.GetRequiredService<ICountryObjectsRepository>();
                 var db = services.GetService<SentryDbContext>();
@@ -48,13 +43,10 @@ namespace Open.Tests.Sentry
             }
         }
 
-        private static void configure(IServiceCollection services, Assembly a)
-        {
-            services.Configure((RazorViewEngineOptions options) =>
-            {
+        private static void configure(IServiceCollection services, Assembly a) {
+            services.Configure((RazorViewEngineOptions options) => {
                 var previous = options.CompilationCallback;
-                options.CompilationCallback = (context) =>
-                {
+                options.CompilationCallback = context => {
                     previous?.Invoke(context);
                     var assemblies = a.GetReferencedAssemblies().Select(x =>
                             MetadataReference.CreateFromFile(Assembly.Load(x).Location))
@@ -69,22 +61,20 @@ namespace Open.Tests.Sentry
         }
 
         private static void addReference(List<PortableExecutableReference> list,
-            string assemblyName)
-        {
+            string assemblyName) {
             list.Add(MetadataReference.CreateFromFile(Assembly.Load(new AssemblyName(assemblyName)).Location));
         }
 
-        private string getPath()
-        {
+        private string getPath() {
             var n = "Open\\" + GetString.Tail(assembly.GetName().Name);
             var p = PlatformServices.Default.Application.ApplicationBasePath;
             var d = new DirectoryInfo(p);
-            while (d != null)
-            {
+            while (d != null) {
                 var f = new FileInfo(Path.Combine(d.FullName, "Open.sln"));
                 if (f.Exists) return Path.GetFullPath(Path.Combine(d.FullName, n));
                 d = d.Parent;
             }
+
             throw new Exception($"No solution file in path <{p}>.");
         }
     }

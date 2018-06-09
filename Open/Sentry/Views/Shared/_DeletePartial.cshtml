@@ -8,17 +8,16 @@
 
 <div class="form-horizontal">
     <h4>@ViewBag.SubTitle</h4>
-    <hr />
-    
+    <hr/>
+
     @RenderBody()
-    
-    @using (Html.BeginForm())
-    {
+
+    @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value=@ViewBag.Button class="btn btn-default" />
+                <input type="submit" value=@ViewBag.Button class="btn btn-default"/>
             </div>
         </div>
         <div>

@@ -4,26 +4,18 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
 using Open.Core;
 
-namespace Open.Tests.Core
-{
+namespace Open.Tests.Core {
     [TestClass]
-    public class PaginatedListTests : ObjectTests<PaginatedList<string>>
-    {
-        private int pageIndex;
+    public class PaginatedListTests : ObjectTests<PaginatedList<string>> {
+        private RepositoryPage firstPage;
         private int itemsCount;
+        private RepositoryPage lastPage;
+        private RepositoryPage page;
+        private int pageIndex;
         private int pageSize;
         private int totalPages;
-        private RepositoryPage page;
-        private RepositoryPage firstPage;
-        private RepositoryPage lastPage;
 
-        class testClass : PaginatedList<string>
-        {
-            public testClass(RepositoryPage p = null) : base(p) { }
-        }
-
-        protected override PaginatedList<string> getRandomTestObject()
-        {
+        protected override PaginatedList<string> getRandomTestObject() {
             itemsCount = GetRandom.UInt8(100);
             pageSize = GetRandom.UInt8(2, 10);
             totalPages = (int) Math.Ceiling(itemsCount / (double) pageSize);
@@ -35,34 +27,29 @@ namespace Open.Tests.Core
         }
 
         [TestMethod]
-        public void IsInstanceOfListTest()
-        {
+        public void IsInstanceOfListTest() {
             Assert.IsInstanceOfType(obj, typeof(List<string>));
         }
 
         [TestMethod]
-        public void IsInstanceOfPaginatedListTest()
-        {
+        public void IsInstanceOfPaginatedListTest() {
             Assert.IsInstanceOfType(obj, typeof(IPaginatedList<string>));
         }
 
         [TestMethod]
-        public void PageIndexTest()
-        {
+        public void PageIndexTest() {
             Assert.AreEqual(1, new testClass().PageIndex);
             Assert.AreEqual(pageIndex, obj.PageIndex);
         }
 
         [TestMethod]
-        public void TotalPagesTest()
-        {
+        public void TotalPagesTest() {
             Assert.AreEqual(0, new testClass().TotalPages);
             Assert.AreEqual(totalPages, obj.TotalPages);
         }
 
         [TestMethod]
-        public void HasPreviousPageTest()
-        {
+        public void HasPreviousPageTest() {
             Assert.AreEqual(false, new testClass().HasPreviousPage);
             Assert.AreEqual(true, obj.HasPreviousPage);
             Assert.AreEqual(true, new testClass(lastPage).HasPreviousPage);
@@ -70,12 +57,15 @@ namespace Open.Tests.Core
         }
 
         [TestMethod]
-        public void HasNextPageTest()
-        {
+        public void HasNextPageTest() {
             Assert.AreEqual(false, new testClass().HasNextPage);
             Assert.AreEqual(true, obj.HasNextPage);
             Assert.AreEqual(true, new testClass(firstPage).HasNextPage);
             Assert.AreEqual(false, new testClass(lastPage).HasNextPage);
+        }
+
+        private class testClass : PaginatedList<string> {
+            public testClass(RepositoryPage p = null) : base(p) { }
         }
     }
 }

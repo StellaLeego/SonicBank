@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Open.Sentry.Models.ManageViewModels
-{
-    public class IndexViewModel
-    {
+namespace Open.Sentry.Models.ManageViewModels {
+    public class IndexViewModel {
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }

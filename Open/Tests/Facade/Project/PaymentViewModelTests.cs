@@ -3,67 +3,62 @@ using Open.Aids;
 using Open.Facade.Common;
 using Open.Facade.Project;
 
-namespace Open.Tests.Facade.Project
-{
+namespace Open.Tests.Facade.Project {
     [TestClass]
-    public class PaymentViewModelTests : ObjectTests<PaymentViewModel>
-    {
-        private class testClass : PaymentViewModel { }
-
-        protected override PaymentViewModel getRandomTestObject()
-        {
+    public class PaymentViewModelTests : ObjectTests<PaymentViewModel> {
+        protected override PaymentViewModel getRandomTestObject() {
             return GetRandom.Object<testClass>();
         }
 
         [TestMethod]
-        public void IsUniqueEntityViewModelTest()
-        {
+        public void IsUniqueEntityViewModelTest() {
             Assert.AreEqual(obj.GetType().BaseType.BaseType, typeof(UniqueEntityViewModel));
         }
 
         [TestMethod]
-        public void PaymentTypeTest()
-        {
+        public void PaymentTypeTest() {
             Assert.AreEqual("testClass", obj.PaymentType);
             Assert.AreEqual("Cash", new CashViewModel().PaymentType);
             Assert.AreEqual("Check", new CheckViewModel().PaymentType);
             Assert.AreEqual("CreditCard", new CreditCardViewModel().PaymentType);
             Assert.AreEqual("DebitCard", new DebitCardViewModel().PaymentType);
         }
+
         [TestMethod]
-        public void PayerTest()
-        {
+        public void PayerTest() {
             testReadWriteProperty(() => obj.Payer, x => obj.Payer = x);
         }
+
         [TestMethod]
-        public void PayerAccountNumberTest()
-        {
+        public void PayerAccountNumberTest() {
             testReadWriteProperty(() => obj.PayerAccountNumber, x => obj.PayerAccountNumber = x);
         }
+
         [TestMethod]
-        public void PayeeTest()
-        {
+        public void PayeeTest() {
             testReadWriteProperty(() => obj.Payee, x => obj.Payee = x);
         }
+
         [TestMethod]
-        public void PayeeAccountNumberTest()
-        {
+        public void PayeeAccountNumberTest() {
             testReadWriteProperty(() => obj.PayeeAccountNumber, x => obj.PayeeAccountNumber = x);
         }
+
         [TestMethod]
-        public void AmountTest()
-        {
+        public void AmountTest() {
             testReadWriteProperty(() => obj.Amount, x => obj.Amount = x);
         }
+
         [TestMethod]
-        public void CurrencyTest()
-        {
+        public void CurrencyTest() {
             testReadWriteProperty(() => obj.Currency, x => obj.Currency = x);
         }
+
         [TestMethod]
-        public void MemoTest()
-        {
+        public void MemoTest() {
             testReadWriteProperty(() => obj.Memo, x => obj.Memo = x);
         }
+
+        private class testClass : PaymentViewModel { }
     }
 }

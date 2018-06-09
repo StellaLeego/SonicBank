@@ -1,5 +1,5 @@
 ﻿@using Open.Facade.Location
-@model EmailAddressViewModel
+@model Open.Facade.Location.EmailAddressViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -8,11 +8,10 @@
 }
 
 <body>
-    @Html.Partial("_ViewEmail", Model)
+@Html.Partial("_ViewEmail", Model)
 </body>
 
 @section Actions{
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+    @Html.ActionLink("Edit", "Edit", new {id = Model.ID})
     @Html.ActionLink("Back to List", "Index")
 }
-

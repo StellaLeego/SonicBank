@@ -7,20 +7,16 @@ using Open.Data.Money;
 using Open.Domain.Money;
 using Open.Infra.Money;
 
-namespace Open.Tests.Infra.Money
-{
+namespace Open.Tests.Infra.Money {
     [TestClass]
-    public class CurrencyObjectsRepositoryTests : CurrencyDbTests
-    {
+    public class CurrencyObjectsRepositoryTests : CurrencyDbTests {
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             type = typeof(CurrencyObjectsRepository);
         }
 
-        private static void validateCurrency(CurrencyDbRecord actual, CurrencyDbRecord expected)
-        {
+        private static void validateCurrency(CurrencyDbRecord actual, CurrencyDbRecord expected) {
             Assert.AreEqual(actual.ID, expected.ID);
             Assert.AreEqual(actual.Name, expected.Name);
             Assert.AreEqual(actual.Code, expected.Code);
@@ -29,14 +25,12 @@ namespace Open.Tests.Infra.Money
         }
 
         [TestMethod]
-        public void CanCreate()
-        {
+        public void CanCreate() {
             Assert.IsNotNull(new CurrencyObjectsRepository(null));
         }
 
         [TestMethod]
-        public async Task GetObjectTest()
-        {
+        public async Task GetObjectTest() {
             var o = GetRandom.Object<CurrencyObject>();
             var currency = await repository.GetObject(o.DbRecord.ID);
             validateCurrency(currency.DbRecord, new CurrencyDbRecord());
@@ -47,15 +41,13 @@ namespace Open.Tests.Infra.Money
         }
 
         [TestMethod]
-        public async Task GetObjectsListTest()
-        {
+        public async Task GetObjectsListTest() {
             var l = await repository.GetObjectsList();
             Assert.AreEqual(count, l.Count());
         }
 
         [TestMethod]
-        public async Task AddObjectTest()
-        {
+        public async Task AddObjectTest() {
             var o = GetRandom.Object<CurrencyObject>();
             var currency = db.Currencies.Find(o.DbRecord.ID);
             Assert.IsNull(currency);
@@ -65,8 +57,7 @@ namespace Open.Tests.Infra.Money
         }
 
         [TestMethod]
-        public async Task UpdateObjectTest()
-        {
+        public async Task UpdateObjectTest() {
             var o = GetRandom.Object<CurrencyObject>();
             await repository.AddObject(o);
             o.DbRecord.Name = GetRandom.String();
@@ -80,20 +71,17 @@ namespace Open.Tests.Infra.Money
         }
 
         [TestMethod]
-        public void DeleteObjectTest()
-        {
+        public void DeleteObjectTest() {
             var c = count;
             Assert.AreEqual(c, db.Currencies.Count());
-            foreach (var e in db.Currencies)
-            {
+            foreach (var e in db.Currencies) {
                 repository.DeleteObject(new CurrencyObject(e));
                 Assert.AreEqual(--c, db.Currencies.Count());
             }
         }
 
         [TestMethod]
-        public void IsInitializedTest()
-        {
+        public void IsInitializedTest() {
             Assert.IsTrue(repository.IsInitialized());
             TestCleanup();
             Assert.IsFalse(repository.IsInitialized());

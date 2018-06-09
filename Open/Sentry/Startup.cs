@@ -15,19 +15,15 @@ using Open.Sentry.Data;
 using Open.Sentry.Models;
 using Open.Sentry.Services;
 
-namespace Open.Sentry
-{
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
+namespace Open.Sentry {
+    public class Startup {
+        public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) {
             setDatabase(services);
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -39,20 +35,18 @@ namespace Open.Sentry
             services.AddScoped<ICurrencyObjectsRepository, CurrencyObjectsRepository>();
             services.AddScoped<ICountryCurrencyObjectsRepository, CountryCurrencyObjectsRepository>();
             services.AddScoped<IAddressObjectsRepository, AddressObjectsRepository>();
-            services.AddScoped<ITelecomDeviceRegistrationObjectsRepository, TelecomDeviceRegistrationObjectsRepository>();
+            services
+                .AddScoped<ITelecomDeviceRegistrationObjectsRepository, TelecomDeviceRegistrationObjectsRepository>();
             services.AddScoped<IPaymentObjectsRepository, PaymentObjectsRepository>();
         }
 
-        protected virtual void setMvcWithAntiForgeryToken(IServiceCollection services)
-        {
+        protected virtual void setMvcWithAntiForgeryToken(IServiceCollection services) {
             services.AddMvc();
-
         }
 
         protected virtual void setAuthentication(IServiceCollection services) { }
 
-        protected virtual void setDatabase(IServiceCollection services)
-        {
+        protected virtual void setDatabase(IServiceCollection services) {
             var s = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(s));
@@ -62,29 +56,24 @@ namespace Open.Sentry
                 options => options.UseSqlServer(s));
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
             setErrorPage(app, env);
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseMvc(routes =>
-            {
+            app.UseMvc(routes => {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
         }
 
-        protected virtual void setErrorPage(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
+        protected virtual void setErrorPage(IApplicationBuilder app, IHostingEnvironment env) {
+            if (env.IsDevelopment()) {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
-            else
-            {
+            else {
                 app.UseExceptionHandler("/Home/Error");
             }
         }

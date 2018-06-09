@@ -6,17 +6,14 @@ using Open.Data.Location;
 using Open.Infra;
 using Open.Infra.Location;
 
-namespace Open.Tests.Infra.Location
-{
+namespace Open.Tests.Infra.Location {
     [TestClass]
-    public class CountryDbTests : BaseTests
-    {
+    public class CountryDbTests : BaseTests {
+        protected const int count = 10;
         protected static SentryDbContext db;
         protected static CountryObjectsRepository repository;
-        protected const int count = 10;
 
-        public CountryDbTests()
-        {
+        public CountryDbTests() {
             if (db != null) return;
             var options = new DbContextOptionsBuilder<SentryDbContext>().UseInMemoryDatabase("CountryDbTests").Options;
             db = new SentryDbContext(options);
@@ -24,26 +21,23 @@ namespace Open.Tests.Infra.Location
         }
 
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             Assert.AreEqual(0, db.Countries.Count());
-            for (var i = 0; i < count; i++)
-            {
+            for (var i = 0; i < count; i++) {
                 db.Countries.Add(GetRandom.Object<CountryDbRecord>());
                 db.SaveChanges();
             }
         }
 
         [TestCleanup]
-        public override void TestCleanup()
-        {
+        public override void TestCleanup() {
             base.TestCleanup();
-            foreach (var c in db.Countries)
-            {
+            foreach (var c in db.Countries) {
                 db.Remove(c);
                 db.SaveChanges();
             }
+
             Assert.AreEqual(0, db.Countries.Count());
         }
     }

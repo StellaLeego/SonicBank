@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace Open.Sentry.Models.ManageViewModels
-{
-    public class ExternalLoginsViewModel
-    {
+namespace Open.Sentry.Models.ManageViewModels {
+    public class ExternalLoginsViewModel {
         public IList<UserLoginInfo> CurrentLogins { get; set; }
 
         public IList<AuthenticationScheme> OtherLogins { get; set; }

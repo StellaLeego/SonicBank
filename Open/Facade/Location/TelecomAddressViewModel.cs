@@ -2,39 +2,45 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Open.Core;
+
 namespace Open.Facade.Location {
     public class TelecomAddressViewModel : AddressViewModel {
+        private string areaCode;
 
         private string countryCode;
-        private string areaCode;
-        private string number;
         private string extension;
         private string nationalDirectDialingPrefix;
+        private string number;
 
-        [DisplayName("Country Code"), RegularExpression(@"^\d+$")]
+        [DisplayName("Country Code")]
+        [RegularExpression(@"^\d+$")]
         public string CountryCode {
             get => getString(ref countryCode);
             set => countryCode = value;
         }
 
-        [DisplayName("Area Code"), RegularExpression(@"^\d+$")]
+        [DisplayName("Area Code")]
+        [RegularExpression(@"^\d+$")]
         public string AreaCode {
             get => getString(ref areaCode);
             set => areaCode = value;
         }
 
-        [Required, RegularExpression(@"^\d+$")]
+        [Required]
+        [RegularExpression(@"^\d+$")]
         public string Number {
             get => getString(ref number);
             set => number = value;
         }
+
         [RegularExpression(@"^\d+$")]
         public string Extension {
             get => getString(ref extension);
             set => extension = value;
         }
 
-        [DisplayName("National Direct Dialing Prefix"), RegularExpression(@"^\d+$")]
+        [DisplayName("National Direct Dialing Prefix")]
+        [RegularExpression(@"^\d+$")]
         public string NationalDirectDialingPrefix {
             get => getString(ref nationalDirectDialingPrefix);
             set => nationalDirectDialingPrefix = value;
@@ -46,6 +52,7 @@ namespace Open.Facade.Location {
         [DisplayName("Registered In")]
         public List<GeographicAddressViewModel> RegisteredInAddresses { get; } =
             new List<GeographicAddressViewModel>();
+
         public override string ToString() {
             var s = Number;
             if (AreaCode != Constants.Unspecified) s = $"{AreaCode} {s}";

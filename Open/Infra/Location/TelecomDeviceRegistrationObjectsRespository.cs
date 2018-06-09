@@ -4,17 +4,21 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Open.Data.Location;
 using Open.Domain.Location;
+
 namespace Open.Infra.Location {
     public class TelecomDeviceRegistrationObjectsRepository : ITelecomDeviceRegistrationObjectsRepository {
-        private readonly DbSet<TelecomDeviceRegistrationDbRecord> dbSet;
         private readonly DbContext db;
+        private readonly DbSet<TelecomDeviceRegistrationDbRecord> dbSet;
+
         public TelecomDeviceRegistrationObjectsRepository(SentryDbContext c) {
             db = c;
             dbSet = c?.TelecomDeviceRegistrations;
         }
+
         public Task<TelecomDeviceRegistrationObject> GetObject(string id) {
             throw new NotImplementedException();
         }
+
         public async Task AddObject(TelecomDeviceRegistrationObject o) {
             var r = o.DbRecord;
             r.Address = null;
@@ -22,6 +26,7 @@ namespace Open.Infra.Location {
             dbSet.Add(r);
             await db.SaveChangesAsync();
         }
+
         public async Task UpdateObject(TelecomDeviceRegistrationObject o) {
             var r = o.DbRecord;
             r.Address = null;
@@ -29,6 +34,7 @@ namespace Open.Infra.Location {
             dbSet.Update(r);
             await db.SaveChangesAsync();
         }
+
         public async Task DeleteObject(TelecomDeviceRegistrationObject o) {
             var r = o.DbRecord;
             r.Address = null;
@@ -36,6 +42,7 @@ namespace Open.Infra.Location {
             dbSet.Remove(r);
             await db.SaveChangesAsync();
         }
+
         public async Task LoadAddresses(TelecomAddressObject device) {
             if (device is null) return;
             var id = device.DbRecord?.ID ?? string.Empty;
@@ -44,6 +51,7 @@ namespace Open.Infra.Location {
             foreach (var c in addresses)
                 device.RegisteredInAddress(new GeographicAddressObject(c.Address));
         }
+
         public async Task LoadDevices(GeographicAddressObject address) {
             if (address is null) return;
             var id = address.DbRecord?.ID ?? string.Empty;
@@ -52,6 +60,7 @@ namespace Open.Infra.Location {
             foreach (var c in devices)
                 address.RegisteredTelecomDevice(new TelecomAddressObject(c.Device));
         }
+
         public async Task<TelecomDeviceRegistrationObject> GetObject(string adr, string dev) {
             var o = await dbSet.FirstOrDefaultAsync(
                 x => x.AddressID == adr && x.DeviceID == dev);

@@ -3,13 +3,10 @@ using Open.Aids;
 using Open.Data.Quantity;
 using Open.Domain.Quantity;
 
-namespace Open.Tests.Domain.Quantity
-{
+namespace Open.Tests.Domain.Quantity {
     [TestClass]
-    public class MeasureObjectTests : DomainObjectsTests<MeasureObject, MeasureDbRecord>
-    {
-        protected override MeasureObject getRandomTestObject()
-        {
+    public class MeasureObjectTests : DomainObjectsTests<MeasureObject, MeasureDbRecord> {
+        protected override MeasureObject getRandomTestObject() {
             createdWithNullArg = new MeasureObject(null);
             dbRecordType = typeof(MeasureDbRecord);
             return GetRandom.Object<MeasureObject>();

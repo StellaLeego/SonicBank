@@ -6,21 +6,17 @@ using Open.Aids;
 using Open.Facade.Location;
 using Open.Sentry.Controllers;
 
-namespace Open.Tests.Sentry.Controllers
-{
+namespace Open.Tests.Sentry.Controllers {
     //[TestClass]
-    public class CountriesControllerTests : AcceptanceTests
-    {
+    public class CountriesControllerTests : AcceptanceTests {
         [TestMethod]
-        public async Task IndexTestWhenLoggedOut()
-        {
+        public async Task IndexTestWhenLoggedOut() {
             var response = await client.GetAsync("/countries");
             Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
         }
 
         [TestMethod]
-        public async Task IndexWhenLoggedIn()
-        {
+        public async Task IndexWhenLoggedIn() {
             Assert.Inconclusive();
             TestAuthenticationHandler.IsLoggedIn = true;
             var response = await client.GetAsync("/countries");
@@ -30,8 +26,7 @@ namespace Open.Tests.Sentry.Controllers
         }
 
         [TestMethod]
-        public void RepositoryTest()
-        {
+        public void RepositoryTest() {
             const string c = ", ";
             var b = new StringBuilder();
             b.Append(GetMember.Name<CountryViewModel>(m => m.Alpha3Code));

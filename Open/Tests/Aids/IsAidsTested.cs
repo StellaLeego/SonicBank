@@ -1,13 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Open.Tests.Aids
-{
+namespace Open.Tests.Aids {
     [TestClass]
-    public class IsAidsTested : AssemblyTests
-    {
+    public class IsAidsTested : AssemblyTests {
         [TestMethod]
-        public void IsTested()
-        {
+        public void IsTested() {
             isAllClassesTested(Namespace("Aids"));
         }
     }

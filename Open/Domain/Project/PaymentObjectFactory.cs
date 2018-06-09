@@ -1,14 +1,10 @@
 ﻿using System;
 using Open.Data.Project;
 
-namespace Open.Domain.Project
-{
-    public static class PaymentObjectFactory
-    {
-        public static IPaymentObject Create(PaymentDbRecord dbRecord)
-        {
-            switch (dbRecord)
-            {
+namespace Open.Domain.Project {
+    public static class PaymentObjectFactory {
+        public static IPaymentObject Create(PaymentDbRecord dbRecord) {
+            switch (dbRecord) {
                 case DebitCardDbRecord debit:
                     return create(debit);
                 case CreditCardDbRecord credit:
@@ -20,23 +16,19 @@ namespace Open.Domain.Project
             return create(dbRecord as CashDbRecord);
         }
 
-        private static DebitCardObject create(DebitCardDbRecord dbRecord)
-        {
+        private static DebitCardObject create(DebitCardDbRecord dbRecord) {
             return new DebitCardObject(dbRecord);
         }
 
-        private static CreditCardObject create(CreditCardDbRecord dbRecord)
-        {
+        private static CreditCardObject create(CreditCardDbRecord dbRecord) {
             return new CreditCardObject(dbRecord);
         }
 
-        private static CheckObject create(CheckDbRecord dbRecord)
-        {
+        private static CheckObject create(CheckDbRecord dbRecord) {
             return new CheckObject(dbRecord);
         }
 
-        private static CashObject create(CashDbRecord dbRecord)
-        {
+        private static CashObject create(CashDbRecord dbRecord) {
             return new CashObject(dbRecord);
         }
 
@@ -45,10 +37,8 @@ namespace Open.Domain.Project
             string payer, string payerAccountNumber,
             string cardAssociationName, string cardNumber,
             string dailyWithDrawalLimit, string payee, string payeeAccountNumber,
-            DateTime? validFrom = null, DateTime? validTo = null)
-        {
-            var r = new DebitCardDbRecord
-            {
+            DateTime? validFrom = null, DateTime? validTo = null) {
+            var r = new DebitCardDbRecord {
                 ID = id,
                 Amount = amount,
                 Currency = currency,
@@ -69,12 +59,10 @@ namespace Open.Domain.Project
         public static CreditCardObject CreateCredit(
             string id, string amount, string currency, string memo,
             string payer, string payerAccountNumber,
-            string cardAssociationName, string cardNumber, 
+            string cardAssociationName, string cardNumber,
             string dailyWithDrawalLimit, string payee, string payeeAccountNumber,
-            string creditLimit, DateTime? validFrom = null, DateTime? validTo = null)
-        {
-            var r = new CreditCardDbRecord
-            {
+            string creditLimit, DateTime? validFrom = null, DateTime? validTo = null) {
+            var r = new CreditCardDbRecord {
                 ID = id,
                 Amount = amount,
                 Currency = currency,
@@ -86,7 +74,7 @@ namespace Open.Domain.Project
                 CardAssociationName = cardAssociationName,
                 CardNumber = cardNumber,
                 CreditLimit = creditLimit,
-                DailyWithDrawalLimit = dailyWithDrawalLimit,
+                DailyWithDrawalLimit = dailyWithDrawalLimit
             };
             return new CreditCardObject(r);
         }
@@ -94,10 +82,8 @@ namespace Open.Domain.Project
         public static CheckObject CreateCheck(
             string id, string amount, string currency, string memo, string payer,
             string payerAccountNumber, string payee, string payeeAccountNumber,
-            string checkNumber, DateTime? validFrom = null, DateTime? validTo = null)
-        {
-            var r = new CheckDbRecord
-            {
+            string checkNumber, DateTime? validFrom = null, DateTime? validTo = null) {
+            var r = new CheckDbRecord {
                 ID = id,
                 Amount = amount,
                 CheckNumber = checkNumber,
@@ -113,12 +99,10 @@ namespace Open.Domain.Project
             return new CheckObject(r);
         }
 
-        public static CashObject CreateCash(string id, string amount, 
+        public static CashObject CreateCash(string id, string amount,
             string currency, string memo, string payer, string payee,
-            DateTime? validFrom = null, DateTime? validTo = null)
-        {
-            var r = new CashDbRecord
-            {
+            DateTime? validFrom = null, DateTime? validTo = null) {
+            var r = new CashDbRecord {
                 ID = id,
                 Amount = amount,
                 Currency = currency,

@@ -3,10 +3,8 @@ using Open.Data.Location;
 using Open.Data.Money;
 using Open.Domain.Location;
 
-namespace Open.Domain.Money
-{
-    public static class CountryCurrencyObjectFactory
-    {
+namespace Open.Domain.Money {
+    public static class CountryCurrencyObjectFactory {
         public static CountryCurrencyObject Create(CountryObject country, CurrencyObject currency,
             DateTime? validFrom = null, DateTime? validTo = null) {
             var o = new CountryCurrencyDbRecord {

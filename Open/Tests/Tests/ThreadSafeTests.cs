@@ -3,50 +3,43 @@ using System.Collections.Generic;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Open.Tests.Tests
-{
+namespace Open.Tests.Tests {
     [TestClass]
-    public class ThreadSafeTests
-    {
-        private List<string> values;
-        private List<string> threads;
-        private readonly object key = new object();
+    public class ThreadSafeTests {
         private const string thread1 = "thread1";
         private const string thread2 = "thread2";
+        private readonly object key = new object();
+        private List<string> threads;
+        private List<string> values;
 
         [TestInitialize]
-        public void TestInitialize()
-        {
+        public void TestInitialize() {
             values = new List<string>();
             threads = new List<string>();
         }
 
         [TestMethod]
-        public void BlockOtherTest()
-        {
+        public void BlockOtherTest() {
             startThreads(addToListBlockOther);
             Assert.IsTrue(values.Count == 10);
             Assert.IsTrue(threads.Count == 1);
         }
 
         [TestMethod]
-        public void ThreadSafeTest()
-        {
+        public void ThreadSafeTest() {
             startThreads(addToListSafe);
             Assert.IsTrue(values.Count == 10);
             Assert.IsTrue(threads.Count == 2);
         }
 
         [TestMethod]
-        public void NotThreadSafeTest()
-        {
+        public void NotThreadSafeTest() {
             startThreads(addToListNotSafe);
             Assert.IsTrue(values.Count > 10);
             Assert.IsTrue(threads.Count == 2);
         }
 
-        private void startThreads(Action<string> method)
-        {
+        private void startThreads(Action<string> method) {
             var th1 = new Thread(() => method(thread1));
             var th2 = new Thread(() => method(thread2));
             th1.Start();
@@ -54,41 +47,26 @@ namespace Open.Tests.Tests
             Thread.Sleep(40);
         }
 
-        private void addToListNotSafe(string thread)
-        {
-            for (var i = 0; i < 10; i++)
-            {
-                addValue(i,thread);
-            }
+        private void addToListNotSafe(string thread) {
+            for (var i = 0; i < 10; i++) addValue(i, thread);
         }
 
-        private void addToListSafe(string thread)
-        {
+        private void addToListSafe(string thread) {
             for (var i = 0; i < 10; i++)
-            {
-                lock (key)
-                {
+                lock (key) {
                     addValue(i, thread);
                 }
+        }
+
+        private void addToListBlockOther(string thread) {
+            lock (key) {
+                for (var i = 0; i < 10; i++) addValue(i, thread);
             }
         }
 
-        private void addToListBlockOther(string thread)
-        {
-            lock (key)
-            {
-                for (var i = 0; i < 10; i++)
-                {
-                    addValue(i, thread);
-                }
-            }
-        }
-
-        private void addValue(int value, string thread)
-        {
+        private void addValue(int value, string thread) {
             var s = value.ToString();
-            if (!values.Contains(s))
-            {
+            if (!values.Contains(s)) {
                 Thread.Sleep(1);
                 values.Add(s);
                 if (threads.Contains(thread)) return;

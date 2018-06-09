@@ -1,5 +1,5 @@
 ﻿@using Open.Facade.Location
-@model WebPageAddressViewModel
+@model Open.Facade.Location.WebPageAddressViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -8,11 +8,10 @@
 }
 
 <body>
-    @Html.Partial("_ViewWeb", Model)
+@Html.Partial("_ViewWeb", Model)
 </body>
 
 @section Actions{
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+    @Html.ActionLink("Edit", "Edit", new {id = Model.ID})
     @Html.ActionLink("Back to List", "Index")
 }
-

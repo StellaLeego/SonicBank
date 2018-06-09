@@ -1,27 +1,22 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
-using Open.Data.Location;
 using Open.Data.Common;
+using Open.Data.Location;
 
-namespace Open.Tests.Data.Location
-{
+namespace Open.Tests.Data.Location {
     [TestClass]
-    public class CountryDbRecordTests : ObjectTests<CountryDbRecord>
-    {
-        protected override CountryDbRecord getRandomTestObject()
-        {
+    public class CountryDbRecordTests : ObjectTests<CountryDbRecord> {
+        protected override CountryDbRecord getRandomTestObject() {
             return GetRandom.Object<CountryDbRecord>();
         }
 
         [TestMethod]
-        public void BaseTypeIsIdentifiedDbRecord()
-        {
+        public void BaseTypeIsIdentifiedDbRecord() {
             Assert.AreEqual(typeof(IdentifiedDbRecord), typeof(CountryDbRecord).BaseType);
         }
 
         [TestMethod]
-        public void ContainsTest()
-        {
+        public void ContainsTest() {
             Assert.IsFalse(obj.Contains(GetRandom.String()));
             Assert.IsTrue(obj.Contains(string.Empty));
             Assert.IsTrue(obj.Contains(null));

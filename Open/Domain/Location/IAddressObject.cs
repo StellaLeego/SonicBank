@@ -1,6 +1,3 @@
-﻿namespace Open.Domain.Location
-{
-    public interface IAddressObject
-    {
-    }
+﻿namespace Open.Domain.Location {
+    public interface IAddressObject { }
 }

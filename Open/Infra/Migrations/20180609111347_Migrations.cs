@@ -1,47 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Open.Infra.Migrations
-{
-    public partial class Migrations : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace Open.Infra.Migrations {
+    public partial class Migrations : Migration {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.CreateTable(
-                name: "Country",
-                columns: table => new
-                {
+                "Country",
+                table => new {
                     ID = table.Column<string>(nullable: false),
                     Code = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     ValidFrom = table.Column<DateTime>(nullable: false),
                     ValidTo = table.Column<DateTime>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Country", x => x.ID);
-                });
+                constraints: table => { table.PrimaryKey("PK_Country", x => x.ID); });
 
             migrationBuilder.CreateTable(
-                name: "Currency",
-                columns: table => new
-                {
+                "Currency",
+                table => new {
                     ID = table.Column<string>(nullable: false),
                     Code = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     ValidFrom = table.Column<DateTime>(nullable: false),
                     ValidTo = table.Column<DateTime>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Currency", x => x.ID);
-                });
+                constraints: table => { table.PrimaryKey("PK_Currency", x => x.ID); });
 
             migrationBuilder.CreateTable(
-                name: "Payments",
-                columns: table => new
-                {
+                "Payments",
+                table => new {
                     CheckNumber = table.Column<string>(nullable: true),
                     CreditLimit = table.Column<string>(nullable: true),
                     CardAssociationName = table.Column<string>(nullable: true),
@@ -59,15 +46,11 @@ namespace Open.Infra.Migrations
                     ValidFrom = table.Column<DateTime>(nullable: false),
                     ValidTo = table.Column<DateTime>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payments", x => x.ID);
-                });
+                constraints: table => { table.PrimaryKey("PK_Payments", x => x.ID); });
 
             migrationBuilder.CreateTable(
-                name: "Address",
-                columns: table => new
-                {
+                "Address",
+                table => new {
                     ID = table.Column<string>(nullable: false),
                     Address = table.Column<string>(nullable: true),
                     CityOrAreaCode = table.Column<string>(nullable: true),
@@ -80,104 +63,98 @@ namespace Open.Infra.Migrations
                     Device = table.Column<int>(nullable: true),
                     NationalDirectDialingPrefix = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Address", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Address_Country_CountryID",
-                        column: x => x.CountryID,
-                        principalTable: "Country",
-                        principalColumn: "ID",
+                        "FK_Address_Country_CountryID",
+                        x => x.CountryID,
+                        "Country",
+                        "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CountryCurrency",
-                columns: table => new
-                {
+                "CountryCurrency",
+                table => new {
                     CountryID = table.Column<string>(nullable: false),
                     CurrencyID = table.Column<string>(nullable: false),
                     ValidFrom = table.Column<DateTime>(nullable: false),
                     ValidTo = table.Column<DateTime>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CountryCurrency", x => new { x.CountryID, x.CurrencyID });
+                constraints: table => {
+                    table.PrimaryKey("PK_CountryCurrency", x => new {x.CountryID, x.CurrencyID});
                     table.ForeignKey(
-                        name: "FK_CountryCurrency_Country_CountryID",
-                        column: x => x.CountryID,
-                        principalTable: "Country",
-                        principalColumn: "ID",
+                        "FK_CountryCurrency_Country_CountryID",
+                        x => x.CountryID,
+                        "Country",
+                        "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_CountryCurrency_Currency_CurrencyID",
-                        column: x => x.CurrencyID,
-                        principalTable: "Currency",
-                        principalColumn: "ID",
+                        "FK_CountryCurrency_Currency_CurrencyID",
+                        x => x.CurrencyID,
+                        "Currency",
+                        "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TelecomDeviceRegistration",
-                columns: table => new
-                {
+                "TelecomDeviceRegistration",
+                table => new {
                     AddressID = table.Column<string>(nullable: false),
                     DeviceID = table.Column<string>(nullable: false),
                     ValidFrom = table.Column<DateTime>(nullable: false),
                     ValidTo = table.Column<DateTime>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TelecomDeviceRegistration", x => new { x.AddressID, x.DeviceID });
+                constraints: table => {
+                    table.PrimaryKey("PK_TelecomDeviceRegistration", x => new {x.AddressID, x.DeviceID});
                     table.ForeignKey(
-                        name: "FK_TelecomDeviceRegistration_Address_AddressID",
-                        column: x => x.AddressID,
-                        principalTable: "Address",
-                        principalColumn: "ID",
+                        "FK_TelecomDeviceRegistration_Address_AddressID",
+                        x => x.AddressID,
+                        "Address",
+                        "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TelecomDeviceRegistration_Address_DeviceID",
-                        column: x => x.DeviceID,
-                        principalTable: "Address",
-                        principalColumn: "ID",
+                        "FK_TelecomDeviceRegistration_Address_DeviceID",
+                        x => x.DeviceID,
+                        "Address",
+                        "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Address_CountryID",
-                table: "Address",
-                column: "CountryID");
+                "IX_Address_CountryID",
+                "Address",
+                "CountryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CountryCurrency_CurrencyID",
-                table: "CountryCurrency",
-                column: "CurrencyID");
+                "IX_CountryCurrency_CurrencyID",
+                "CountryCurrency",
+                "CurrencyID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TelecomDeviceRegistration_DeviceID",
-                table: "TelecomDeviceRegistration",
-                column: "DeviceID");
+                "IX_TelecomDeviceRegistration_DeviceID",
+                "TelecomDeviceRegistration",
+                "DeviceID");
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropTable(
-                name: "CountryCurrency");
+                "CountryCurrency");
 
             migrationBuilder.DropTable(
-                name: "Payments");
+                "Payments");
 
             migrationBuilder.DropTable(
-                name: "TelecomDeviceRegistration");
+                "TelecomDeviceRegistration");
 
             migrationBuilder.DropTable(
-                name: "Currency");
+                "Currency");
 
             migrationBuilder.DropTable(
-                name: "Address");
+                "Address");
 
             migrationBuilder.DropTable(
-                name: "Country");
+                "Country");
         }
     }
 }

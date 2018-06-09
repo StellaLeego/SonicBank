@@ -2,13 +2,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
 
-namespace Open.Tests.Tests
-{ 
+namespace Open.Tests.Tests {
     [TestClass]
-    public class RecursionTests
-    {
-        private static string ToBackwardsUsingRecursion(string s)
-        {
+    public class RecursionTests {
+        private static string ToBackwardsUsingRecursion(string s) {
             if (string.IsNullOrEmpty(s)) return string.Empty;
             var i = s.Length - 1;
             var x = s.Substring(0, i);
@@ -17,8 +14,7 @@ namespace Open.Tests.Tests
         }
 
         [TestMethod]
-        public void RecursionIsSlowTest()
-        {
+        public void RecursionIsSlowTest() {
             var d1 = DateTime.Now.Ticks;
             for (var i = 0; i < 1000000; i++) SystemString.ToBackwards("abc");
             var d2 = DateTime.Now.Ticks;

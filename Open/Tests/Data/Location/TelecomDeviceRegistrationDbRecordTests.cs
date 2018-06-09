@@ -3,43 +3,36 @@ using Open.Aids;
 using Open.Core;
 using Open.Data.Location;
 
-namespace Open.Tests.Data.Location
-{
+namespace Open.Tests.Data.Location {
     [TestClass]
-    public class TelecomDeviceRegistrationDbRecordTests : ObjectTests<TelecomDeviceRegistrationDbRecord>
-    {
-        protected override TelecomDeviceRegistrationDbRecord getRandomTestObject()
-        {
+    public class TelecomDeviceRegistrationDbRecordTests : ObjectTests<TelecomDeviceRegistrationDbRecord> {
+        protected override TelecomDeviceRegistrationDbRecord getRandomTestObject() {
             return GetRandom.Object<TelecomDeviceRegistrationDbRecord>();
         }
 
         [TestMethod]
-        public void DeviceIDTest()
-        {
+        public void DeviceIDTest() {
             testReadWriteProperty(() => obj.DeviceID, x => obj.DeviceID = x);
             testNullEmptyAndWhitespacesCases(() => obj.DeviceID, x => obj.DeviceID = x,
                 () => Constants.Unspecified);
         }
 
         [TestMethod]
-        public void AddressIDTest()
-        {
+        public void AddressIDTest() {
             testReadWriteProperty(() => obj.AddressID, x => obj.AddressID = x);
             testNullEmptyAndWhitespacesCases(() => obj.AddressID, x => obj.AddressID = x,
                 () => Constants.Unspecified);
         }
 
         [TestMethod]
-        public void DeviceTest()
-        {
+        public void DeviceTest() {
             testReadWriteProperty(() => obj.Device, x => obj.Device = x);
             obj.Device = null;
             Assert.IsNull(obj.Device);
         }
 
         [TestMethod]
-        public void AddressTest()
-        {
+        public void AddressTest() {
             testReadWriteProperty(() => obj.Address, x => obj.Address = x);
             obj.Address = null;
             Assert.IsNull(obj.Address);

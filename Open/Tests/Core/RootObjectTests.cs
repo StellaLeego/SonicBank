@@ -3,50 +3,34 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Open.Aids;
 using Open.Core;
 
-namespace Open.Tests.Core
-{
+namespace Open.Tests.Core {
     [TestClass]
-    public class RootObjectTests : ClassTests<RootObject>
-    {
+    public class RootObjectTests : ClassTests<RootObject> {
+        private testClass obj;
         private string x;
         private string y;
-        private testClass obj;
-
-        private class testClass : RootObject
-        {
-            public string S;
-            public DateTime F;
-            public DateTime T;
-            public string Name { get; set; }
-            public DateTime Date { get; set; }
-            public decimal D;
-        }
 
         [TestMethod]
-        public void getDecimalTest()
-        {
+        public void getDecimalTest() {
             obj.D = decimal.Zero;
-            decimal expected = obj.getDecimal(ref obj.D);
+            var expected = obj.getDecimal(ref obj.D);
             Assert.AreEqual(obj.D, expected);
         }
 
-        private void testGetValue(string field, string value, string expected)
-        {
+        private void testGetValue(string field, string value, string expected) {
             obj.S = field;
             obj.getString(ref obj.S, value);
             Assert.AreEqual(expected, obj.S);
         }
 
-        private void testMinMax(Action method)
-        {
+        private void testMinMax(Action method) {
             method();
             Assert.AreEqual(DateTime.MinValue, obj.F);
             Assert.AreEqual(DateTime.MaxValue, obj.T);
         }
 
         [TestInitialize]
-        public override void TestInitialize()
-        {
+        public override void TestInitialize() {
             base.TestInitialize();
             obj = new testClass {F = DateTime.MaxValue, T = DateTime.MinValue};
             x = GetRandom.String();
@@ -54,8 +38,7 @@ namespace Open.Tests.Core
         }
 
         [TestMethod]
-        public void GetValueTest()
-        {
+        public void GetValueTest() {
             testGetValue(null, y, y);
             testGetValue("", y, y);
             testGetValue("   ", y, y);
@@ -63,20 +46,17 @@ namespace Open.Tests.Core
         }
 
         [TestMethod]
-        public void GetMinValueTest()
-        {
+        public void GetMinValueTest() {
             testMinMax(() => obj.getMinValue(ref obj.F, ref obj.T));
         }
 
         [TestMethod]
-        public void GetMaxValueTest()
-        {
+        public void GetMaxValueTest() {
             testMinMax(() => obj.getMaxValue(ref obj.T, ref obj.F));
         }
 
         [TestMethod]
-        public void ContainsTest()
-        {
+        public void ContainsTest() {
             obj = GetRandom.Object<testClass>();
             Assert.IsFalse(obj.Contains(GetRandom.String()));
             Assert.IsTrue(obj.Contains(string.Empty));
@@ -86,6 +66,15 @@ namespace Open.Tests.Core
             Assert.IsTrue(obj.Contains(obj.Date.Year.ToString()));
             Assert.IsTrue(obj.Contains(obj.Date.Day.ToString()));
             Assert.IsTrue(obj.Contains(obj.Date.Month.ToString()));
+        }
+
+        private class testClass : RootObject {
+            public decimal D;
+            public DateTime F;
+            public string S;
+            public DateTime T;
+            public string Name { get; set; }
+            public DateTime Date { get; set; }
         }
     }
 }
