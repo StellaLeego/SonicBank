@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Open.Data.Project.PaymentDbRecord">
+    <Position X="8" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAIAAEAAAEBAAAAIAACACAIAgAACAAQAAAAIAIA=</HashCode>
+      <FileName>Project\PaymentDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Common.UniqueDbRecord">
+    <Position X="5.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Common\UniqueDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Common.TemporalDbRecord" Collapsed="true">
+    <Position X="3.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAACAAACAAAAAgAAA=</HashCode>
+      <FileName>Common\TemporalDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Core.RootObject" Collapsed="true">
+    <Position X="1.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Open.Data.Project.CashDbRecord">
+    <Position X="10.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Project\CashDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Project.CheckDbRecord">
+    <Position X="10.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Project\CheckDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Project.PaymentCardDbRecord">
+    <Position X="10.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ICAAACAAIAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Project\PaymentCardDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Project.CreditCardDbRecord">
+    <Position X="12.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Project\CreditCardDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.Data.Project.DebitCardDbRecord">
+    <Position X="12.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Project\DebitCardDbRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
