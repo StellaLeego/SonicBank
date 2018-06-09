@@ -27,9 +27,9 @@ namespace Open.Infra.Project
                     Currency = "EUR",
                     Memo = "Eilse eest",
                     Payer = "Mina",
-                    PayerAccountNumber = "420",
+                    PayerAccountNumber = "EE8023749234973254",
                     Payee = "Sina",
-                    PayeeAccountNumber = "1234"
+                    PayeeAccountNumber = "EE8023745423954328"
                 });
         }
 
@@ -42,9 +42,9 @@ namespace Open.Infra.Project
                     Currency = "USD",
                     Memo = "Toit",
                     Payer = "Peeter",
-                    PayerAccountNumber = "987654321",
+                    PayerAccountNumber = "EE8023749234973254",
                     Payee = "TTÜ raamatukogu",
-                    PayeeAccountNumber = "123456789"
+                    PayeeAccountNumber = "EE0409238075209842"
                 });
         }
 
@@ -53,16 +53,17 @@ namespace Open.Infra.Project
             add(c,
                 new CreditCardDbRecord()
                 {
-                    Amount = "100000000",
+                    Amount = "10",
                     Currency = "USD",
-                    Memo = "Narkootikumid",
-                    Payer = "Pablo",
-                    PayerAccountNumber = "321321313",
-                    Payee = "Escobar",
-                    PayeeAccountNumber = "53452342",
+                    Memo = "Lilled Liisule",
+                    Payer = "Juku",
+                    PayerAccountNumber = "EE0409238075209842",
+                    Payee = "Mari Lilled OÜ",
+                    PayeeAccountNumber = "EE3840238402750273",
                     CardAssociationName = "MasterCard",
-                    CardNumber = "123434534",
-                    CreditLimit = "9999999999999"
+                    CardNumber = "5341963232324091",
+                    DailyWithDrawalLimit = "500",
+                    CreditLimit = "534196"
                 });
         }
         private static void initDebitPayments(SentryDbContext c)
@@ -70,15 +71,16 @@ namespace Open.Infra.Project
             add(c,
                 new DebitCardDbRecord()
                 {
-                    Amount = "100",
+                    Amount = "3.70",
                     Currency = "EUR",
-                    Memo = "memo",
-                    Payer = "payer",
-                    PayerAccountNumber = "654645",
-                    Payee = "payee",
-                    PayeeAccountNumber = "88383",
+                    Memo = "Smuuti Blendrerist",
+                    Payer = "Pets",
+                    PayerAccountNumber = "EE3840238402750273",
+                    Payee = "Blender OÜ",
+                    PayeeAccountNumber = "EE3840223422750273",
                     CardAssociationName = "MasterCard",
-                    CardNumber = "282382fff"
+                    DailyWithDrawalLimit = "500",
+                    CardNumber = "5341963232324091"
                 });
         }
 
