@@ -66,6 +66,7 @@
   <ItemGroup>
     <None Include="BaseClasses.cd" />
     <None Include="Location\Location.cd" />
+    <None Include="Project\Project.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Inventory\" />
